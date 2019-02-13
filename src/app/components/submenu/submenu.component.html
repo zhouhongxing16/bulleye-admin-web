@@ -1,0 +1,12 @@
+<ul>
+  <ng-container *ngFor="let item of menus">
+    <li *ngIf="item.children!=null" nz-submenu>
+      <span title><i nz-icon [type]="item.icon?item.icon:'calendar'"></i>{{item.name}}</span>
+      <app-submenu *ngIf="item.children!=null" [menus]="item.children">
+      </app-submenu>
+    </li>
+    <li *ngIf="item.children==null" nz-menu-item>
+      <span title><i nz-icon [type]="item.icon?item.icon:'calendar'"></i>{{item.name}}</span>
+    </li>
+  </ng-container>
+</ul>

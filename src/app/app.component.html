@@ -1,120 +1,48 @@
 <nz-layout style="height: 100%">
   <nz-header>
+    <div style="float: left;">
+          <nz-avatar [nzSrc]="'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549969134321&di=113371aa86883c695f6d88bc4613c936&imgtype=0&src=http%3A%2F%2Fwww.5snow.com%2Ffiles%2Fa%2Fa0319f12a7c895a6b942227a7e6c9c1f.jpg'"></nz-avatar>
+    </div>
     <div style="float: right;">
       <nz-dropdown nzTrigger="click">
         <a nz-dropdown>
-          adad
-          <nz-avatar nzIcon="anticon anticon-user"></nz-avatar>
+          <ng-container *ngIf="userInfo && userInfo.staff">
+            {{userInfo.staff.name}}
+            <nz-avatar [nzSrc]="userInfo.staff.avatar"></nz-avatar>
+          </ng-container>
         </a>
         <!-- <ul nz-menu nzSelectable *ngIf="menus">
           <li nz-menu-item *ngFor="let m of menus" (click)="click(m)">
             <a><i class="anticon" [ngClass]="m.icon"></i>&nbsp;{{m.label}}</a>
           </li>
-        </ul> -->
+        </ul>-->
+
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a>个人信息</a>
+          </li>
+          <li nz-menu-item>
+            <a>修改密码</a>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item (click)="showLogoutConfirm()">退出</li>
+
+        </ul>
       </nz-dropdown>
     </div>
   </nz-header>
   <nz-layout>
     <nz-sider style="overflow: auto;min-width: 150px;" [nzWidth]="'200px'">
-      <div class="drag-content">
-        <ul nz-menu [nzMode]="'inline'" style="height:100%">
-          <li nz-submenu>
-            <span title><i nz-icon type="user"></i>subnav 1</span>
-            <ul>
-              <li nz-menu-item>option1</li>
-              <li nz-menu-item>option2</li>
-              <li nz-menu-item>option3</li>
-              <li nz-menu-item>option4</li>
-            </ul>
-          </li>
-          <li nz-submenu>
-            <span title><i nz-icon type="laptop"></i>subnav 2</span>
-            <ul>
-              <li nz-menu-item>option5</li>
-              <li nz-menu-item>option6</li>
-              <li nz-menu-item>option7</li>
-              <li nz-menu-item>option8</li>
-            </ul>
-          </li>
-          <li nz-submenu>
-            <span title><i nz-icon type="notification"></i>subnav 3</span>
-            <ul>
-              <li nz-menu-item>option9</li>
-              <li nz-menu-item>option10</li>
-              <li nz-menu-item>option11</li>
-              <li nz-menu-item>option12</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+      <app-menu [menus]="menus"></app-menu>
     </nz-sider>
     <nz-layout>
-      <div class="drag-content">
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-        kotlinx.coroutines
-        official JetBrains project GitHub license Download
-
-        Library support for Kotlin coroutines with multiplatform support. This is a companion version for Kotlin 1.3.20 release.
-
-        NOTE: 0.30.2 was the last release with Kotlin 1.2 and experimental coroutines. See COMPATIBILITY.md for details of migration onto the stable Kotlin 1.3 coroutines.
-
-        Modules <br>
-      </div>
+      <router-outlet> {{userInfo | json}}</router-outlet>
+      <nz-modal [(nzVisible)]="loginFlag" nzTitle="您的登录信息已失效，请重新登录！" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <app-login></app-login>
+      </nz-modal>
+      <button (click)="login()">test</button>
+      <button (click)="getMenu()">test</button>
     </nz-layout>
   </nz-layout>
 </nz-layout>
+
