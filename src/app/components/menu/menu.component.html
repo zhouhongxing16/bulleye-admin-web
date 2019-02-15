@@ -1,8 +1,9 @@
 <div class="drag-content">
   <ul nz-menu [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed" style="height:100%">
     <ng-container *ngFor="let item of menus">
-      <li *ngIf="item.children==null" nz-menu-item nz-tooltip nzPlacement="right">
-        <span title><i nz-icon [type]="item.icon?item.icon:'calendar'"></i>{{item.name}}</span>
+
+      <li *ngIf="item.children==null" nz-menu-item nz-tooltip nzPlacement="right" [routerLink]="item.path">
+        <span title><i nz-icon [type]="item.icon?item.icon:'calendar'" ></i>{{item.name}}</span>
       </li>
       <li *ngIf="item.children!=null" nz-submenu>
         <span title><i nz-icon [type]="item.icon?item.icon:'calendar'"></i>{{item.name}}</span>

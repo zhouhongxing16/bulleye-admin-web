@@ -6,9 +6,9 @@
     <div style="float: right;">
       <nz-dropdown nzTrigger="click">
         <a nz-dropdown>
-          <ng-container *ngIf="userInfo && userInfo.staff">
-            {{userInfo.staff.name}}
-            <nz-avatar [nzSrc]="userInfo.staff.avatar"></nz-avatar>
+          <ng-container *ngIf="userInfo">
+            {{userInfo.name}}
+            <nz-avatar [nzSrc]="userInfo.avatar"></nz-avatar>
           </ng-container>
         </a>
         <!-- <ul nz-menu nzSelectable *ngIf="menus">
@@ -34,14 +34,19 @@
   <nz-layout>
     <nz-sider style="overflow: auto;min-width: 150px;" [nzWidth]="'200px'">
       <app-menu [menus]="menus"></app-menu>
+      <a routerLink="/login">login</a>
+      <a routerLink="">home</a>
     </nz-sider>
     <nz-layout>
-      <router-outlet> {{userInfo | json}}</router-outlet>
+      <router-outlet></router-outlet>
       <nz-modal [(nzVisible)]="loginFlag" nzTitle="您的登录信息已失效，请重新登录！" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
         <app-login></app-login>
       </nz-modal>
+      <a routerLink="/login">Dashboard</a>
+      <a routerLink="/heroes">Heroes</a>
       <button (click)="login()">test</button>
       <button (click)="getMenu()">test</button>
+      <button (click)="testAuth()">testAuth</button>
     </nz-layout>
   </nz-layout>
 </nz-layout>

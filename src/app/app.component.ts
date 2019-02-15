@@ -18,6 +18,7 @@ export class AppComponent {
     const token = localStorage.getItem('token');
     if (token) {
       this.getMenu();
+      this.getStaffInfo();
     } else {
       this.loginFlag = true;
     }
@@ -47,7 +48,7 @@ export class AppComponent {
     this.help.post('http://localhost:8088/login', {username: 'zhx', password: '1'}).subscribe(msg => {
       if (msg.success) {
         localStorage.setItem('token', msg.data.token);
-        that.userInfo = msg.data.userInfo;
+
       }
       console.log(msg);
     });
@@ -55,7 +56,27 @@ export class AppComponent {
 
   getMenu() {
     const that = this;
-    this.help.post('http://localhost:8088/menu/getAllMenus', {username: 'zhx', password: '1'}).subscribe(msg => {
+    this.help.post('http://localhost:8088/menu/getAllMenus', null).subscribe(msg => {
+      if (msg.success) {
+        that.menus = msg.data;
+      } else {
+        console.log(msg);
+      }
+    });
+  }
+  getStaffInfo() {
+    const that = this;
+    this.help.get('http://localhost:8088/staff/getStaffInfo').subscribe(msg => {
+      if (msg.success) {
+        that.userInfo = msg.data;
+      } else {
+        console.log(msg);
+      }
+    });
+  }
+  testAuth() {
+    const that = this;
+    this.help.post('http://localhost:8088/staff/list', {username: 'zhx', password: '1'}).subscribe(msg => {
       if (msg.success) {
         that.menus = msg.data;
       } else {

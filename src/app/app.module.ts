@@ -22,7 +22,7 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     MenuComponent,
-    SubmenuComponent
+    SubmenuComponent,
   ],
   imports: [
     BrowserModule,
