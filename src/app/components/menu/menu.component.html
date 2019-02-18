@@ -1,5 +1,5 @@
 <div class="drag-content">
-  <ul nz-menu [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed" style="height:100%">
+  <ul nz-menu [nzMode]="'inline'" nzTheme='dark' style="height:100%">
     <ng-container *ngFor="let item of menus">
 
       <li *ngIf="item.children==null" nz-menu-item nz-tooltip nzPlacement="right" [routerLink]="item.path">

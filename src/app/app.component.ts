@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Help} from './utils/Help';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent {
   userInfo: any;
   loginFlag: boolean;
 
-  constructor(private help: Help, private modalService: NzModalService) {
+  constructor(private help: Help, private modalService: NzModalService, private message: NzMessageService) {
     const token = localStorage.getItem('token');
     if (token) {
       this.getMenu();
@@ -48,7 +48,6 @@ export class AppComponent {
     this.help.post('http://localhost:8088/login', {username: 'zhx', password: '1'}).subscribe(msg => {
       if (msg.success) {
         localStorage.setItem('token', msg.data.token);
-
       }
       console.log(msg);
     });
@@ -60,6 +59,7 @@ export class AppComponent {
       if (msg.success) {
         that.menus = msg.data;
       } else {
+        this.message.create('error', msg.message);
         console.log(msg);
       }
     });
@@ -70,6 +70,7 @@ export class AppComponent {
       if (msg.success) {
         that.userInfo = msg.data;
       } else {
+        this.message.create('error', msg.message);
         console.log(msg);
       }
     });
