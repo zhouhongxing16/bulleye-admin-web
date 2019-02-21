@@ -1,3 +1,4 @@
+
 <nz-layout style="height: 100%">
   <nz-header>
     <div style="float: left;">
@@ -11,12 +12,6 @@
             <nz-avatar [nzSrc]="userInfo.avatar"></nz-avatar>
           </ng-container>
         </a>
-        <!-- <ul nz-menu nzSelectable *ngIf="menus">
-          <li nz-menu-item *ngFor="let m of menus" (click)="click(m)">
-            <a><i class="anticon" [ngClass]="m.icon"></i>&nbsp;{{m.label}}</a>
-          </li>
-        </ul>-->
-
         <ul nz-menu>
           <li nz-menu-item>
             <a>个人信息</a>
@@ -31,14 +26,46 @@
       </nz-dropdown>
     </div>
   </nz-header>
+
   <nz-layout>
+    <nz-sider [nzWidth]="200">
+      <app-menu [menus]="menus"></app-menu>
+    </nz-sider>
+    <nz-layout style="padding:0 24px 24px">
+      <nz-breadcrumb style="margin:16px 0;">
+        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+        <nz-breadcrumb-item>List</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <nz-content style=" padding: 24px; min-height: 280px;">
+
+        <router-outlet></router-outlet>
+
+        <button (click)="login()">test</button>
+        <button (click)="getMenu()">test</button>
+        <button (click)="testAuth()">testAuth</button>
+
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+  <!--<nz-layout>
     <nz-sider style="overflow: auto;min-width: 150px;" [nzWidth]="'200px'">
       <app-menu [menus]="menus"></app-menu>
       <a routerLink="/login">login</a>
       <a routerLink="">home</a>
     </nz-sider>
     <nz-layout>
-      <router-outlet></router-outlet>
+
+
+        <nz-breadcrumb style="margin:16px 0;">
+          <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+          <nz-breadcrumb-item>List</nz-breadcrumb-item>
+          <nz-breadcrumb-item>App</nz-breadcrumb-item>
+        </nz-breadcrumb>
+        <nz-content style="background:#fff; padding: 24px; min-height: 280px;">
+          <router-outlet></router-outlet>
+        </nz-content>
+
       <nz-modal [(nzVisible)]="loginFlag" nzTitle="您的登录信息已失效，请重新登录！" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
         <app-login></app-login>
       </nz-modal>
@@ -48,6 +75,6 @@
       <button (click)="getMenu()">test</button>
       <button (click)="testAuth()">testAuth</button>
     </nz-layout>
-  </nz-layout>
+  </nz-layout>-->
 </nz-layout>
 
