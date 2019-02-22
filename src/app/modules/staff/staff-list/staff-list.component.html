@@ -1,26 +1,38 @@
+<div class="table-operations">
+  <button nz-button>Sort age</button>
+  <button nz-button>Clear filters</button>
+  <button nz-button>Clear filters and sorters</button>
+</div>
 <nz-table
-  #ajaxTable
+  #staffTable
   nzShowSizeChanger
-  [nzFrontPagination]="false"
   [nzData]="dataSet"
   [nzLoading]="loading"
   [nzTotal]="total"
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
   (nzPageIndexChange)="searchData()"
   (nzPageSizeChange)="searchData(true)">
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
-    <th nzShowSort nzSortKey="name">Name</th>
-    <th nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">Gender</th>
+    <th nzShowSort nzSortKey="name">姓名</th>
+    <th nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
     <th nzShowSort nzSortKey="email"><span>Email</span></th>
+    <th ><span>操作</span></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of ajaxTable.data">
-    <td>{{data.name.first}} {{data.name.last}}</td>
-    <td>{{data.gender}}</td>
+  <tr *ngFor="let data of staffTable.data">
+    <td>{{data.name}}</td>
+    <td>{{data.genderId}}</td>
     <td>{{data.email}}</td>
+    <td>
+      <a><i nz-icon type="edit" theme="outline" title="编辑"></i></a>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+        <a nz-popconfirm><i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></a>
+      </nz-popconfirm>
+    </td>
   </tr>
   </tbody>
 </nz-table>

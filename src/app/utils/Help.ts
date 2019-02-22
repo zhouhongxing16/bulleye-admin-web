@@ -1,11 +1,25 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Injectable()
 export class Help {
+  private loadId: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private message: NzMessageService) {
+  }
+
+  showMessage(type: string, msg: string) {
+    this.message.create(type, msg);
+  }
+
+  loading(msg: string = '加载中...') {
+    this.loadId = this.message.loading(msg, {nzDuration: 0}).messageId;
+  }
+
+  stopLoad() {
+    this.message.remove(this.loadId);
   }
 
   get(url: string): Observable<any> {
@@ -15,6 +29,14 @@ export class Help {
 
   post(url: string, params: any): Observable<any> {
     return this.http.post(url, params);
+  }
+
+  isEmpty(val): boolean {
+    if (val !== undefined && val != null && (val + '').trim() !== '') {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   convertTime(timestamp: any) {
