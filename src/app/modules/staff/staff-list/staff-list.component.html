@@ -1,7 +1,6 @@
 <div class="table-operations">
-  <button nz-button>Sort age</button>
-  <button nz-button>Clear filters</button>
-  <button nz-button>Clear filters and sorters</button>
+  <button nz-button nzType="primary" routerLink="/edit"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" ><i class="anticon anticon-delete"></i>删除</button>
 </div>
 <nz-table
   #staffTable
@@ -28,9 +27,9 @@
     <td>{{data.genderId}}</td>
     <td>{{data.email}}</td>
     <td>
-      <a><i nz-icon type="edit" theme="outline" title="编辑"></i></a>
+      <button title="修改数据" [routerLink]="['/edit']" nz-button nzType="primary" nzShape="circle"><i class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
-        <a nz-popconfirm><i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></a>
+        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></button>
       </nz-popconfirm>
     </td>
   </tr>

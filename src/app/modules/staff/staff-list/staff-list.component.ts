@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StaffService} from '../staff.service';
 import {Help} from '../../../utils/Help';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-staff-list',
@@ -48,6 +47,19 @@ export class StaffListComponent implements OnInit {
     this.sortKey = sort.key;
     this.sortValue = sort.value;
     this.searchData();
+  }
+
+  saveOrUpdateData(data) {
+    this.help.loading('删除中...');
+    this.staffService.saveOrUpdateData(data).subscribe(res => {
+      if (res.success) {
+        this.help.stopLoad();
+        this.help.showMessage('success', res.message);
+        this.searchData(true);
+      } else {
+        this.help.showMessage('error', res.message);
+      }
+    });
   }
 
   deleteRow(id: string) {

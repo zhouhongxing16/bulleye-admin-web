@@ -5,7 +5,9 @@ import {StaffEditComponent} from './staff-edit/staff-edit.component';
 
 const routes: Routes = [
   {path: '', component: StaffListComponent},
-  {path: 'edit', component: StaffEditComponent}];
+  {path: 'edit/:id', component: StaffEditComponent},
+  {path: 'edit', component: StaffEditComponent}
+  ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
