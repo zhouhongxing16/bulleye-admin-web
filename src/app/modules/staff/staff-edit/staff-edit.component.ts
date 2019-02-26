@@ -21,10 +21,28 @@ import {of} from 'rxjs';
 export class StaffEditComponent implements OnInit {
   validateForm: FormGroup;
   isLoading = false;
-  data: Staff;
+  data: {
+    id: string;
+    serialNo: string;
+    name: string;
+    birthday: string;
+    mobile: string;
+    email: string;
+    genderId: string;
+    nationId: string;
+    identifyNo: string;
+    academicId: string;
+    degreeId: string;
+    avatar: string;
+    organizationId: string;
+    departmentId: string;
+    positionId: string;
+    titleId: string;
+    status: number;
+    created: any;
+  };
 
   constructor(
-    private location: Location,
     private formBuilder: FormBuilder,
     private staffService: StaffService,
     private route: ActivatedRoute,
@@ -40,10 +58,18 @@ export class StaffEditComponent implements OnInit {
           return of(new Staff());
         }
       })
-    ).subscribe(d => this.data = d);
+    ).subscribe(d => {
+      if (d.success) {
+        console.log('获取数据：' + d.data);
+        this.data = d.data;
+        console.log('对象数据：' + this.data);
+      } else {
+        return of(this.data);
+      }
+    });
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      code: [null, [Validators.required]],
+      serialNo: [null, [Validators.required]],
       status: [null, [Validators.required]],
       remark: [null]
     });
