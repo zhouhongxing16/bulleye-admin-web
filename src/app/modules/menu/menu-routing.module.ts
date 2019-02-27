@@ -5,7 +5,7 @@ import {MenuListComponent} from './menu-list/menu-list.component';
 
 const routes: Routes = [
   {path: 'list', component: MenuListComponent},
-  {path: 'edit', component: MenuEditComponent},
+  {path: 'edit:/id', component: MenuEditComponent},
   {path: 'add', component: MenuEditComponent}
 ];
 

@@ -20,7 +20,7 @@ export class StaffService {
   private url = {
     listByPage: 'http://localhost:8001/staff/listByPage',
     create: 'http://localhost:8001/staff/create',
-    deleteById: 'http://localhost:8001/staff/deleteById',
+    deleteById: 'http://localhost:8001/staff/delete',
     getById: 'http://localhost:8001/staff/getById',
     update: 'http://localhost:8001/staff/update',
   };
@@ -43,6 +43,16 @@ export class StaffService {
           return this.data;
         }));
     }
+  }
+
+  getList(pageIndex: number = 1, pageSize: number = 10, sortField: string, sortOrder: string, genders: string[]): Observable<{}> {
+    const params = {
+      page: pageIndex,
+      limit: pageSize,
+      sortField: sortField,
+      sortOrder: sortOrder
+    };
+    return this.help.post(`${this.url.listByPage}`, params);
   }
 
   saveOrUpdateData(data: any) {

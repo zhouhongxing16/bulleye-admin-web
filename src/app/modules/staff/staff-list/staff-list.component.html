@@ -11,8 +11,8 @@
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
-  (nzPageIndexChange)="getData()"
-  (nzPageSizeChange)="getData(true)">
+  (nzPageIndexChange)="getList(true)"
+  (nzPageSizeChange)="getList(true)">
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="name">姓名</th>

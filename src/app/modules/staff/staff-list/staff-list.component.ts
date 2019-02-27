@@ -16,6 +16,8 @@ export class StaffListComponent implements OnInit {
   total = 0;
   pageIndex = 1;
   pageSize = 10;
+  sortValue = null;
+  sortKey = null;
   loading = false;
   private search = '';
 
@@ -37,16 +39,31 @@ export class StaffListComponent implements OnInit {
     this.getData();
   }
 
+  getList(reset: boolean = false): void {
+    if (reset) {
+      this.pageIndex = 1;
+    }
+    this.loading = true;
+    this.staffService.getList(this.pageIndex, this.pageSize, this.sortKey, this.sortValue, this.searchGenderList).subscribe((data: any) => {
+      this.loading = false;
+      this.total = data.total;
+      this.list = data.rows;
+    }, err => {
+      this.loading = false;
+      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+    });
+  }
+
   getData(reset: boolean = false) {
     this.loading = true;
     this.staffService.getListByPage(this.search).subscribe(data => {
-        this.loading = false;
-        this.list = data.list;
-        this.total = data.total;
-      }, err => {
-        this.loading = false;
-        this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
-      });
+      this.loading = false;
+      this.list = data.list;
+      this.total = data.total;
+    }, err => {
+      this.loading = false;
+      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+    });
   }
 
   updateFilter(value: string[]): void {
