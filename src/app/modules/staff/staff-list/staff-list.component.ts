@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StaffService} from '../staff.service';
 import {Help} from '../../../utils/Help';
+import {Observable, of} from 'rxjs';
+import {Staff} from '../staff';
 
 @Component({
   selector: 'app-staff-list',
@@ -8,14 +10,17 @@ import {Help} from '../../../utils/Help';
   styleUrls: ['./staff-list.component.scss'],
 })
 export class StaffListComponent implements OnInit {
-
+  allChecked = false;
+  indeterminate = false;
+  list: Staff[] = [];
+  total = 0;
   pageIndex = 1;
   pageSize = 10;
-  total = 1;
-  dataSet = [];
-  loading = true;
-  sortValue = null;
-  sortKey = null;
+  loading = false;
+  private search = '';
+
+
+  private flag = false;
   filterGender = [
     {text: 'male', value: 'male'},
     {text: 'female', value: 'female'}
@@ -23,30 +28,30 @@ export class StaffListComponent implements OnInit {
   searchGenderList: string[] = [];
 
   constructor(private staffService: StaffService, private help: Help) {
+
   }
 
-  searchData(reset: boolean = false): void {
-    if (reset) {
-      this.pageIndex = 1;
-    }
+  ngOnInit() {
+    this.pageIndex = this.staffService.pageNum;
+    this.pageSize = this.staffService.pageSize;
+    this.getData();
+  }
+
+  getData(reset: boolean = false) {
     this.loading = true;
-    this.staffService.getList(this.pageIndex, this.pageSize, this.sortKey, this.sortValue, this.searchGenderList).subscribe((data: any) => {
-      this.loading = false;
-      this.total = data.total;
-      this.dataSet = data.rows;
-    });
+    this.staffService.getListByPage(this.search).subscribe(data => {
+        this.loading = false;
+        this.list = data.list;
+        this.total = data.total;
+      }, err => {
+        this.loading = false;
+        this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+      });
   }
 
   updateFilter(value: string[]): void {
     this.searchGenderList = value;
-    this.searchData(true);
-  }
-
-
-  sort(sort: { key: string, value: string }): void {
-    this.sortKey = sort.key;
-    this.sortValue = sort.value;
-    this.searchData();
+    this.getData(true);
   }
 
   saveOrUpdateData(data) {
@@ -55,7 +60,7 @@ export class StaffListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.searchData(true);
+        this.getData(true);
       } else {
         this.help.showMessage('error', res.message);
       }
@@ -68,15 +73,12 @@ export class StaffListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.searchData(true);
+        this.getData(true);
       } else {
         this.help.showMessage('error', res.message);
       }
     });
   }
 
-  ngOnInit() {
-    this.searchData(true);
-  }
 
 }

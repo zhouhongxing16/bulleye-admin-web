@@ -4,8 +4,9 @@ import {RoleEditComponent} from './role-edit/role-edit.component';
 import {RoleListComponent} from './role-list/role-list.component';
 
 const routes: Routes = [
-  {path: '', component: RoleListComponent},
-  {path: 'edit', component: RoleEditComponent}
+  {path: 'list', component: RoleListComponent},
+  {path: 'edit', component: RoleEditComponent},
+  {path: 'add', component: RoleEditComponent}
 ];
 
 @NgModule({

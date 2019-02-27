@@ -1,12 +1,22 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Help} from '../../utils/Help';
+import {map} from 'rxjs/operators';
+import {Staff} from './staff';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
+  flag = false;
+  pageSize = 10;
+  pageNum = 1;
+  data = {
+    list: [],
+    total: 0
+  };
+  search = '';
   private url = {
     listByPage: 'http://localhost:8001/staff/listByPage',
     create: 'http://localhost:8001/staff/create',
@@ -15,19 +25,24 @@ export class StaffService {
     update: 'http://localhost:8001/staff/update',
   };
 
-
-  getList(pageIndex: number = 1, pageSize: number = 10, sortField: string, sortOrder: string, genders: string[]): Observable<{}> {
-    let params = new HttpParams()
-      .append('page', `${pageIndex}`)
-      .append('limit', `${pageSize}`)
-      .append('sortField', sortField)
-      .append('sortOrder', sortOrder);
-    genders.forEach(gender => {
-      params = params.append('gender', gender);
-    });
-    return this.http.get(`${this.url.listByPage}`, {
-      params
-    });
+  getListByPage(name: string): Observable<any> {
+    const params = {
+      page: this.pageNum,
+      limit: this.pageSize,
+    };
+    if (this.flag) {
+      return of(this.data);
+    } else {
+      return this.help.post(`${this.url.listByPage}`, params).pipe(
+        map(res => {
+          this.flag = true;
+          this.data = {
+            list: res.rows,
+            total: res.total
+          };
+          return this.data;
+        }));
+    }
   }
 
   saveOrUpdateData(data: any) {
@@ -41,8 +56,15 @@ export class StaffService {
   deleteById(id: string) {
     return this.help.get(this.url.deleteById + `/` + id);
   }
+
   getById(id: string) {
     return this.help.get(this.url.getById + `/` + id);
+  }
+
+  getStaff(id: string) {
+    return of(this.data.list).pipe(
+      map((dataList: Staff[]) => dataList.find(data => data.id === id))
+    );
   }
 
   constructor(private help: Help, private http: HttpClient) {

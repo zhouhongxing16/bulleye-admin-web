@@ -4,8 +4,9 @@ import {MenuEditComponent} from './menu-edit/menu-edit.component';
 import {MenuListComponent} from './menu-list/menu-list.component';
 
 const routes: Routes = [
-  {path: '', component: MenuListComponent},
-  {path: 'edit', component: MenuEditComponent}
+  {path: 'list', component: MenuListComponent},
+  {path: 'edit', component: MenuEditComponent},
+  {path: 'add', component: MenuEditComponent}
 ];
 
 @NgModule({
