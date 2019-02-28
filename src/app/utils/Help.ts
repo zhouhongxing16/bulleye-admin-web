@@ -2,12 +2,21 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NzMessageService} from 'ng-zorro-antd';
+import {Location} from '@angular/common';
 
 @Injectable()
 export class Help {
   private loadId: any;
 
-  constructor(private http: HttpClient, private message: NzMessageService) {
+  constructor(private http: HttpClient, private message: NzMessageService, private location: Location) {
+  }
+
+  back() {
+    this.location.back();
+  }
+
+  go(url: string) {
+    this.location.go(url);
   }
 
   showMessage(type: string, msg: string) {

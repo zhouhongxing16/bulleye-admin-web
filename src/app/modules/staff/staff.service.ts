@@ -25,6 +25,28 @@ export class StaffService {
     update: 'http://localhost:8001/staff/update',
   };
 
+
+  getListByPage(pageNum: number = 1, pageSize: number = 10): Observable<any> {
+    this.flag = false;
+    const params = {
+      pageNum: pageNum,
+      pageSize: pageSize,
+    };
+    if (this.flag) {
+      return of(this.data);
+    } else {
+      return this.help.post(`${this.url.listByPage}`, params).pipe(
+        map(res => {
+          this.flag = true;
+          this.data = {
+            list: res.rows,
+            total: res.total
+          };
+          return this.data;
+        }));
+    }
+  }
+
   getListByPage(name: string): Observable<any> {
     const params = {
       page: this.pageNum,
@@ -45,10 +67,10 @@ export class StaffService {
     }
   }
 
-  getList(pageIndex: number = 1, pageSize: number = 10, sortField: string, sortOrder: string, genders: string[]): Observable<{}> {
+  getList(pageNum: number = 1, pageSize: number = 10, sortField: string, sortOrder: string, genders: string[]): Observable<{}> {
     const params = {
-      page: pageIndex,
-      limit: pageSize,
+      pageNum: pageNum,
+      pageSize: pageSize,
       sortField: sortField,
       sortOrder: sortOrder
     };
