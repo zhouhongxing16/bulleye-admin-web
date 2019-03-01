@@ -33,22 +33,6 @@ export class StaffEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        if (params.get('id')) {
-          return this.staffService.getById(params.get('id'));
-        } else {
-          return of({data: new Staff(), success: true});
-        }
-      })
-    ).subscribe(d => {
-      if (d.success) {
-        this.obj = d.data;
-      } else {
-        this.obj = new Staff();
-      }
-    });
-*/
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
@@ -62,6 +46,8 @@ export class StaffEditComponent implements OnInit {
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       serialNo: [null, [Validators.required]],
+      identifyNo: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
       status: [null, [Validators.required]],
       remark: [null]
     });

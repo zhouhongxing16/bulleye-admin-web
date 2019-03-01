@@ -24,7 +24,7 @@ export class Staff {
   positionId: string;
   remark: string;
   serialNo: string;
-  status: string;
+  status: number;
   titleId: string;
   typeId: string;
   vmnetNo: string;

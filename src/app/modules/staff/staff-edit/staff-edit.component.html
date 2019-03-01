@@ -1,6 +1,4 @@
-<!--<form  [formGroup]="validateForm">-->
-<!--<input  [(ngModel)]="staff.name" formControlName="name" name="name" id="name">-->
-<!--</form>-->
+
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">姓名</nz-form-label>
@@ -11,25 +9,48 @@
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="serialNo">编号</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="serialNo" [(ngModel)]="obj.serialNo" id="serialNo">
+      <input nz-input formControlName="serialNo" [(ngModel)]="obj.serialNo" name="serialNo" id="serialNo">
       <nz-form-explain *ngIf="validateForm.get('serialNo').dirty && validateForm.get('serialNo').errors">
         必填
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="serialNo">电话</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="mobile" [(ngModel)]="obj.mobile" name="mobile" id="mobile">
+      <nz-form-explain *ngIf="validateForm.get('mobile').dirty && validateForm.get('mobile').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="identifyNo">身份证号</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="identifyNo" [(ngModel)]="obj.identifyNo" name="identifyNo" id="identifyNo">
+      <nz-form-explain *ngIf="validateForm.get('identifyNo').dirty && validateForm.get('identifyNo').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="remark">备注</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <textarea formControlName="remark" id="remark" [(ngModel)]="obj.remark" nz-input rows="4"></textarea>
+      <textarea formControlName="remark" name="remark" id="remark" [(ngModel)]="obj.remark" nz-input rows="4"></textarea>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-radio-group formControlName="status" id="status" [(ngModel)]="obj.status">
+      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
         <label nz-radio [nzValue]="0">启用</label>
         <label nz-radio [nzValue]="1">禁用</label>
       </nz-radio-group>
@@ -38,6 +59,7 @@
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item nz-row style="margin-bottom:8px;">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
       <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;

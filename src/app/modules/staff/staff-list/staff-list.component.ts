@@ -12,7 +12,7 @@ import {Staff} from '../staff';
 export class StaffListComponent implements OnInit {
   allChecked = false;
   indeterminate = false;
-  list: Staff[] = [];
+  rows: Staff[] = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
@@ -36,29 +36,17 @@ export class StaffListComponent implements OnInit {
   ngOnInit() {
     this.pageIndex = this.staffService.pageNum;
     this.pageSize = this.staffService.pageSize;
-    this.getData();
+    this.getListByPage();
   }
 
-  getList(reset: boolean = false): void {
+  getListByPage(reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.staffService.getList(this.pageIndex, this.pageSize, this.sortKey, this.sortValue, this.searchGenderList).subscribe((data: any) => {
+    this.staffService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
       this.loading = false;
-      this.total = data.total;
-      this.list = data.rows;
-    }, err => {
-      this.loading = false;
-      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
-    });
-  }
-
-  getData(reset: boolean = false) {
-    this.loading = true;
-    this.staffService.getListByPage(this.search).subscribe(data => {
-      this.loading = false;
-      this.list = data.list;
+      this.rows = data.rows;
       this.total = data.total;
     }, err => {
       this.loading = false;
@@ -68,20 +56,7 @@ export class StaffListComponent implements OnInit {
 
   updateFilter(value: string[]): void {
     this.searchGenderList = value;
-    this.getData(true);
-  }
-
-  saveOrUpdateData(data) {
-    this.help.loading('删除中...');
-    this.staffService.saveOrUpdateData(data).subscribe(res => {
-      if (res.success) {
-        this.help.stopLoad();
-        this.help.showMessage('success', res.message);
-        this.getData(true);
-      } else {
-        this.help.showMessage('error', res.message);
-      }
-    });
+    this.getListByPage(true);
   }
 
   deleteRow(id: string) {
@@ -90,7 +65,7 @@ export class StaffListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.getData(true);
+        this.getListByPage(true);
       } else {
         this.help.showMessage('error', res.message);
       }

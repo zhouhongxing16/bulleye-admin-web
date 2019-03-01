@@ -13,7 +13,7 @@ export class StaffService {
   pageSize = 10;
   pageNum = 1;
   data = {
-    list: [],
+    rows: [],
     total: 0
   };
   search = '';
@@ -39,42 +39,12 @@ export class StaffService {
         map(res => {
           this.flag = true;
           this.data = {
-            list: res.rows,
+            rows: res.rows,
             total: res.total
           };
           return this.data;
         }));
     }
-  }
-
-  getListByPage(name: string): Observable<any> {
-    const params = {
-      page: this.pageNum,
-      limit: this.pageSize,
-    };
-    if (this.flag) {
-      return of(this.data);
-    } else {
-      return this.help.post(`${this.url.listByPage}`, params).pipe(
-        map(res => {
-          this.flag = true;
-          this.data = {
-            list: res.rows,
-            total: res.total
-          };
-          return this.data;
-        }));
-    }
-  }
-
-  getList(pageNum: number = 1, pageSize: number = 10, sortField: string, sortOrder: string, genders: string[]): Observable<{}> {
-    const params = {
-      pageNum: pageNum,
-      pageSize: pageSize,
-      sortField: sortField,
-      sortOrder: sortOrder
-    };
-    return this.help.post(`${this.url.listByPage}`, params);
   }
 
   saveOrUpdateData(data: any) {
@@ -94,7 +64,7 @@ export class StaffService {
   }
 
   getStaff(id: string) {
-    return of(this.data.list).pipe(
+    return of(this.data.rows).pipe(
       map((dataList: Staff[]) => dataList.find(data => data.id === id))
     );
   }
