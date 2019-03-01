@@ -4,9 +4,9 @@ import {LoginComponent} from './components/login/login.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'staff', loadChildren: './modules/staff/staff.module#StaffModule'},
-  {path: 'menu', loadChildren: './modules/menu/menu.module#MenuModule'},
-  {path: 'role', loadChildren: './modules/role/role.module#RoleModule'},
+  {path: 'staff', loadChildren: './modules/system/staff/staff.module#StaffModule'},
+  {path: 'menu', loadChildren: './modules/system/menu/menu.module#MenuModule'},
+  {path: 'role', loadChildren: './modules/system/role/role.module#RoleModule'},
 ];
 
 @NgModule({

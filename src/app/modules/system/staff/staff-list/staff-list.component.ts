@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StaffService} from '../staff.service';
-import {Help} from '../../../utils/Help';
+import {Help} from '../../../../utils/Help';
 import {Observable, of} from 'rxjs';
 import {Staff} from '../staff';
 

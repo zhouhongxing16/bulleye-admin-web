@@ -7,7 +7,7 @@ import {
   Validators
 } from '@angular/forms';
 import {StaffService} from '../staff.service';
-import {Help} from '../../../utils/Help';
+import {Help} from '../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {Staff} from '../staff';
