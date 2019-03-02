@@ -69,6 +69,6 @@ export class StaffService {
     );
   }
 
-  constructor(private help: Help, private http: HttpClient) {
+  constructor(private help: Help) {
   }
 }
