@@ -22,10 +22,6 @@ export class WxMenuListComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-
-  ngOnInit() {
     this.getListByPage();
   }
 

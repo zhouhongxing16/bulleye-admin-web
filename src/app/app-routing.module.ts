@@ -8,6 +8,8 @@ const routes: Routes = [
   {path: 'menu', loadChildren: './modules/system/menu/menu.module#MenuModule'},
   {path: 'role', loadChildren: './modules/system/role/role.module#RoleModule'},
   {path: 'account', loadChildren: './modules/system/account/account.module#AccountModule'},
+  {path: 'department', loadChildren: './modules/system/department/department.module#DepartmentModule'},
+  {path: 'organization', loadChildren: './modules/system/organization/organization.module#OrganizationModule'},
   {path: 'wxaccount', loadChildren: './modules/wechat/wx-account/wx-account.module#WxAccountModule'},
   {path: 'wxmember', loadChildren: './modules/wechat/wx-member/wx-member.module#WxMemberModule'},
   {path: 'wxmenu', loadChildren: './modules/wechat/wx-menu/wx-menu.module#WxMenuModule'},

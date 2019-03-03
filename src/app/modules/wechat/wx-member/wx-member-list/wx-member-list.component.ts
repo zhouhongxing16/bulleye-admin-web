@@ -21,10 +21,6 @@ export class WxMemberListComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-
-  ngOnInit() {
     this.getListByPage();
   }
 

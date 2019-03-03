@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Help} from '../../../../utils/Help';
-import {WxAccountService} from '../wx-account.service';
-import {WxAccount} from '../wx-account';
+import {Department} from '../department';
+import {DepartmentService} from '../department.service';
 
 @Component({
-  selector: 'app-wx-account-list',
-  templateUrl: './wx-account-list.component.html',
-  styleUrls: ['./wx-account-list.component.scss']
+  selector: 'app-department-list',
+  templateUrl: './department-list.component.html',
+  styleUrls: ['./department-list.component.scss']
 })
-export class WxAccountListComponent implements OnInit {
-  rows: WxAccount[] = [];
+export class DepartmentListComponent implements OnInit {
+  rows: Department[] = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
@@ -17,7 +17,7 @@ export class WxAccountListComponent implements OnInit {
   sortKey = null;
   loading = false;
 
-  constructor(private wxAccountService: WxAccountService, private help: Help) {
+  constructor(private departmentService: DepartmentService, private help: Help) {
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class WxAccountListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.wxAccountService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.departmentService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;
@@ -41,7 +41,7 @@ export class WxAccountListComponent implements OnInit {
 
   deleteRow(id: string) {
     this.help.loading('删除中...');
-    this.wxAccountService.deleteById(id).subscribe(res => {
+    this.departmentService.deleteById(id).subscribe(res => {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);

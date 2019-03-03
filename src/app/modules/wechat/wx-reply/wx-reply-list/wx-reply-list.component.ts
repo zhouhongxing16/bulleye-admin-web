@@ -21,10 +21,6 @@ export class WxReplyListComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-
-  ngOnInit() {
     this.getListByPage();
   }
 
