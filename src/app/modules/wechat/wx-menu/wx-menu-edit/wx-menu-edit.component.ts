@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Help} from '../../../../utils/Help';
+import {WxMenuService} from '../wx-menu.service';
 
 @Component({
   selector: 'app-wx-menu-edit',
@@ -7,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WxMenuEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder,
+              private wxMenuService: WxMenuService,
+              private route: ActivatedRoute,
+              private help: Help) {
+  }
 
   ngOnInit() {
   }

@@ -36,7 +36,7 @@ export class StaffEditComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
-          return this.staffService.getStaff(params.get('id'));
+          return this.staffService.getObject(params.get('id'));
         } else {
           return of(new Staff());
         }

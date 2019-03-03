@@ -16,7 +16,6 @@ export class StaffService {
     rows: [],
     total: 0
   };
-  search = '';
   private url = {
     listByPage: 'http://localhost:8001/staff/listByPage',
     create: 'http://localhost:8001/staff/create',
@@ -63,7 +62,7 @@ export class StaffService {
     return this.help.get(this.url.getById + `/` + id);
   }
 
-  getStaff(id: string) {
+  getObject(id: string) {
     return of(this.data.rows).pipe(
       map((dataList: Staff[]) => dataList.find(data => data.id === id))
     );

@@ -1,14 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Help} from '../../../utils/Help';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {WxAccount} from './wx-account';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WxAccountService {
-
+export class AccountService {
 
   flag = false;
   pageSize = 10;
@@ -18,11 +16,11 @@ export class WxAccountService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/wxaccount/listByPage',
-    create: 'http://localhost:8001/wxaccount/create',
-    deleteById: 'http://localhost:8001/wxaccount/delete',
-    getById: 'http://localhost:8001/wxaccount/getById',
-    update: 'http://localhost:8001/wxaccount/update',
+    listByPage: 'http://localhost:8001/account/listByPage',
+    create: 'http://localhost:8001/account/create',
+    deleteById: 'http://localhost:8001/account/delete',
+    getById: 'http://localhost:8001/account/getById',
+    update: 'http://localhost:8001/account/update',
   };
   constructor(private help: Help) {
   }
@@ -65,7 +63,7 @@ export class WxAccountService {
 
   getObject(id: string) {
     return of(this.data.rows).pipe(
-      map((dataList: WxAccount[]) => dataList.find(data => data.id === id))
+      map((dataList: Account[]) => dataList.find(data => data.id === id))
     );
   }
 }

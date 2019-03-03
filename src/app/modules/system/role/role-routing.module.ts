@@ -5,7 +5,7 @@ import {RoleListComponent} from './role-list/role-list.component';
 
 const routes: Routes = [
   {path: 'list', component: RoleListComponent},
-  {path: 'edit', component: RoleEditComponent},
+  {path: 'edit/:id', component: RoleEditComponent},
   {path: 'add', component: RoleEditComponent}
 ];
 

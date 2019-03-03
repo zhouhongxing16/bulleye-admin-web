@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Help} from '../../../../utils/Help';
+import {WxReplyService} from '../wx-reply.service';
 
 @Component({
   selector: 'app-wx-reply-edit',
@@ -7,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WxReplyEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder,
+              private wxReplyService: WxReplyService,
+              private route: ActivatedRoute,
+              private help: Help) {
+  }
 
   ngOnInit() {
   }

@@ -1,43 +1,37 @@
 import {Component, OnInit} from '@angular/core';
-import {StaffService} from '../staff.service';
 import {Help} from '../../../../utils/Help';
-import {Staff} from '../staff';
+import {AccountService} from '../account.service';
+import {Staff} from '../../staff/staff';
 
 @Component({
-  selector: 'app-staff-list',
-  templateUrl: './staff-list.component.html',
-  styleUrls: ['./staff-list.component.scss'],
+  selector: 'app-account-list',
+  templateUrl: './account-list.component.html',
+  styleUrls: ['./account-list.component.scss']
 })
-export class StaffListComponent implements OnInit {
-  allChecked = false;
-  indeterminate = false;
-  rows: Staff[] = [];
+export class AccountListComponent implements OnInit {
+  rows: Account[] = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
   sortValue = null;
   sortKey = null;
   loading = false;
-  filterGender = [
-    {text: 'male', value: 'male'},
-    {text: 'female', value: 'female'}
-  ];
-  searchGenderList: string[] = [];
 
-  constructor(private staffService: StaffService, private help: Help) {
-
+  constructor(private accountService: AccountService, private help: Help) {
   }
+
 
   ngOnInit() {
     this.getListByPage();
   }
+
 
   getListByPage(reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.staffService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.accountService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;
@@ -47,14 +41,9 @@ export class StaffListComponent implements OnInit {
     });
   }
 
-  updateFilter(value: string[]): void {
-    this.searchGenderList = value;
-    this.getListByPage(true);
-  }
-
   deleteRow(id: string) {
     this.help.loading('删除中...');
-    this.staffService.deleteById(id).subscribe(res => {
+    this.accountService.deleteById(id).subscribe(res => {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
@@ -64,6 +53,4 @@ export class StaffListComponent implements OnInit {
       }
     });
   }
-
-
 }
