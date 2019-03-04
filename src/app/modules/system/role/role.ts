@@ -10,7 +10,7 @@ export class Role {
 
   dataAuthFlag: string;
 
-  describle: string;
+  describe: string;
 
   status: string;
 

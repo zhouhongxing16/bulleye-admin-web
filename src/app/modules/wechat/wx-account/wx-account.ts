@@ -1,42 +1,49 @@
 export class WxAccount {
-
   id: string;
+
+  accountId: string;
+
+  subscribe: string;
+
+  openId: string;
+
+  nickname: string;
+
+  sex: string;
+
+  sexDesc: string;
+
+  language: string;
+
+  city: string;
 
   qrCode: string;
 
-  name: string;
+  province: string;
 
-  sourceId: string;
+  country: string;
 
-  appId: string;
+  headImgUrl: string;
 
-  aesKey: string;
+  subscribeTime: string;
 
-  appSecret: string;
-
-  token: string;
-
-  domain: string;
-
-  accessToken: string;
-
-  tokenTime: string;
-
-  menuState: string;
-
-  userId: string;
-
-  created: string;
-
-  updated: string;
+  unionId: string;
 
   remark: string;
 
-  partner: string;
+  groupId: string;
 
-  partnerKey: string;
+  privileges: string;
 
-  certificatePath: string;
+  tagIds: string;
 
-  status: string;
+  subscribeScene: string;
+
+  qrScene: string;
+
+  qrSceneStr: string;
+
+  userId: string;
+
+  unsubscribeTime: string;
 }

@@ -1,3 +1,47 @@
-<p>
-  wx-member-list works!
-</p>
+<div class="table-operations">
+  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+</div>
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead (nzSortChange)="sort($event)" nzSingleSort>
+  <tr>
+    <th nzShowSort nzSortKey="appSecret"><span>头像</span></th>
+    <th nzShowSort nzSortKey="name">昵称</th>
+    <th nzShowSort nzSortKey="email">性别</th>
+    <th nzShowSort nzSortKey="accountLocked">城市</th>
+    <th nzShowSort nzSortKey="status">是否关注</th>
+    <th nzShowSort nzSortKey="created">关注时间</th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td><nz-avatar [nzSrc]="data.headImgUrl"></nz-avatar></td>
+    <td>{{data.nickname}}</td>
+    <td>{{data.sex}}</td>
+    <td>{{data.city}}</td>
+    <td>{{data.subscribe}}</td>
+    <td>{{data.subscribeTime}}</td>
+    <td>
+      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+        class="anticon anticon-edit"></i></button>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+                                                                                          theme="outline"
+                                                                                          twoToneColor="red"
+                                                                                          title="删除"></i></button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
