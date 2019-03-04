@@ -1,32 +1,27 @@
 export class WxMenu {
-  academicId: string;
-  avatar: string;
-  birthCityId: string;
-  birthProvinceId: string;
-  birthday: string;
-  created: string;
-  degreeId: string;
-  departmentId: string;
-  email: string;
-  genderId: string;
-  healthStatus: string;
-  height: string;
   id: string;
-  identifyNo: string;
-  identifyTypeId: string;
-  joinDate: string;
-  marryStatusId: string;
-  mobile: string;
+
+  accountId: string;
+
+  type: string;
+
   name: string;
-  nationId: string;
-  organizationId: string;
-  policy: string;
-  positionId: string;
+
+  key: string;
+
+  url: string;
+
+  mediaId: string;
+
+  appId: string;
+
+  pagePath: string;
+
+  parentId: string;
+
+  author: string;
+
+  sort: string;
+
   remark: string;
-  serialNo: string;
-  status: number;
-  titleId: string;
-  typeId: string;
-  vmnetNo: string;
-  weight: string;
 }

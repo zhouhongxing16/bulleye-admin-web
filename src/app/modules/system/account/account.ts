@@ -1,32 +1,36 @@
 export class Account {
-  academicId: string;
-  avatar: string;
-  birthCityId: string;
-  birthProvinceId: string;
-  birthday: string;
-  created: string;
-  degreeId: string;
-  departmentId: string;
-  email: string;
-  genderId: string;
-  healthStatus: string;
-  height: string;
+
   id: string;
-  identifyNo: string;
-  identifyTypeId: string;
-  joinDate: string;
-  marryStatusId: string;
-  mobile: string;
-  name: string;
-  nationId: string;
+
+  username: string;
+
+  password: string;
+
+  accountLocked: string;
+
+  credentialsExpired: string;
+
+  accountExpired: string;
+
+  staffId: string;
+
   organizationId: string;
-  policy: string;
-  positionId: string;
+
+  wxOpenid: string;
+
+  alipayOpenid: string;
+
+  email: string;
+
+  status: string;
+
+  mobileLoginFlag: string;
+
   remark: string;
-  serialNo: string;
-  status: number;
-  titleId: string;
-  typeId: string;
-  vmnetNo: string;
-  weight: string;
+
+  created: string;
+
+  modified: string;
+
+  expiredDate: string;
 }

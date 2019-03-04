@@ -1,32 +1,50 @@
 export class WxMember {
-  academicId: string;
-  avatar: string;
-  birthCityId: string;
-  birthProvinceId: string;
-  birthday: string;
-  created: string;
-  degreeId: string;
-  departmentId: string;
-  email: string;
-  genderId: string;
-  healthStatus: string;
-  height: string;
   id: string;
-  identifyNo: string;
-  identifyTypeId: string;
-  joinDate: string;
-  marryStatusId: string;
-  mobile: string;
-  name: string;
-  nationId: string;
-  organizationId: string;
-  policy: string;
-  positionId: string;
+
+  accountId: string;
+
+  subscribe: string;
+
+  openId: string;
+
+  nickname: string;
+
+  sex: string;
+
+  sexDesc: string;
+
+  language: string;
+
+  city: string;
+
+  qrCode: string;
+
+  province: string;
+
+  country: string;
+
+  headImgUrl: string;
+
+  subscribeTime: string;
+
+  unionId: string;
+
   remark: string;
-  serialNo: string;
-  status: number;
-  titleId: string;
-  typeId: string;
-  vmnetNo: string;
-  weight: string;
+
+  groupId: string;
+
+  privileges: string;
+
+  tagIds: string;
+
+  subscribeScene: string;
+
+  qrScene: string;
+
+  qrSceneStr: string;
+
+  userId: string;
+
+  unsubscribeTime: string;
+
 }

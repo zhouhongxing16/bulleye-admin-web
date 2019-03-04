@@ -1,32 +1,42 @@
 export class WxAccount {
-  academicId: string;
-  avatar: string;
-  birthCityId: string;
-  birthProvinceId: string;
-  birthday: string;
-  created: string;
-  degreeId: string;
-  departmentId: string;
-  email: string;
-  genderId: string;
-  healthStatus: string;
-  height: string;
+
   id: string;
-  identifyNo: string;
-  identifyTypeId: string;
-  joinDate: string;
-  marryStatusId: string;
-  mobile: string;
+
+  qrCode: string;
+
   name: string;
-  nationId: string;
-  organizationId: string;
-  policy: string;
-  positionId: string;
+
+  sourceId: string;
+
+  appId: string;
+
+  aesKey: string;
+
+  appSecret: string;
+
+  token: string;
+
+  domain: string;
+
+  accessToken: string;
+
+  tokenTime: string;
+
+  menuState: string;
+
+  userId: string;
+
+  created: string;
+
+  updated: string;
+
   remark: string;
-  serialNo: string;
-  status: number;
-  titleId: string;
-  typeId: string;
-  vmnetNo: string;
-  weight: string;
+
+  partner: string;
+
+  partnerKey: string;
+
+  certificatePath: string;
+
+  status: string;
 }

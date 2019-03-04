@@ -1,32 +1,25 @@
 export class Organization {
-  academicId: string;
-  avatar: string;
-  birthCityId: string;
-  birthProvinceId: string;
-  birthday: string;
-  created: string;
-  degreeId: string;
-  departmentId: string;
-  email: string;
-  genderId: string;
-  healthStatus: string;
-  height: string;
   id: string;
-  identifyNo: string;
-  identifyTypeId: string;
-  joinDate: string;
-  marryStatusId: string;
-  mobile: string;
+
+  pid: string;
+
+  code: string;
+
   name: string;
-  nationId: string;
-  organizationId: string;
-  policy: string;
-  positionId: string;
-  remark: string;
-  serialNo: string;
-  status: number;
-  titleId: string;
-  typeId: string;
-  vmnetNo: string;
-  weight: string;
+
+  areaId: string;
+
+  brief: string;
+
+  contactName: string;
+
+  contactPhone: string;
+
+  status: string;
+
+  endDate: string;
+
+  domain: string;
+
+  created: string;
 }
