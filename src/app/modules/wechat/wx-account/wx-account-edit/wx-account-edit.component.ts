@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Help} from '../../../../utils/Help';
 import {WxAccountService} from '../wx-account.service';
+import {Staff} from '../../../system/staff/staff';
+import {WxAccount} from '../wx-account';
+import {switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-wx-account-edit',
@@ -17,7 +21,41 @@ export class WxAccountEditComponent implements OnInit {
               private help: Help) {
   }
 
+  validateForm: FormGroup;
+  isLoading = false;
+  obj: WxAccount = new WxAccount();
+
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        if (params.get('id')) {
+          return this.wxAccountService.getObject(params.get('id'));
+        } else {
+          return of(new WxAccount());
+        }
+      })
+    ).subscribe(d => this.obj = d);
+
+    this.validateForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      sourceId: [null, [Validators.required]],
+      appId: [null, [Validators.required]],
+      appSecret: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      domain: [null],
+      remark: [null]
+    });
+  }
+
+  submitForm() {
+    this.isLoading = true;
+    this.wxAccountService.saveOrUpdateData(this.obj).subscribe(res => {
+      this.isLoading = false;
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+        this.help.back();
+      }
+    });
   }
 
 }
