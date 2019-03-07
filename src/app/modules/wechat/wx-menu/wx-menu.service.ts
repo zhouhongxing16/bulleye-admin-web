@@ -23,14 +23,16 @@ export class WxMenuService {
     deleteById: 'http://localhost:8001/wxmenu/delete',
     getById: 'http://localhost:8001/wxmenu/getById',
     update: 'http://localhost:8001/wxmenu/update',
+    getWxMenu: 'http://localhost:8001/wxmenu/getWxMenu',
   };
   constructor(private help: Help) {
   }
-  getListByPage(pageNum: number = 1, pageSize: number = 10): Observable<any> {
+  getListByPage(pageNum: number = 1, pageSize: number = 10, keyword): Observable<any> {
     this.flag = false;
     const params = {
       pageNum: pageNum,
       pageSize: pageSize,
+      keyword:keyword
     };
     if (this.flag) {
       return of(this.data);
@@ -67,5 +69,9 @@ export class WxMenuService {
     return of(this.data.rows).pipe(
       map((dataList: WxMenu[]) => dataList.find(data => data.id === id))
     );
+  }
+
+  getWxMenu(appId: string) {
+    return this.help.get(this.url.getWxMenu + `/` + appId);
   }
 }

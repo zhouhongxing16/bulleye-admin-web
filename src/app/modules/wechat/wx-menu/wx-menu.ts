@@ -24,4 +24,10 @@ export class WxMenu {
   sort: string;
 
   remark: string;
+
+  level: number;
+
+  expand: boolean;
+
+  children?: WxMenu[];
 }

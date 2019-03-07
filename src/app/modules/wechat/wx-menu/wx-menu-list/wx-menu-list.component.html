@@ -2,42 +2,41 @@
   <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
-<nz-table
-  #staffTable
-  nzShowSizeChanger
-  [nzData]="rows"
-  [nzLoading]="loading"
-  [nzTotal]="total"
-  [(nzPageIndex)]="pageIndex"
-  [(nzPageSize)]="pageSize"
-  [nzFrontPagination]="false"
-  (nzPageIndexChange)="getListByPage()"
-  (nzPageSizeChange)="getListByPage(true)">
-  <thead (nzSortChange)="sort($event)" nzSingleSort>
+
+<nz-table #expandTable [nzData]="rows">
+  <thead>
   <tr>
-    <th nzShowSort nzSortKey="name">名称</th>
-    <th nzShowSort nzSortKey="code">编码</th>
-    <th nzShowSort nzSortKey="status">状态</th>
-    <th nzShowSort nzSortKey="created">创建时间</th>
-    <th><span>操作</span></th>
+    <th nzWidth="40%">名称</th>
+    <th nzWidth="30%">菜单类型</th>
+    <th>需要登录</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of staffTable.data">
-    <td>{{data.name}}</td>
-    <td>{{data.code}}</td>
-    <td>{{data.status}}</td>
-    <td>{{data.created}}</td>
-    <td>
-      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
-        class="anticon anticon-edit"></i></button>
-      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
-        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
-                                                                                          theme="outline"
-                                                                                          twoToneColor="red"
-                                                                                          title="删除"></i></button>
-      </nz-popconfirm>
-    </td>
-  </tr>
+  <ng-container *ngFor="let data of expandTable.data">
+    <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
+      <tr *ngIf="item.parent && item.parent.expand || !item.parent">
+        <td
+          [nzIndentSize]="item.level * 20"
+          [nzShowExpand]="!!item.children"
+          [(nzExpand)]="item.expand"
+          (nzExpandChange)="collapse(mapOfExpandedData[data.id],item,$event)">
+          {{item.name}}
+        </td>
+        <td>{{item.type}}</td>
+        <td>{{item.author}}</td>
+        <td>
+          <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+            class="anticon anticon-edit"></i></button>
+          <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+            <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+                                                                                              theme="outline"
+                                                                                              twoToneColor="red"
+                                                                                              title="删除"></i></button>
+          </nz-popconfirm>
+        </td>
+      </tr>
+    </ng-container>
+  </ng-container>
   </tbody>
-</nz-table>
+</nz-table>`

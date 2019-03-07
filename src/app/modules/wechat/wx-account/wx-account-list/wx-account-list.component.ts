@@ -17,6 +17,37 @@ export class WxAccountListComponent implements OnInit {
   sortKey = null;
   loading = false;
 
+  //方法开始全选多选
+  isAllDisplayDataChecked = false;
+  isIndeterminate = false;
+  listOfDisplayData = [];
+  mapOfCheckedId = {};
+
+  currentPageDataChange($event: Array<{}>): void {
+    this.listOfDisplayData = $event;
+    this.refreshStatus();
+  }
+
+  refreshStatus(): void {
+    this.isAllDisplayDataChecked = this.listOfDisplayData.every(item => this.mapOfCheckedId[ item.id]);
+    this.isIndeterminate = this.listOfDisplayData.some(item => this.mapOfCheckedId[ item.id ]) && !this.isAllDisplayDataChecked;
+  }
+
+  checkAll(value: boolean): void {
+    this.listOfDisplayData.forEach(item => this.mapOfCheckedId[ item.id ] = value);
+    this.refreshStatus();
+  }
+  //多选方法结束
+
+  //多选删除
+  deleteOfChecked(){
+    var ids = [];
+    for (var p1 in this.mapOfCheckedId) {
+      if (this.mapOfCheckedId.hasOwnProperty(p1)&&this.mapOfCheckedId[p1])
+        ids.push(p1);
+    }
+  }
+
   constructor(private wxAccountService: WxAccountService, private help: Help) {
   }
 

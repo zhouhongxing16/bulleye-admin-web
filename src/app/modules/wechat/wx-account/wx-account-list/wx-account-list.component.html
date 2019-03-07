@@ -1,6 +1,6 @@
 <div class="table-operations">
   <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
-  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+  <button nz-button nzType="dashed" (click)="deleteOfChecked()"><i class="anticon anticon-delete"></i>删除</button>
 </div>
 <nz-table
   #staffTable
@@ -12,9 +12,11 @@
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
   (nzPageIndexChange)="getListByPage()"
-  (nzPageSizeChange)="getListByPage(true)">
+  (nzPageSizeChange)="getListByPage(true)"
+  (nzCurrentPageDataChange)="currentPageDataChange($event)">
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
+    <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate" (nzCheckedChange)="checkAll($event)"></th>
     <th nzShowSort nzSortKey="name">名称</th>
     <th nzShowSort nzSortKey="email">ID</th>
     <th nzShowSort nzSortKey="accountLocked">appId</th>
@@ -26,6 +28,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of staffTable.data">
+    <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()" ></td>
     <td>{{data.name}}</td>
     <td>{{data.sourceId}}</td>
     <td>{{data.appId}}</td>
