@@ -29,11 +29,6 @@ export class WxMenuListComponent implements OnInit {
     this.getWxaccount();
   }
 
-  chooseWxaccount($event){
-    this.chooseWxAccountId = $event;
-    this.getWxMenu(this.chooseWxAccountId);
-  }
-
   getWxaccount() {
     this.wxAccountService.select(new WxAccount()).subscribe(data => {
       console.log(data.rows);
