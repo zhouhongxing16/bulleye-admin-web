@@ -71,7 +71,7 @@ export class WxMenuService {
     );
   }
 
-  getWxMenu(appId: string) {
-    return this.help.get(this.url.getWxMenu + `/` + appId);
+  getWxMenu(accountId: string) {
+    return this.help.get(this.url.getWxMenu + `/` + accountId);
   }
 }

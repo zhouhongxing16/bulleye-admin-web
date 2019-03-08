@@ -23,6 +23,7 @@ export class WxAccountService {
     deleteById: 'http://localhost:8001/wxaccount/delete',
     getById: 'http://localhost:8001/wxaccount/getById',
     update: 'http://localhost:8001/wxaccount/update',
+    select: 'http://localhost:8001/wxaccount/select',
   };
   constructor(private help: Help) {
   }
@@ -67,5 +68,16 @@ export class WxAccountService {
     return of(this.data.rows).pipe(
       map((dataList: WxAccount[]) => dataList.find(data => data.id === id))
     );
+  }
+
+  select(wxAccount: WxAccount): Observable<any> {
+    return this.help.post(`${this.url.select}`, wxAccount).pipe(
+      map(res => {
+        this.data = {
+          rows: res.list,
+          total: res.list.length
+        };
+        return this.data;
+      }));
   }
 }

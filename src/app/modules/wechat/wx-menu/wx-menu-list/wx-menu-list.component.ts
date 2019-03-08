@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {WxMenuService} from '../wx-menu.service';
 import {Help} from '../../../../utils/Help';
 import {WxMenu} from '../wx-menu';
+import {WxAccount} from '../../wx-account/wx-account';
+import {WxAccountService} from '../../wx-account/wx-account.service';
 
 @Component({
   selector: 'app-wx-menu-list',
@@ -11,31 +13,55 @@ import {WxMenu} from '../wx-menu';
 export class WxMenuListComponent implements OnInit {
 
   rows: WxMenu[] = [];
+  wxAccounts: WxAccount[] = [];
   expand: true;
   loading = false;
   mapOfExpandedData = {};
+  chooseWxAccountId = '';
 
 
-  constructor(private wxMenuService: WxMenuService, private help: Help) {
+  constructor(private wxMenuService: WxMenuService,
+              private help: Help,
+              private wxAccountService: WxAccountService) {
   }
 
   ngOnInit() {
-    this.getWxMenu();
+    this.getWxaccount();
   }
 
-  getWxMenu() {
-    this.loading = true;
-    this.wxMenuService.getWxMenu('1').subscribe(data => {
-      this.loading = false;
-      this.rows = data.wxMenu;
-      this.rows.forEach(item => {
-        this.mapOfExpandedData[ item.id ] = this.convertTreeToList(item);
-      });
+  chooseWxaccount($event){
+    this.chooseWxAccountId = $event;
+    this.getWxMenu(this.chooseWxAccountId);
+  }
+
+  getWxaccount() {
+    this.wxAccountService.select(new WxAccount()).subscribe(data => {
+      console.log(data.rows);
+      this.wxAccounts = data.rows;
+      this.getWxMenu(this.wxAccounts[0].id);
     }, err => {
-      this.loading = false;
-      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+
     });
   }
+
+  getWxMenu(accountId:string) {
+    if (accountId){
+      this.chooseWxAccountId = accountId;
+      this.loading = true;
+      this.wxMenuService.getWxMenu(accountId).subscribe(data => {
+        this.loading = false;
+        this.rows = data.wxMenu;
+        this.rows.forEach(item => {
+          this.mapOfExpandedData[ item.id ] = this.convertTreeToList(item);
+        });
+      }, err => {
+        this.loading = false;
+        this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+      });
+    }
+  }
+
+
 
   collapse(array: WxMenu[], data: WxMenu, $event: boolean): void {
     if ($event === false) {
@@ -83,7 +109,7 @@ export class WxMenuListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.getWxMenu();
+        this.getWxMenu(this.chooseWxAccountId);
       } else {
         this.help.showMessage('error', res.message);
       }
