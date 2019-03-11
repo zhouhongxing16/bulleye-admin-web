@@ -19,7 +19,6 @@ export class WxMenuListComponent implements OnInit {
   mapOfExpandedData = {};
   chooseWxAccountId = '';
 
-
   constructor(private wxMenuService: WxMenuService,
               private help: Help,
               private wxAccountService: WxAccountService) {
@@ -111,5 +110,20 @@ export class WxMenuListComponent implements OnInit {
     });
   }
 
+  createWxMenu() {
+
+
+    this.loading = true;
+    this.wxMenuService.createWxMenu(this.chooseWxAccountId).subscribe(res => {
+      this.loading = false;
+      if (res.success) {
+        this.help.stopLoad();
+        this.help.showMessage('success', res.message);
+        this.getWxMenu(this.chooseWxAccountId);
+      } else {
+        this.help.showMessage('error', res.message);
+      }
+    });
+  }
 
 }

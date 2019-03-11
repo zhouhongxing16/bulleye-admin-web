@@ -24,6 +24,7 @@ export class WxMenuService {
     getById: 'http://localhost:8001/wxmenu/getById',
     update: 'http://localhost:8001/wxmenu/update',
     getWxMenu: 'http://localhost:8001/wxmenu/getWxMenu',
+    createWxMenu: 'http://localhost:8001/wxmenu/createWxMenu',
   };
   constructor(private help: Help) {
   }
@@ -73,5 +74,9 @@ export class WxMenuService {
 
   getWxMenu(accountId: string) {
     return this.help.get(this.url.getWxMenu + `/` + accountId);
+  }
+
+  createWxMenu(accountId: string) {
+    return this.help.get(this.url.createWxMenu + `/` + accountId);
   }
 }

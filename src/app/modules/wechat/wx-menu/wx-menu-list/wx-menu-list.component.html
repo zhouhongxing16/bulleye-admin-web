@@ -4,12 +4,10 @@
     <ng-container *ngFor="let item of wxAccounts">
       <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
     </ng-container>
-  </nz-select>
+  </nz-select>&nbsp;&nbsp;
   <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
-
-
 
 <nz-table #expandTable [nzData]="rows" [nzHideOnSinglePage]="true">
   <thead>
@@ -47,4 +45,7 @@
     </ng-container>
   </ng-container>
   </tbody>
-</nz-table>`
+</nz-table>
+
+<hr *ngIf="rows.length>0">
+<button *ngIf="rows.length>0" nz-popconfirm nzTitle="确定生成菜单吗?" (nzOnConfirm)="createWxMenu()" nz-button>生成菜单</button>
