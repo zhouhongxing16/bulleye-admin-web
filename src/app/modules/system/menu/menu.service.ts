@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Help} from '../../../utils/Help';
@@ -12,20 +12,22 @@ export class MenuService {
 
   flag = false;
   pageSize = 10;
-  pageNum = 1;
   data = {
     rows: [],
     total: 0
   };
   private url = {
     listByPage: 'http://localhost:8001/menu/listByPage',
+    getAllMenus: 'http://localhost:8001/menu/getAllMenus',
     create: 'http://localhost:8001/menu/create',
     deleteById: 'http://localhost:8001/menu/delete',
     getById: 'http://localhost:8001/menu/getById',
     update: 'http://localhost:8001/menu/update',
   };
+
   constructor(private help: Help) {
   }
+
   getListByPage(pageNum: number = 1, pageSize: number = 10): Observable<any> {
     this.flag = false;
     const params = {
@@ -45,6 +47,10 @@ export class MenuService {
           return this.data;
         }));
     }
+  }
+
+  getAllMenus() {
+    return this.help.post(this.url.getAllMenus, null);
   }
 
   saveOrUpdateData(data: any) {

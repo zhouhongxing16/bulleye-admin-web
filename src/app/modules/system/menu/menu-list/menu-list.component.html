@@ -1,3 +1,26 @@
-<p>
-  menu-list works!
-</p>
+<nz-tree
+  #treeCom
+  [nzData]="nodes"
+  (nzClick)="activeNode($event)"
+  (nzDblClick)="openFolder($event)">
+  <ng-template #nzTreeTemplate let-node>
+    <span class="custom-node" [class.active]="activedNode?.key===node.key">
+      <span *ngIf="!node.isLeaf" (contextmenu)="contextMenu($event,contextTemplate,node)">
+        <i nz-icon [type]="node.isExpanded ? 'folder-open' : 'folder'" (click)="openFolder(node)"></i>
+        <span class="folder-name">{{node.title}}</span>
+      </span>
+      <span *ngIf="node.isLeaf" (contextmenu)="contextMenu($event,contextTemplate,node)">
+        <i nz-icon type="file"></i>
+        <span class="file-name">{{node.title}}</span>
+      </span>
+    </span>
+  </ng-template>
+
+  <ng-template #contextTemplate>
+    <ul nz-menu nzInDropDown>
+      <li nz-menu-item>增加</li>
+      <li nz-menu-item (click)="editUnit()">修改</li>
+      <li nz-menu-item (click)="getAllMenus()">删除</li>
+    </ul>
+  </ng-template>
+</nz-tree>
