@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Help} from '../../../../utils/Help';
@@ -14,7 +14,7 @@ export class WxMenuEditComponent implements OnInit {
 
   validateForm: FormGroup;
   isLoading = false;
-  obj:WxAccount = new WxAccount();
+  obj: WxAccount = new WxAccount();
 
   constructor(private formBuilder: FormBuilder,
               private wxMenuService: WxMenuService,

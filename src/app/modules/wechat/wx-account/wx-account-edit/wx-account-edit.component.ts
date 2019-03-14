@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Help} from '../../../../utils/Help';
 import {WxAccountService} from '../wx-account.service';
-import {Staff} from '../../../system/staff/staff';
 import {WxAccount} from '../wx-account';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';

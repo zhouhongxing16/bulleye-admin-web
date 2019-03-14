@@ -1,13 +1,13 @@
 export class Menu {
   id: string;
 
-  pId: string;
+  parentId: string;
 
   icon: string;
 
   code: string;
 
-  name: string;
+  title: string;
 
   path: string;
 

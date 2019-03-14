@@ -2,6 +2,8 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Help} from '../../../../utils/Help';
 import {MenuService} from '../menu.service';
 import {NzDropdownContextComponent, NzDropdownService, NzFormatEmitEvent, NzTreeComponent, NzTreeNode} from 'ng-zorro-antd';
+import {Menu} from '../menu';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-menu-list',
@@ -15,30 +17,50 @@ export class MenuListComponent implements OnInit {
   // actived node
   activedNode: NzTreeNode;
   rightNode: NzTreeNode;
-  nodes = [{
-    title: '系统',
-    key: '100',
-    author: 'NG ZORRO',
-    expanded: true,
-    children: [
-      {title: 'leaf 0-0', key: '1000', author: 'NG ZORRO', isLeaf: true},
-      {title: 'leaf 0-1', key: '1001', author: 'NG ZORRO', isLeaf: true}
-    ]
-  }, {
-    title: 'parent 1',
-    key: '101',
-    author: 'NG ZORRO',
-    children: [
-      {title: 'leaf 1-0', key: '1010', author: 'NG ZORRO', isLeaf: true},
-      {title: 'leaf 1-1', key: '1011', author: 'NG ZORRO', isLeaf: true}
-    ]
-  }];
+  nodes = [];
+  visible = false;
+  obj: Menu = new Menu();
+  isLoading = false;
+  validateForm: FormGroup;
+  expandKeys = [];
 
   // 构造函数里注入右键菜单的服务
-  constructor(private menuService: MenuService, private help: Help, private nzDropdownService: NzDropdownService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private menuService: MenuService,
+    private help: Help,
+    private nzDropdownService: NzDropdownService) {
   }
 
   ngOnInit() {
+    this.getAllMenus();
+    this.validateForm = this.formBuilder.group({
+      icon: [null, [Validators.required]],
+      title: [null, [Validators.required]],
+      path: [null, [Validators.required]],
+      code: [null, [Validators.required]],
+      sort: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      parentId: [null],
+    });
+  }
+
+  createMenu(): void {
+    this.obj = new Menu();
+    this.obj.parentId = this.rightNode.origin.id;
+    this.expandKeys.push(this.rightNode.origin.id);
+    this.visible = true;
+    this.dropdown.close();
+  }
+
+  editMenu(): void {
+    this.obj = this.rightNode.origin;
+    this.visible = true;
+    this.dropdown.close();
+  }
+
+  close(): void {
+    this.visible = false;
   }
 
   openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
@@ -58,20 +80,48 @@ export class MenuListComponent implements OnInit {
     });
   }
 
+  deleteObject() {
+    console.log(this.rightNode);
+    if (this.rightNode.children.length > 0) {
+      this.help.showMessage('warning', '请先删除子节点！');
+    } else {
+      this.menuService.deleteById(this.rightNode.origin.id).subscribe(msg => {
+        if (msg.success) {
+          this.getAllMenus();
+          this.help.showMessage('success', msg.message);
+        } else {
+          this.help.showMessage('error', msg.message);
+        }
+      });
+    }
+
+  }
+
   activeNode(data: NzFormatEmitEvent): void {
     this.activedNode = data.node;
   }
 
+  onChange($event: string): void {
+    console.log($event);
+  }
+
   // 创建右键菜单和关闭右键菜单的代码
   contextMenu($event: MouseEvent, template: TemplateRef<void>, node: NzTreeNode): void {
+    this.expandKeys = [];
     this.rightNode = node;
+    this.expandKeys.push(node.origin.key);
     this.dropdown = this.nzDropdownService.create($event, template);
   }
 
-
-  editUnit(): void {
-    console.log(this.rightNode);
-    this.dropdown.close();
-    // do something
+  submitForm() {
+    this.isLoading = true;
+    this.menuService.saveOrUpdateData(this.obj).subscribe(res => {
+      this.isLoading = false;
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+        this.visible = false;
+        this.getAllMenus();
+      }
+    });
   }
 }
