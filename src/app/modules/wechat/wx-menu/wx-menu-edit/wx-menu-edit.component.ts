@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Help} from '../../../../utils/Help';
 import {WxMenuService} from '../wx-menu.service';
 import {WxAccount} from '../../wx-account/wx-account';
+import {WxMenu} from '../wx-menu';
 
 @Component({
   selector: 'app-wx-menu-edit',
@@ -14,7 +15,7 @@ export class WxMenuEditComponent implements OnInit {
 
   validateForm: FormGroup;
   isLoading = false;
-  obj: WxAccount = new WxAccount();
+  obj: WxMenu = new WxMenu();
 
   constructor(private formBuilder: FormBuilder,
               private wxMenuService: WxMenuService,

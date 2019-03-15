@@ -12,7 +12,7 @@
   [nzFrontPagination]="false"
   (nzPageIndexChange)="getListByPage()"
   (nzPageSizeChange)="getListByPage(true)">
-  <thead (nzSortChange)="sort($event)" nzSingleSort>
+  <thead nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="appSecret"><span>头像</span></th>
     <th nzShowSort nzSortKey="name">昵称</th>

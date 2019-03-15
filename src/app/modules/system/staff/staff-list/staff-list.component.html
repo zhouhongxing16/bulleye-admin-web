@@ -13,7 +13,7 @@
   [nzFrontPagination]="false"
   (nzPageIndexChange)="getListByPage()"
   (nzPageSizeChange)="getListByPage(true)">
-  <thead (nzSortChange)="sort($event)" nzSingleSort>
+  <thead nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="name">姓名</th>
     <th nzShowSort nzSortKey="serialNo">编号</th>

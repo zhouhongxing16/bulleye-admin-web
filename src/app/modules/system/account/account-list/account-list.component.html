@@ -13,7 +13,7 @@
   [nzFrontPagination]="false"
   (nzPageIndexChange)="getListByPage()"
   (nzPageSizeChange)="getListByPage(true)">
-  <thead (nzSortChange)="sort($event)" nzSingleSort>
+  <thead nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="name">用户名</th>
     <th nzShowSort nzSortKey="email">邮箱</th>
