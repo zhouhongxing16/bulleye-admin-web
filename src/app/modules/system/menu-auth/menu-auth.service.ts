@@ -1,14 +1,13 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Help} from '../../../utils/Help';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {WxMenu} from './wx-menu';
+import {Organization} from '../organization/organization';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WxMenuService {
-
+export class MenuAuthService {
 
   flag = false;
   pageSize = 10;
@@ -18,24 +17,22 @@ export class WxMenuService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/wxmenu/listByPage',
-    create: 'http://localhost:8001/wxmenu/create',
-    deleteById: 'http://localhost:8001/wxmenu/delete',
-    getById: 'http://localhost:8001/wxmenu/getById',
-    update: 'http://localhost:8001/wxmenu/update',
-    getWxMenu: 'http://localhost:8001/wxmenu/getWxMenu',
-    createWxMenu: 'http://localhost:8001/wxmenu/createWxMenu',
+    listByPage: 'http://localhost:8001/menuauth/listByPage',
+    create: 'http://localhost:8001/menuauth/create',
+    deleteById: 'http://localhost:8001/menuauth/delete',
+    getById: 'http://localhost:8001/menuauth/getById',
+    update: 'http://localhost:8001/menuauth/update',
   };
 
   constructor(private help: Help) {
   }
 
-  getListByPage(pageNum: number = 1, pageSize: number = 10, keyword): Observable<any> {
+  getListByPage(pageNum: number = 1, pageSize: number = 10, menuId: string): Observable<any> {
     this.flag = false;
     const params = {
       pageNum: pageNum,
       pageSize: pageSize,
-      keyword: keyword
+      menuId: menuId
     };
     if (this.flag) {
       return of(this.data);
@@ -70,15 +67,7 @@ export class WxMenuService {
 
   getObject(id: string) {
     return of(this.data.rows).pipe(
-      map((dataList: WxMenu[]) => dataList.find(data => data.id === id))
+      map((dataList: Organization[]) => dataList.find(data => data.id === id))
     );
-  }
-
-  getWxMenu(accountId: string) {
-    return this.help.get(this.url.getWxMenu + `/` + accountId);
-  }
-
-  createWxMenu(accountId: string) {
-    return this.help.get(this.url.createWxMenu + `/` + accountId);
   }
 }

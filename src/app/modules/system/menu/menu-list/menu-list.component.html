@@ -20,6 +20,7 @@
     <ul nz-menu nzInDropDown>
       <li nz-menu-item (click)="createMenu()">增加</li>
       <li nz-menu-item (click)="editMenu()">修改</li>
+      <li nz-menu-item (click)="addAuth()">添加权限</li>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteObject()">
         <li nz-menu-item nz-popconfirm>删除</li>
       </nz-popconfirm>

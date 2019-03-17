@@ -4,6 +4,7 @@ import {MenuService} from '../menu.service';
 import {NzDropdownContextComponent, NzDropdownService, NzFormatEmitEvent, NzTreeComponent, NzTreeNode} from 'ng-zorro-antd';
 import {Menu} from '../menu';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu-list',
@@ -29,7 +30,9 @@ export class MenuListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private menuService: MenuService,
     private help: Help,
-    private nzDropdownService: NzDropdownService) {
+    private nzDropdownService: NzDropdownService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -57,6 +60,11 @@ export class MenuListComponent implements OnInit {
     this.obj = this.rightNode.origin;
     this.visible = true;
     this.dropdown.close();
+  }
+
+  addAuth() {
+    console.log(this.rightNode.origin);
+    this.router.navigate(['/menuauth/list', this.rightNode.origin.id]);
   }
 
   close(): void {

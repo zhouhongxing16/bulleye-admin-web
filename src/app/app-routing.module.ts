@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'account', loadChildren: './modules/system/account/account.module#AccountModule'},
   {path: 'department', loadChildren: './modules/system/department/department.module#DepartmentModule'},
   {path: 'organization', loadChildren: './modules/system/organization/organization.module#OrganizationModule'},
+  {path: 'menuauth', loadChildren: './modules/system/menu-auth/menu-auth.module#MenuAuthModule'},
   {path: 'wxaccount', loadChildren: './modules/wechat/wx-account/wx-account.module#WxAccountModule'},
   {path: 'wxmember', loadChildren: './modules/wechat/wx-member/wx-member.module#WxMemberModule'},
   {path: 'wxmenu', loadChildren: './modules/wechat/wx-menu/wx-menu.module#WxMenuModule'},
