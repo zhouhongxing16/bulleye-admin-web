@@ -7,7 +7,11 @@ export class MenuAuth {
 
   name: string;
 
+  path: string;
+
   status: string;
 
   created: string;
+
+  remark: string;
 }

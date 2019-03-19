@@ -3,6 +3,7 @@ import {Help} from '../../../utils/Help';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Organization} from '../organization/organization';
+import {MenuAuth} from './menu-auth';
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +68,7 @@ export class MenuAuthService {
 
   getObject(id: string) {
     return of(this.data.rows).pipe(
-      map((dataList: Organization[]) => dataList.find(data => data.id === id))
+      map((dataList: MenuAuth[]) => dataList.find(data => data.id === id))
     );
   }
 }
