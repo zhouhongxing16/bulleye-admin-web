@@ -3,6 +3,8 @@ export class MenuAuth {
 
   menuId: string;
 
+  menuName: string;
+
   code: string;
 
   name: string;

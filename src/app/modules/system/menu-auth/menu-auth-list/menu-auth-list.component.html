@@ -17,7 +17,7 @@
     <tr>
       <th nzShowSort nzSortKey="name">名称</th>
       <th nzShowSort nzSortKey="code">编码</th>
-      <th nzShowSort nzSortKey="url">描述</th>
+      <th nzShowSort nzSortKey="path">描述</th>
       <th nzShowSort nzSortKey="menuId"><span>菜单</span></th>
       <th nzShowSort nzSortKey="status">状态</th>
       <th nzShowSort nzSortKey="created">创建时间</th>
@@ -28,8 +28,8 @@
     <tr *ngFor="let data of staffTable.data">
       <td>{{data.name}}</td>
       <td>{{data.code}}</td>
-      <td>{{data.describe}}</td>
-      <td>{{data.dataAuthFlag}}</td>
+      <td>{{data.path}}</td>
+      <td>{{data.menuName}}</td>
       <td>{{data.status}}</td>
       <td>{{data.created}}</td>
       <td>
