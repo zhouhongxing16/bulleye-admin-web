@@ -1,9 +1,15 @@
 <div class="table-operations">
+  <nz-tree-select [(ngModel)]="queryParams.menuId" style="width: 20%"
+                  [nzDefaultExpandedKeys]="expandKeys"
+                  [nzNodes]="nodes" (ngModelChange)="getListByPage(true)"
+                  nzShowSearch
+                  nzPlaceHolder="请选择">
+  </nz-tree-select>
   <button nz-button nzType="primary" routerLink="/menuauth/add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
 <nz-table
-  #staffTable
+  #menuAuthTable
   nzShowSizeChanger
   [nzData]="rows"
   [nzLoading]="loading"
@@ -17,7 +23,7 @@
     <tr>
       <th nzShowSort nzSortKey="name">名称</th>
       <th nzShowSort nzSortKey="code">编码</th>
-      <th nzShowSort nzSortKey="path">描述</th>
+      <th nzShowSort nzSortKey="path">路径</th>
       <th nzShowSort nzSortKey="menuId"><span>菜单</span></th>
       <th nzShowSort nzSortKey="status">状态</th>
       <th nzShowSort nzSortKey="created">创建时间</th>
@@ -25,7 +31,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of staffTable.data">
+    <tr *ngFor="let data of menuAuthTable.data">
       <td>{{data.name}}</td>
       <td>{{data.code}}</td>
       <td>{{data.path}}</td>

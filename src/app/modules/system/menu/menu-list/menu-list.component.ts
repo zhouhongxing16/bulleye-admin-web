@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class MenuListComponent implements OnInit {
 
-  @ViewChild('treeCom') treeCom: NzTreeComponent;
+  @ViewChild('menuTree') menuTree: NzTreeComponent;
   dropdown: NzDropdownContextComponent;
   // actived node
   activedNode: NzTreeNode;

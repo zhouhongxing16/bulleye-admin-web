@@ -3,6 +3,7 @@ import {Help} from '../../../../utils/Help';
 import {MenuAuth} from '../menu-auth';
 import {MenuAuthService} from '../menu-auth.service';
 import {ActivatedRoute} from '@angular/router';
+import {MenuService} from '../../menu/menu.service';
 
 @Component({
   selector: 'app-menu-auth-list',
@@ -16,10 +17,14 @@ export class MenuAuthListComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   loading = false;
-  menuId: string;
+  nodes = null;
+  queryParams = {
+    menuId: null
+  };
 
   constructor(
     private menuAuthService: MenuAuthService,
+    private menuService: MenuService,
     private help: Help,
     private route: ActivatedRoute
   ) {
@@ -28,21 +33,27 @@ export class MenuAuthListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((param) => {
       if (param.id != null) {
-        this.menuId = param.id;
-        this.getListByPage(false);
+        this.queryParams.menuId = param.id;
       } else {
-        this.menuId = null;
+        this.queryParams.menuId = null;
       }
-
+      this.getListByPage(false);
+      this.getAllMenus();
     });
   }
-
+  getAllMenus() {
+    this.menuService.getAllMenus().subscribe(msg => {
+      if (msg.success) {
+        this.nodes = msg.data;
+      }
+    });
+  }
   getListByPage(reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.menuAuthService.getListByPage(this.pageIndex, this.pageSize, this.menuId).subscribe(data => {
+    this.menuAuthService.getListByPage(this.pageIndex, this.pageSize, this.queryParams.menuId).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Help} from '../../../utils/Help';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscribable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Organization} from './organization';
 
@@ -22,9 +22,12 @@ export class OrganizationService {
     deleteById: 'http://localhost:8001/organization/delete',
     getById: 'http://localhost:8001/organization/getById',
     update: 'http://localhost:8001/organization/update',
+    createOrganizationMenu: 'http://localhost:8001/organizationmenu/createOrganizationMenu',
   };
+
   constructor(private help: Help) {
   }
+
   getListByPage(pageNum: number = 1, pageSize: number = 10): Observable<any> {
     this.flag = false;
     const params = {
@@ -66,5 +69,9 @@ export class OrganizationService {
     return of(this.data.rows).pipe(
       map((dataList: Organization[]) => dataList.find(data => data.id === id))
     );
+  }
+
+  saveOrganizationMenus(data: any){
+    return this.help.post(this.url.createOrganizationMenu, data);
   }
 }

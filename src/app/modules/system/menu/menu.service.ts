@@ -19,6 +19,7 @@ export class MenuService {
   private url = {
     listByPage: 'http://localhost:8001/menu/listByPage',
     getAllMenus: 'http://localhost:8001/menu/getAllMenus',
+    getOrganizationMenus: 'http://localhost:8001/menu/getOrganizationMenus',
     create: 'http://localhost:8001/menu/create',
     deleteById: 'http://localhost:8001/menu/delete',
     getById: 'http://localhost:8001/menu/getById',
@@ -51,6 +52,10 @@ export class MenuService {
 
   getAllMenus() {
     return this.help.post(this.url.getAllMenus, null);
+  }
+
+  getOrganizationMenus(params) {
+    return this.help.post(this.url.getOrganizationMenus, params);
   }
 
   saveOrUpdateData(data: any) {
