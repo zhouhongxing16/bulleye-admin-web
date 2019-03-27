@@ -42,7 +42,8 @@ export class WxAccountEditComponent implements OnInit {
       appSecret: [null, [Validators.required]],
       status: [null, [Validators.required]],
       domain: [null],
-      remark: [null]
+      remark: [null],
+      menuState: [null]
     });
   }
 

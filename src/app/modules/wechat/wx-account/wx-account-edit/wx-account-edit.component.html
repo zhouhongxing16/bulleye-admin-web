@@ -48,6 +48,13 @@
   </nz-form-item>
 
   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="domain">menuState</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      {{obj.menuState}}<input type="hidden" nz-input formControlName="menuState" [(ngModel)]="obj.menuState" name="menuState" id="menuState">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="remark">备注</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <textarea formControlName="remark" name="remark" id="remark" [(ngModel)]="obj.remark" nz-input rows="4"></textarea>

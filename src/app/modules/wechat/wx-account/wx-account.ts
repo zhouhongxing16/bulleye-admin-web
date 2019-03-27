@@ -15,4 +15,6 @@ export class WxAccount {
 
   remark: string;
 
+  menuState: string;
+
 }
