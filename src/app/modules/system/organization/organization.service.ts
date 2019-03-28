@@ -23,6 +23,7 @@ export class OrganizationService {
     getById: 'http://localhost:8001/organization/getById',
     update: 'http://localhost:8001/organization/update',
     createOrganizationMenu: 'http://localhost:8001/organizationmenu/createOrganizationMenu',
+    getCheckedLeafMenus: 'http://localhost:8001/organizationmenu/getListByParams',
   };
 
   constructor(private help: Help) {
@@ -71,7 +72,11 @@ export class OrganizationService {
     );
   }
 
-  saveOrganizationMenus(data: any){
+  saveOrganizationMenus(data: any) {
     return this.help.post(this.url.createOrganizationMenu, data);
+  }
+
+  getCheckedLeafMenus(data: any) {
+    return this.help.post(this.url.getCheckedLeafMenus, data);
   }
 }
