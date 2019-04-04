@@ -5,7 +5,6 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="parentId">所属菜单</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-tree-select [(ngModel)]="obj.menuId" formControlName="menuId"
-                      [nzDefaultExpandedKeys]="expandKeys"
                       [nzNodes]="nodes"
                       nzShowSearch
                       nzPlaceHolder="请选择">

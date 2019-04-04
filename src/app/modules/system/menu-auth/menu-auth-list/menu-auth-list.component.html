@@ -1,6 +1,5 @@
 <div class="table-operations">
   <nz-tree-select [(ngModel)]="queryParams.menuId" style="width: 20%"
-                  [nzDefaultExpandedKeys]="expandKeys"
                   [nzNodes]="nodes" (ngModelChange)="getListByPage(true)"
                   nzShowSearch
                   nzPlaceHolder="请选择">
