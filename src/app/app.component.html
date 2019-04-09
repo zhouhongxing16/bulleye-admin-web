@@ -1,7 +1,9 @@
-<router-outlet *ngIf="!loginFlag"></router-outlet>
+<nz-layout *ngIf="loginFlag">
+  <app-login></app-login>
+</nz-layout>
 
 
-<nz-layout style="height: 100%" *ngIf="loginFlag">
+<nz-layout style="height: 100%" *ngIf="!loginFlag">
   <nz-header>
     <div style="float: left;">
       <nz-avatar [nzSrc]="'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549969134321&di=113371aa86883c695f6d88bc4613c936&imgtype=0&src=http%3A%2F%2Fwww.5snow.com%2Ffiles%2Fa%2Fa0319f12a7c895a6b942227a7e6c9c1f.jpg'"></nz-avatar>

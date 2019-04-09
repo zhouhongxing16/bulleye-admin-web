@@ -11,12 +11,18 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {Help} from './utils/Help';
 import {JwtInterceptor} from './utils/JwtInterceptor';
+import {SubmenuComponent} from './components/submenu/submenu.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {LoginComponent} from './components/login/login.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    MenuComponent,
+    SubmenuComponent,
   ],
   imports: [
     BrowserModule,
