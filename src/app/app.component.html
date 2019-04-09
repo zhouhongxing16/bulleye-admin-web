@@ -1,8 +1,10 @@
+<router-outlet *ngIf="!loginFlag"></router-outlet>
 
-<nz-layout style="height: 100%">
+
+<nz-layout style="height: 100%" *ngIf="loginFlag">
   <nz-header>
     <div style="float: left;">
-          <nz-avatar [nzSrc]="'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549969134321&di=113371aa86883c695f6d88bc4613c936&imgtype=0&src=http%3A%2F%2Fwww.5snow.com%2Ffiles%2Fa%2Fa0319f12a7c895a6b942227a7e6c9c1f.jpg'"></nz-avatar>
+      <nz-avatar [nzSrc]="'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549969134321&di=113371aa86883c695f6d88bc4613c936&imgtype=0&src=http%3A%2F%2Fwww.5snow.com%2Ffiles%2Fa%2Fa0319f12a7c895a6b942227a7e6c9c1f.jpg'"></nz-avatar>
     </div>
     <div style="float: right;">
       <nz-dropdown nzTrigger="click">
@@ -41,40 +43,12 @@
 
         <router-outlet></router-outlet>
 
-        <button (click)="login()">test</button>
-        <button (click)="getMenu()">test</button>
-        <button (click)="testAuth()">testAuth</button>
+        <button (click)="login()">登录</button>
+        <button (click)="getMenu()">获取菜单</button>
+        <button (click)="testAuth()">权限测试</button>
 
       </nz-content>
     </nz-layout>
   </nz-layout>
-  <!--<nz-layout>
-    <nz-sider style="overflow: auto;min-width: 150px;" [nzWidth]="'200px'">
-      <app-menu [menus]="menus"></app-menu>
-      <a routerLink="/login">login</a>
-      <a routerLink="">home</a>
-    </nz-sider>
-    <nz-layout>
-
-
-        <nz-breadcrumb style="margin:16px 0;">
-          <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-          <nz-breadcrumb-item>List</nz-breadcrumb-item>
-          <nz-breadcrumb-item>App</nz-breadcrumb-item>
-        </nz-breadcrumb>
-        <nz-content style="background:#fff; padding: 24px; min-height: 280px;">
-          <router-outlet></router-outlet>
-        </nz-content>
-
-      <nz-modal [(nzVisible)]="loginFlag" nzTitle="您的登录信息已失效，请重新登录！" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-        <app-login></app-login>
-      </nz-modal>
-      <a routerLink="/login">Dashboard</a>
-      <a routerLink="/heroes">Heroes</a>
-      <button (click)="login()">test</button>
-      <button (click)="getMenu()">test</button>
-      <button (click)="testAuth()">testAuth</button>
-    </nz-layout>
-  </nz-layout>-->
 </nz-layout>
 

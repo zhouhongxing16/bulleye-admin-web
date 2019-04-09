@@ -9,20 +9,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import {LoginComponent} from './components/login/login.component';
 import {Help} from './utils/Help';
 import {JwtInterceptor} from './utils/JwtInterceptor';
-import { MenuComponent } from './components/menu/menu.component';
-import { SubmenuComponent } from './components/submenu/submenu.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    MenuComponent,
-    SubmenuComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Help} from './utils/Help';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {Help} from './utils/Help';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,9 @@ import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 })
 export class AppComponent {
   title = 'bulleye-admin-web';
-  menus: any;
+  loginFlag = false;
   userInfo: any;
-  loginFlag: boolean;
+  menus: any;
 
   constructor(private help: Help, private modalService: NzModalService, private message: NzMessageService) {
     const token = localStorage.getItem('token');
@@ -24,13 +24,8 @@ export class AppComponent {
     }
 
   }
-  handleOk(): void {
-    this.loginFlag = false;
-  }
 
-  handleCancel(): void {
-    this.loginFlag = false;
-  }
+
   showLogoutConfirm(): void {
     this.modalService.confirm({
       nzTitle: '<i>确定注销登录吗?</i>',
@@ -64,6 +59,7 @@ export class AppComponent {
       }
     });
   }
+
   getStaffInfo() {
     const that = this;
     this.help.get('http://localhost:8001/staff/getStaffInfo').subscribe(msg => {
@@ -75,6 +71,7 @@ export class AppComponent {
       }
     });
   }
+
   testAuth() {
     const that = this;
     this.help.post('http://localhost:8001/staff/list', {username: 'zhx', password: '1'}).subscribe(msg => {
@@ -85,4 +82,5 @@ export class AppComponent {
       }
     });
   }
+
 }

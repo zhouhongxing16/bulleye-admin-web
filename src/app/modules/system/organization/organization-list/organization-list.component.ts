@@ -21,7 +21,7 @@ export class OrganizationListComponent implements OnInit {
   organizationId: string;
   nodes = [];
   selectMenus = [];
-  defaultCheckedKeys = ['5', '7'];
+  defaultCheckedKeys = [];
   defaultSelectedKeys = [];
 
   constructor(
