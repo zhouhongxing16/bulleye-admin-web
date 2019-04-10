@@ -17,13 +17,13 @@ export class MenuService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/menu/listByPage',
-    getAllMenus: 'http://localhost:8001/menu/getAllMenus',
-    getOrganizationMenus: 'http://localhost:8001/menu/getOrganizationMenus',
-    create: 'http://localhost:8001/menu/create',
-    deleteById: 'http://localhost:8001/menu/delete',
-    getById: 'http://localhost:8001/menu/getById',
-    update: 'http://localhost:8001/menu/update',
+    listByPage: '/menu/listByPage',
+    getAllMenus: '/menu/getAllMenus',
+    getOrganizationMenus: '/menu/getOrganizationMenus',
+    create: '/menu/create',
+    deleteById: '/menu/delete',
+    getById: '/menu/getById',
+    update: '/menu/update',
   };
 
   constructor(private help: Help) {

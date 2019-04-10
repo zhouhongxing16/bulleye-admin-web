@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
     console.log();
     if (this.validateForm.valid) {
-      this.help.post('http://localhost:8001/login', this.validateForm.value).subscribe(msg => {
+      this.help.post('/login', this.validateForm.value).subscribe(msg => {
         if (msg.success) {
           localStorage.setItem('token', msg.data.token);
           this.message.create('success', msg.message);

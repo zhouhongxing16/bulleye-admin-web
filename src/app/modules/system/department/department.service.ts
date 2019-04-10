@@ -17,11 +17,11 @@ export class DepartmentService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/department/listByPage',
-    create: 'http://localhost:8001/department/create',
-    deleteById: 'http://localhost:8001/department/delete',
-    getById: 'http://localhost:8001/department/getById',
-    update: 'http://localhost:8001/department/update',
+    listByPage: '/department/listByPage',
+    create: '/department/create',
+    deleteById: '/department/delete',
+    getById: '/department/getById',
+    update: '/department/update',
   };
   constructor(private help: Help) {
   }

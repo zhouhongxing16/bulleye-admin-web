@@ -18,12 +18,12 @@ export class WxAccountService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/wxaccount/listByPage',
-    create: 'http://localhost:8001/wxaccount/create',
-    deleteById: 'http://localhost:8001/wxaccount/delete',
-    getById: 'http://localhost:8001/wxaccount/getById',
-    update: 'http://localhost:8001/wxaccount/update',
-    select: 'http://localhost:8001/wxaccount/select',
+    listByPage: '/wxaccount/listByPage',
+    create: '/wxaccount/create',
+    deleteById: '/wxaccount/delete',
+    getById: '/wxaccount/getById',
+    update: '/wxaccount/update',
+    select: '/wxaccount/select',
   };
   constructor(private help: Help) {
   }

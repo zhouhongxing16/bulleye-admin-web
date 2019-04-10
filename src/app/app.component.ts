@@ -40,7 +40,7 @@ export class AppComponent {
 
   login() {
     const that = this;
-    this.help.post('http://localhost:8001/login', {username: 'zhx', password: '1'}).subscribe(msg => {
+    this.help.post('/login', {username: 'zhx', password: '1'}).subscribe(msg => {
       if (msg.success) {
         localStorage.setItem('token', msg.data.token);
       }
@@ -50,7 +50,7 @@ export class AppComponent {
 
   getMenu() {
     const that = this;
-    this.help.post('http://localhost:8001/menu/getAllMenus', null).subscribe(msg => {
+    this.help.post('/menu/getAllMenus', null).subscribe(msg => {
       if (msg.success) {
         that.menus = msg.data;
       } else {
@@ -62,7 +62,7 @@ export class AppComponent {
 
   getStaffInfo() {
     const that = this;
-    this.help.get('http://localhost:8001/staff/getStaffInfo').subscribe(msg => {
+    this.help.get('/staff/getStaffInfo').subscribe(msg => {
       if (msg.success) {
         that.userInfo = msg.data;
       } else {
@@ -74,7 +74,7 @@ export class AppComponent {
 
   testAuth() {
     const that = this;
-    this.help.post('http://localhost:8001/staff/list', {username: 'zhx', password: '1'}).subscribe(msg => {
+    this.help.post('/staff/list', {username: 'zhx', password: '1'}).subscribe(msg => {
       if (msg.success) {
         that.menus = msg.data;
       } else {

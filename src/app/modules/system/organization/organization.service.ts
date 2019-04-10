@@ -17,13 +17,13 @@ export class OrganizationService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/organization/listByPage',
-    create: 'http://localhost:8001/organization/create',
-    deleteById: 'http://localhost:8001/organization/delete',
-    getById: 'http://localhost:8001/organization/getById',
-    update: 'http://localhost:8001/organization/update',
-    createOrganizationMenu: 'http://localhost:8001/organizationmenu/createOrganizationMenu',
-    getCheckedLeafMenus: 'http://localhost:8001/organizationmenu/getListByParams',
+    listByPage: '/organization/listByPage',
+    create: '/organization/create',
+    deleteById: '/organization/delete',
+    getById: '/organization/getById',
+    update: '/organization/update',
+    createOrganizationMenu: '/organizationmenu/createOrganizationMenu',
+    getCheckedLeafMenus: '/organizationmenu/getListByParams',
   };
 
   constructor(private help: Help) {

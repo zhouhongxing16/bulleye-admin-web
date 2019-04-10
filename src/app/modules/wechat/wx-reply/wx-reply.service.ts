@@ -18,11 +18,11 @@ export class WxReplyService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/wxreply/listByPage',
-    create: 'http://localhost:8001/wxreply/create',
-    deleteById: 'http://localhost:8001/wxreply/delete',
-    getById: 'http://localhost:8001/wxreply/getById',
-    update: 'http://localhost:8001/wxreply/update',
+    listByPage: '/wxreply/listByPage',
+    create: '/wxreply/create',
+    deleteById: '/wxreply/delete',
+    getById: '/wxreply/getById',
+    update: '/wxreply/update',
   };
   constructor(private help: Help) {
   }

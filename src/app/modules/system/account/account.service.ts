@@ -16,11 +16,11 @@ export class AccountService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/account/listByPage',
-    create: 'http://localhost:8001/account/create',
-    deleteById: 'http://localhost:8001/account/delete',
-    getById: 'http://localhost:8001/account/getById',
-    update: 'http://localhost:8001/account/update',
+    listByPage: '/account/listByPage',
+    create: '/account/create',
+    deleteById: '/account/delete',
+    getById: '/account/getById',
+    update: '/account/update',
   };
   constructor(private help: Help) {
   }

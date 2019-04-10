@@ -18,11 +18,11 @@ export class MenuAuthService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/menuauth/listByPage',
-    create: 'http://localhost:8001/menuauth/create',
-    deleteById: 'http://localhost:8001/menuauth/delete',
-    getById: 'http://localhost:8001/menuauth/getById',
-    update: 'http://localhost:8001/menuauth/update',
+    listByPage: '/menuauth/listByPage',
+    create: '/menuauth/create',
+    deleteById: '/menuauth/delete',
+    getById: '/menuauth/getById',
+    update: '/menuauth/update',
   };
 
   constructor(private help: Help) {

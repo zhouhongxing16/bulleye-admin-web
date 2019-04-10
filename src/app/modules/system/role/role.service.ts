@@ -17,11 +17,11 @@ export class RoleService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/role/listByPage',
-    create: 'http://localhost:8001/role/create',
-    deleteById: 'http://localhost:8001/role/delete',
-    getById: 'http://localhost:8001/role/getById',
-    update: 'http://localhost:8001/role/update',
+    listByPage: '/role/listByPage',
+    create: '/role/create',
+    deleteById: '/role/delete',
+    getById: '/role/getById',
+    update: '/role/update',
   };
   constructor(private help: Help) {
   }

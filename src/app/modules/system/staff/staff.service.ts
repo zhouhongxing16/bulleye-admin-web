@@ -17,11 +17,11 @@ export class StaffService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/staff/listByPage',
-    create: 'http://localhost:8001/staff/create',
-    deleteById: 'http://localhost:8001/staff/delete',
-    getById: 'http://localhost:8001/staff/getById',
-    update: 'http://localhost:8001/staff/update',
+    listByPage: '/staff/listByPage',
+    create: '/staff/create',
+    deleteById: '/staff/delete',
+    getById: '/staff/getById',
+    update: '/staff/update',
   };
 
 

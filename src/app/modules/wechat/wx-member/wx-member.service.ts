@@ -18,11 +18,11 @@ export class WxMemberService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/wxmember/listByPage',
-    create: 'http://localhost:8001/wxmember/create',
-    deleteById: 'http://localhost:8001/wxmember/delete',
-    getById: 'http://localhost:8001/wxmember/getById',
-    update: 'http://localhost:8001/wxmember/update',
+    listByPage: '/wxmember/listByPage',
+    create: '/wxmember/create',
+    deleteById: '/wxmember/delete',
+    getById: '/wxmember/getById',
+    update: '/wxmember/update',
   };
   constructor(private help: Help) {
   }

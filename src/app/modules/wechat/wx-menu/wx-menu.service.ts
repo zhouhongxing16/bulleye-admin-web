@@ -18,13 +18,13 @@ export class WxMenuService {
     total: 0
   };
   private url = {
-    listByPage: 'http://localhost:8001/wxmenu/listByPage',
-    create: 'http://localhost:8001/wxmenu/create',
-    deleteById: 'http://localhost:8001/wxmenu/delete',
-    getById: 'http://localhost:8001/wxmenu/getById',
-    update: 'http://localhost:8001/wxmenu/update',
-    getWxMenu: 'http://localhost:8001/wxmenu/getWxMenu',
-    createWxMenu: 'http://localhost:8001/wxmenu/createWxMenu',
+    listByPage: '/wxmenu/listByPage',
+    create: '/wxmenu/create',
+    deleteById: '/wxmenu/delete',
+    getById: '/wxmenu/getById',
+    update: '/wxmenu/update',
+    getWxMenu: '/wxmenu/getWxMenu',
+    createWxMenu: '/wxmenu/createWxMenu',
   };
 
   constructor(private help: Help) {
