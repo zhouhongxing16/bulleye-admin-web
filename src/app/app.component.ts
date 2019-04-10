@@ -20,7 +20,7 @@ export class AppComponent {
       this.getMenu();
       this.getStaffInfo();
     } else {
-      this.loginFlag = true;
+      help.authFlag = true;
     }
 
   }

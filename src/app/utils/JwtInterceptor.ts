@@ -21,9 +21,6 @@ export class JwtInterceptor implements HttpInterceptor {
     }
     console.log(url);
     request = request.clone({
-      /*setHeaders: {
-        Authorization: `Bearer ${token}`
-      }*/
       url: url,
       setHeaders: {
         Authorization: `Bearer ${token}`
@@ -41,7 +38,7 @@ export class JwtInterceptor implements HttpInterceptor {
     switch (event.status) {
       case 401:
         this.help.showMessage('warning', '未登录，请先登录！');
-        this.router.navigate(['/login']);
+        window.location.reload();
         return of(event);
         break;
 
