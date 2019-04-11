@@ -38,6 +38,7 @@ export class JwtInterceptor implements HttpInterceptor {
     switch (event.status) {
       case 401:
         this.help.showMessage('warning', '未登录，请先登录！');
+        this.help.authFlag = false;
         window.location.reload();
         return of(event);
         break;
