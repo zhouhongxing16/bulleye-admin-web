@@ -19,7 +19,6 @@ export class JwtInterceptor implements HttpInterceptor {
     } else {
       url = url + request.url;
     }
-    console.log(url);
     request = request.clone({
       url: url,
       setHeaders: {
