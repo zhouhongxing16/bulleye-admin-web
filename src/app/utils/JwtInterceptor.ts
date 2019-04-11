@@ -48,6 +48,10 @@ export class JwtInterceptor implements HttpInterceptor {
         this.help.showMessage('warning', '未授权，禁止访问！');
         return of(event);
         break;
+      case 500:
+        this.help.showMessage('error', '服务器错误！');
+        return of(event);
+        break;
       default:
     }
     return throwError(event);
