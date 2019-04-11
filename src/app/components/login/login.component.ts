@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
         if (msg.success) {
           localStorage.setItem('token', msg.data.token);
           this.message.create('success', msg.message);
-          console.log(msg);
           window.location.reload();
         } else {
           this.message.create('error', msg.message);

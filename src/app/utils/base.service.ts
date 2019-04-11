@@ -17,11 +17,12 @@ export class BaseService<T> {
   };
 
 
-  private _url: {
+  private url: {
     listByPage: string;
     create: string;
     update: string;
-    delete: string;
+    deleteById: string;
+    getById: string;
     view: string;
     edit: string;
     add: string;
@@ -64,10 +65,10 @@ export class BaseService<T> {
   getById(id: string) {
     return this.help.get(this.url.getById + `/` + id);
   }
-
+/*
   getObject(id: string) {
     return of(this.data.rows).pipe(
       map((dataList: T[]) => dataList.find(data => data.id === id))
     );
-  }
+  }*/
 }

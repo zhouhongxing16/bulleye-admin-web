@@ -10,7 +10,6 @@ import {Help} from './utils/Help';
 })
 export class AppComponent {
   title = 'bulleye-admin-web';
-  loginFlag = false;
   userInfo: any;
   menus: any;
 
@@ -19,8 +18,6 @@ export class AppComponent {
     if (token) {
       this.getMenu();
       this.getStaffInfo();
-    } else {
-      help.authFlag = true;
     }
 
   }
@@ -36,16 +33,6 @@ export class AppComponent {
       }
     })
     ;
-  }
-
-  login() {
-    const that = this;
-    this.help.post('/login', {username: 'zhx', password: '1'}).subscribe(msg => {
-      if (msg.success) {
-        localStorage.setItem('token', msg.data.token);
-      }
-      console.log(msg);
-    });
   }
 
   getMenu() {
