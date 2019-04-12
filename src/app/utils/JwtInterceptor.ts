@@ -4,6 +4,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Help} from './Help';
+import {environment} from '../../environments/environment';
 
 
 @Injectable()
@@ -13,11 +14,9 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
-    let url = 'http://localhost:8001';
-    if (request.url.indexOf('http') === 0) {
-      url = request.url;
-    } else {
-      url = url + request.url;
+    let url = request.url;
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+      url = environment.SERVER_URL + url;
     }
     request = request.clone({
       url: url,
