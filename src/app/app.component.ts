@@ -46,7 +46,15 @@ export class AppComponent {
       }
     });
   }
-
+  login() {
+    const that = this;
+    this.help.post('/login', {username: 'zhx', password: '1'}).subscribe(msg => {
+      if (msg.success) {
+        localStorage.setItem('token', msg.data.token);
+      }
+      console.log(msg);
+    });
+  }
   getStaffInfo() {
     const that = this;
     this.help.get('/staff/getStaffInfo').subscribe(msg => {

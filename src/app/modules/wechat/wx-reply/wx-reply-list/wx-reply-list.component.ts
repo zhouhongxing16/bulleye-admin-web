@@ -29,7 +29,7 @@ export class WxReplyListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.wxReplyService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.wxReplyService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

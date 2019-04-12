@@ -36,12 +36,18 @@ export class StaffEditComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
-          return this.staffService.getObject(params.get('id'));
+          return this.staffService.getById(params.get('id'));
         } else {
           return of(new Staff());
         }
       })
-    ).subscribe(d => this.obj = d);
+    ).subscribe(d => {
+      if (d.success) {
+        this.obj = d.data;
+      } else {
+        this.obj = new Staff();
+      }
+    });
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],

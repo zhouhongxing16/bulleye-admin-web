@@ -32,7 +32,7 @@ export class RoleListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.roleService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.roleService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

@@ -3,76 +3,25 @@ import {Help} from '../../../utils/Help';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {WxMenu} from './wx-menu';
+import {BaseService} from '../../../utils/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WxMenuService {
+export class WxMenuService extends BaseService<WxMenu> {
 
-
-  flag = false;
-  pageSize = 10;
-  pageNum = 1;
-  data = {
-    rows: [],
-    total: 0
-  };
-  private url = {
+  url = {
     listByPage: '/wxmenu/listByPage',
     create: '/wxmenu/create',
     deleteById: '/wxmenu/delete',
     getById: '/wxmenu/getById',
     update: '/wxmenu/update',
+    view: '',
+    edit: '',
+    add: '',
     getWxMenu: '/wxmenu/getWxMenu',
     createWxMenu: '/wxmenu/createWxMenu',
   };
-
-  constructor(private help: Help) {
-  }
-
-  getListByPage(pageNum: number = 1, pageSize: number = 10, keyword): Observable<any> {
-    this.flag = false;
-    const params = {
-      pageNum: pageNum,
-      pageSize: pageSize,
-      keyword: keyword
-    };
-    if (this.flag) {
-      return of(this.data);
-    } else {
-      return this.help.post(`${this.url.listByPage}`, params).pipe(
-        map(res => {
-          this.flag = true;
-          this.data = {
-            rows: res.rows,
-            total: res.total
-          };
-          return this.data;
-        }));
-    }
-  }
-
-  saveOrUpdateData(data: any) {
-    let url = this.url.create;
-    if (data.id) {
-      url = this.url.update;
-    }
-    return this.help.post(url, data);
-  }
-
-  deleteById(id: string) {
-    return this.help.get(this.url.deleteById + `/` + id);
-  }
-
-  getById(id: string) {
-    return this.help.get(this.url.getById + `/` + id);
-  }
-
-  getObject(id: string) {
-    return of(this.data.rows).pipe(
-      map((dataList: WxMenu[]) => dataList.find(data => data.id === id))
-    );
-  }
 
   getWxMenu(accountId: string) {
     return this.help.get(this.url.getWxMenu + `/` + accountId);

@@ -28,12 +28,18 @@ export class WxAccountEditComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
-          return this.wxAccountService.getObject(params.get('id'));
+          return this.wxAccountService.getById(params.get('id'));
         } else {
           return of(new WxAccount());
         }
       })
-    ).subscribe(d => this.obj = d);
+    ).subscribe(d => {
+      if (d.success) {
+        this.obj = d.data;
+      } else {
+        this.obj = new WxAccount();
+      }
+    });
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],

@@ -37,7 +37,7 @@ export class StaffListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.staffService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.staffService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

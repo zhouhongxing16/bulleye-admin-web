@@ -124,7 +124,7 @@ export class OrganizationListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.isLoading = true;
-    this.organizationService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.organizationService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.isLoading = false;
       this.rows = data.rows;
       this.total = data.total;

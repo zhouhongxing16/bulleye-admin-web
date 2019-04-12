@@ -58,7 +58,7 @@ export class WxAccountListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.wxAccountService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.wxAccountService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

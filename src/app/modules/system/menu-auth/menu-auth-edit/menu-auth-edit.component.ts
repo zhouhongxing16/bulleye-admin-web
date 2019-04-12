@@ -7,6 +7,7 @@ import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {MenuAuth} from '../menu-auth';
 import {MenuService} from '../../menu/menu.service';
+import {Staff} from '../../staff/staff';
 
 @Component({
   selector: 'app-menu-auth-edit',
@@ -32,13 +33,20 @@ export class MenuAuthEditComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
-          this.obj.menuId = params.get('id');
-          return this.menuAuthService.getObject(params.get('id'));
+          const menuId = params.get('id');
+          this.obj.menuId = menuId;
+          return this.menuAuthService.getById(menuId);
         } else {
           return of(new MenuAuth());
         }
       })
-    ).subscribe(d => this.obj = d);
+    ).subscribe(d => {
+      if (d.success) {
+        this.obj = d.data;
+      } else {
+        this.obj = new MenuAuth();
+      }
+    });
     this.getAllMenus();
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],

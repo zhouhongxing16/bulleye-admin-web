@@ -29,7 +29,7 @@ export class WxMemberListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.wxMemberService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.wxMemberService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

@@ -30,7 +30,7 @@ export class AccountListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.accountService.getListByPage(this.pageIndex, this.pageSize).subscribe(data => {
+    this.accountService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

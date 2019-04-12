@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Help} from './Help';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class BaseService<T> {
   };
 
 
-  private url: {
+  public _url: {
     listByPage: string;
     create: string;
     update: string;
@@ -27,14 +27,22 @@ export class BaseService<T> {
     edit: string;
     add: string;
   };
-  constructor(private help: Help) {
+
+  get url() {
+    return this._url;
   }
-  getListByPage(pageNum: number = 1, pageSize: number = 10): Observable<any> {
+
+  set url(value) {
+    this._url = value;
+  }
+
+  constructor(public help: Help) {
+  }
+
+  getListByPage(pageNum: number = 1, pageSize: number = 10, params: any): Observable<any> {
     this.flag = false;
-    const params = {
-      pageNum: pageNum,
-      pageSize: pageSize,
-    };
+    params.pageNum = pageNum;
+    params.pageSize = pageSize;
     if (this.flag) {
       return of(this.data);
     } else {
@@ -65,10 +73,11 @@ export class BaseService<T> {
   getById(id: string) {
     return this.help.get(this.url.getById + `/` + id);
   }
-/*
-  getObject(id: string) {
-    return of(this.data.rows).pipe(
-      map((dataList: T[]) => dataList.find(data => data.id === id))
-    );
-  }*/
+
+  /*
+    getObject(id: string) {
+      return of(this.data.rows).pipe(
+        map((dataList: T[]) => dataList.find(data => data.id === id))
+      );
+    }*/
 }
