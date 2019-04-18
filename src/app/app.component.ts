@@ -13,7 +13,7 @@ export class AppComponent {
   userInfo: any;
   menus: any;
 
-  constructor(private help: Help, private modalService: NzModalService, private message: NzMessageService) {
+  constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService) {
     const token = localStorage.getItem('token');
     if (token) {
       this.getMenu();
@@ -46,15 +46,20 @@ export class AppComponent {
       }
     });
   }
+
   login() {
     const that = this;
     this.help.post('/login', {username: 'zhx', password: '1'}).subscribe(msg => {
       if (msg.success) {
+        that.help.showMessage('success', msg.message);
         localStorage.setItem('token', msg.data.token);
+      } else {
+        that.help.showMessage('error', msg.message);
       }
       console.log(msg);
     });
   }
+
   getStaffInfo() {
     const that = this;
     this.help.get('/staff/getStaffInfo').subscribe(msg => {
