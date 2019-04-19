@@ -1,17 +1,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">唯一标识</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="id" [(ngModel)]="obj.id" name="id" id="id">
-      <nz-form-explain *ngIf="validateForm.get('id').dirty && validateForm.get('id').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织标识</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属组织</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="organizationId" [(ngModel)]="obj.organizationId" name="organizationId" id="organizationId">
       <nz-form-explain *ngIf="validateForm.get('organizationId').dirty && validateForm.get('organizationId').errors">
@@ -21,7 +11,7 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">部门代码</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">代码</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="code" [(ngModel)]="obj.code" name="code" id="code">
       <nz-form-explain *ngIf="validateForm.get('code').dirty && validateForm.get('code').errors">
@@ -31,7 +21,7 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">部门名称</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
       <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
@@ -41,7 +31,7 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">部门类型</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">类型</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="typeId" [(ngModel)]="obj.typeId" name="typeId" id="typeId">
       <nz-form-explain *ngIf="validateForm.get('typeId').dirty && validateForm.get('typeId').errors">
@@ -65,16 +55,6 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="status" [(ngModel)]="obj.status" name="status" id="status">
       <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">创建日期</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="created" [(ngModel)]="obj.created" name="created" id="created">
-      <nz-form-explain *ngIf="validateForm.get('created').dirty && validateForm.get('created').errors">
         必填
       </nz-form-explain>
     </nz-form-control>

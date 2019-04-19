@@ -1,16 +1,6 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">唯一标识</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="id" [(ngModel)]="obj.id" name="id" id="id">
-      <nz-form-explain *ngIf="validateForm.get('id').dirty && validateForm.get('id').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name"></nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="pid" [(ngModel)]="obj.pid" name="pid" id="pid">
@@ -105,16 +95,6 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="domain" [(ngModel)]="obj.domain" name="domain" id="domain">
       <nz-form-explain *ngIf="validateForm.get('domain').dirty && validateForm.get('domain').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">创建日期</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="created" [(ngModel)]="obj.created" name="created" id="created">
-      <nz-form-explain *ngIf="validateForm.get('created').dirty && validateForm.get('created').errors">
         必填
       </nz-form-explain>
     </nz-form-control>
