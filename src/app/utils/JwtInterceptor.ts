@@ -17,6 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
     let url = request.url;
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = environment.SERVER_URL + url;
+      // url = url;
     }
     request = request.clone({
       url: url,

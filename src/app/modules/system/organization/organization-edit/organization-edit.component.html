@@ -1,7 +1,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name"></nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="pid" [(ngModel)]="obj.pid" name="pid" id="pid">
       <nz-form-explain *ngIf="validateForm.get('pid').dirty && validateForm.get('pid').errors">

@@ -27,8 +27,7 @@ export class OrganizationListComponent implements OnInit {
   constructor(
     private organizationService: OrganizationService,
     private menuService: MenuService,
-    private help: Help,
-    private nzDropdownService: NzDropdownService
+    private help: Help
   ) {
   }
 

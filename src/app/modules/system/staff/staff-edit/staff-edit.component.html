@@ -1,16 +1,6 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">ID</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="id" [(ngModel)]="obj.id" name="id" id="id">
-      <nz-form-explain *ngIf="validateForm.get('id').dirty && validateForm.get('id').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">工号</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="serialNo" [(ngModel)]="obj.serialNo" name="serialNo" id="serialNo">
@@ -75,16 +65,6 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="avatar" [(ngModel)]="obj.avatar" name="avatar" id="avatar">
       <nz-form-explain *ngIf="validateForm.get('avatar').dirty && validateForm.get('avatar').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属组织</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="organizationId" [(ngModel)]="obj.organizationId" name="organizationId" id="organizationId">
-      <nz-form-explain *ngIf="validateForm.get('organizationId').dirty && validateForm.get('organizationId').errors">
         必填
       </nz-form-explain>
     </nz-form-control>
@@ -165,26 +145,6 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="email" [(ngModel)]="obj.email" name="email" id="email">
       <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">备注</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
-      <nz-form-explain *ngIf="validateForm.get('remark').dirty && validateForm.get('remark').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="status" [(ngModel)]="obj.status" name="status" id="status">
-      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
         必填
       </nz-form-explain>
     </nz-form-control>
@@ -291,11 +251,24 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">创建时间</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="name">备注</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="created" [(ngModel)]="obj.created" name="created" id="created">
-      <nz-form-explain *ngIf="validateForm.get('created').dirty && validateForm.get('created').errors">
+      <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
+      <nz-form-explain *ngIf="validateForm.get('remark').dirty && validateForm.get('remark').errors">
         必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="status" id="status" [(ngModel)]="obj.status">
+        <label nz-radio [nzValue]="0">启用</label>
+        <label nz-radio [nzValue]="1">禁用</label>
+      </nz-radio-group>
+      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
+        必选
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>

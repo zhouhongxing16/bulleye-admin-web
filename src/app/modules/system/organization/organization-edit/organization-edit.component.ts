@@ -49,8 +49,6 @@ export class OrganizationEditComponent implements OnInit {
 
     this.validateForm = this.formBuilder.group({
 
-      id: [null, [Validators.required]],
-
       pid: [null, [Validators.required]],
 
       code: [null, [Validators.required]],

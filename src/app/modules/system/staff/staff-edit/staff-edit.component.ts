@@ -4,11 +4,11 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { StaffService} from '../staff.service';
+import {StaffService} from '../staff.service';
 import {Help} from '../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import { Staff} from '../Staff';
+import {Staff} from '../Staff';
 import {of} from 'rxjs';
 
 @Component({
@@ -49,8 +49,6 @@ export class StaffEditComponent implements OnInit {
 
     this.validateForm = this.formBuilder.group({
 
-      id: [null, [Validators.required]],
-
       serialNo: [null, [Validators.required]],
 
       name: [null, [Validators.required]],
@@ -64,8 +62,6 @@ export class StaffEditComponent implements OnInit {
       degreeId: [null, [Validators.required]],
 
       avatar: [null, [Validators.required]],
-
-      organizationId: [null, [Validators.required]],
 
       departmentId: [null, [Validators.required]],
 
@@ -83,7 +79,7 @@ export class StaffEditComponent implements OnInit {
 
       email: [null, [Validators.required]],
 
-      remark: [null, [Validators.required]],
+      remark: [null, null],
 
       status: [null, [Validators.required]],
 
@@ -106,8 +102,6 @@ export class StaffEditComponent implements OnInit {
       vmnetNo: [null, [Validators.required]],
 
       joinDate: [null, [Validators.required]],
-
-      created: [null, [Validators.required]],
 
     });
   }

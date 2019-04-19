@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { LogRoutingModule } from './log-routing.module';
 import { LogListComponent } from './log-list/log-list.component';
-import { LogEditComponent } from './log-edit/log-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 
 @NgModule({
-  declarations: [LogListComponent, LogEditComponent],
+  declarations: [LogListComponent],
   imports: [
     CommonModule,
     LogRoutingModule,
