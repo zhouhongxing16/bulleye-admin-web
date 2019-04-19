@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Help} from '../../utils/Help';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,7 @@ export class MenuComponent implements OnInit {
 
   @Input() menus: any;
 
-  constructor() {
+  constructor(public help: Help) {
   }
 
   ngOnInit() {

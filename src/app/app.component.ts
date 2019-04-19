@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {Help} from './utils/Help';
 
@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'bulleye-admin-web';
   userInfo: any;
   menus: any;
-
+  triggerTemplate: TemplateRef<void> | null = null;
   constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService) {
     const token = localStorage.getItem('token');
     if (token) {
@@ -22,6 +22,11 @@ export class AppComponent {
 
   }
 
+  @ViewChild('trigger') customTrigger: TemplateRef<void>;
+  /** custom trigger can be TemplateRef **/
+  changeTrigger(): void {
+    this.triggerTemplate = this.customTrigger;
+  }
 
   showLogoutConfirm(): void {
     this.modalService.confirm({

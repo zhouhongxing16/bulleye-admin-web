@@ -7,7 +7,7 @@ import {Location} from '@angular/common';
 @Injectable()
 export class Help {
   private loadId: any;
-  public authFlag = false;
+  public isCollapsed = false;
 
   constructor(private http: HttpClient, private message: NzMessageService, private location: Location) {
   }
