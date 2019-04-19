@@ -1,16 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidationErrors,
   Validators
 } from '@angular/forms';
-import {StaffService} from '../staff.service';
+import { StaffService} from '../staff.service';
 import {Help} from '../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {Staff} from '../staff';
+import { Staff} from '../Staff';
 import {of} from 'rxjs';
 
 @Component({
@@ -50,12 +48,67 @@ export class StaffEditComponent implements OnInit {
     });
 
     this.validateForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
+
+      id: [null, [Validators.required]],
+
       serialNo: [null, [Validators.required]],
-      identifyNo: [null, [Validators.required]],
+
+      name: [null, [Validators.required]],
+
+      birthday: [null, [Validators.required]],
+
+      genderId: [null, [Validators.required]],
+
+      academicId: [null, [Validators.required]],
+
+      degreeId: [null, [Validators.required]],
+
+      avatar: [null, [Validators.required]],
+
+      organizationId: [null, [Validators.required]],
+
+      departmentId: [null, [Validators.required]],
+
+      positionId: [null, [Validators.required]],
+
+      titleId: [null, [Validators.required]],
+
+      typeId: [null, [Validators.required]],
+
       mobile: [null, [Validators.required]],
+
+      identifyTypeId: [null, [Validators.required]],
+
+      identifyNo: [null, [Validators.required]],
+
+      email: [null, [Validators.required]],
+
+      remark: [null, [Validators.required]],
+
       status: [null, [Validators.required]],
-      remark: [null]
+
+      birthProvinceId: [null, [Validators.required]],
+
+      birthCityId: [null, [Validators.required]],
+
+      policy: [null, [Validators.required]],
+
+      weight: [null, [Validators.required]],
+
+      height: [null, [Validators.required]],
+
+      healthStatus: [null, [Validators.required]],
+
+      marryStatusId: [null, [Validators.required]],
+
+      nationId: [null, [Validators.required]],
+
+      vmnetNo: [null, [Validators.required]],
+
+      joinDate: [null, [Validators.required]],
+
+      created: [null, [Validators.required]],
+
     });
   }
 

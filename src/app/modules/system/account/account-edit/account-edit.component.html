@@ -1,3 +1,179 @@
-<p>
-  account-edit works!
-</p>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">唯一标识</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="id" [(ngModel)]="obj.id" name="id" id="id">
+      <nz-form-explain *ngIf="validateForm.get('id').dirty && validateForm.get('id').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">账户</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="username" [(ngModel)]="obj.username" name="username" id="username">
+      <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">密码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="password" [(ngModel)]="obj.password" name="password" id="password">
+      <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">是否锁定</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="accountLocked" [(ngModel)]="obj.accountLocked" name="accountLocked" id="accountLocked">
+      <nz-form-explain *ngIf="validateForm.get('accountLocked').dirty && validateForm.get('accountLocked').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">是否凭证过期</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="credentialsExpired" [(ngModel)]="obj.credentialsExpired" name="credentialsExpired" id="credentialsExpired">
+      <nz-form-explain *ngIf="validateForm.get('credentialsExpired').dirty && validateForm.get('credentialsExpired').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">是否过期</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="accountExpired" [(ngModel)]="obj.accountExpired" name="accountExpired" id="accountExpired">
+      <nz-form-explain *ngIf="validateForm.get('accountExpired').dirty && validateForm.get('accountExpired').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">人员标识</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="staffId" [(ngModel)]="obj.staffId" name="staffId" id="staffId">
+      <nz-form-explain *ngIf="validateForm.get('staffId').dirty && validateForm.get('staffId').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织标识</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="organizationId" [(ngModel)]="obj.organizationId" name="organizationId" id="organizationId">
+      <nz-form-explain *ngIf="validateForm.get('organizationId').dirty && validateForm.get('organizationId').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">微信OpenId</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="wxOpenid" [(ngModel)]="obj.wxOpenid" name="wxOpenid" id="wxOpenid">
+      <nz-form-explain *ngIf="validateForm.get('wxOpenid').dirty && validateForm.get('wxOpenid').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">支付宝OpenId</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="alipayOpenid" [(ngModel)]="obj.alipayOpenid" name="alipayOpenid" id="alipayOpenid">
+      <nz-form-explain *ngIf="validateForm.get('alipayOpenid').dirty && validateForm.get('alipayOpenid').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">邮箱</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="email" [(ngModel)]="obj.email" name="email" id="email">
+      <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="status" [(ngModel)]="obj.status" name="status" id="status">
+      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">是否开通手机号登录</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="mobileLoginFlag" [(ngModel)]="obj.mobileLoginFlag" name="mobileLoginFlag" id="mobileLoginFlag">
+      <nz-form-explain *ngIf="validateForm.get('mobileLoginFlag').dirty && validateForm.get('mobileLoginFlag').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">备注</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
+      <nz-form-explain *ngIf="validateForm.get('remark').dirty && validateForm.get('remark').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">创建时间</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="created" [(ngModel)]="obj.created" name="created" id="created">
+      <nz-form-explain *ngIf="validateForm.get('created').dirty && validateForm.get('created').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">修改时间</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="modified" [(ngModel)]="obj.modified" name="modified" id="modified">
+      <nz-form-explain *ngIf="validateForm.get('modified').dirty && validateForm.get('modified').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">账号过期时间</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="expiredDate" [(ngModel)]="obj.expiredDate" name="expiredDate" id="expiredDate">
+      <nz-form-explain *ngIf="validateForm.get('expiredDate').dirty && validateForm.get('expiredDate').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" routerLink="/account/list" [nzLoading]="isLoading">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

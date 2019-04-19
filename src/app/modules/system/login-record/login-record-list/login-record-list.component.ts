@@ -1,22 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {StaffService} from '../staff.service';
+import {LoginRecord} from '../LoginRecord';
 import {Help} from '../../../../utils/Help';
-import {Staff} from '../staff';
+import {LoginRecordService} from '../login-record.service';
 
 @Component({
-  selector: 'app-staff-list',
-  templateUrl: './staff-list.component.html',
-  styleUrls: ['./staff-list.component.scss'],
+  selector: 'app-login-record-list',
+  templateUrl: './login-record-list.component.html',
+  styleUrls: ['./login-record-list.component.scss']
 })
-export class StaffListComponent implements OnInit {
-  rows: Staff[] = [];
+export class LoginRecordListComponent implements OnInit {
+
+  rows: LoginRecord[] = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
   loading = false;
   searchGenderList: string[] = [];
 
-  constructor(private staffService: StaffService, private help: Help) {
+  constructor(private loginRecordService: LoginRecordService, private help: Help) {
 
   }
 
@@ -29,7 +30,7 @@ export class StaffListComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.staffService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
+    this.loginRecordService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;
@@ -39,14 +40,9 @@ export class StaffListComponent implements OnInit {
     });
   }
 
-  updateFilter(value: string[]): void {
-    this.searchGenderList = value;
-    this.getListByPage(true);
-  }
-
   deleteRow(id: string) {
     this.help.loading('删除中...');
-    this.staffService.deleteById(id).subscribe(res => {
+    this.loginRecordService.deleteById(id).subscribe(res => {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);

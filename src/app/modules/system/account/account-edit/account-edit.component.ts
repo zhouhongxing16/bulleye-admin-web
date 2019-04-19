@@ -1,8 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { AccountService} from '../account.service';
 import {Help} from '../../../../utils/Help';
-import {AccountService} from '../account.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {switchMap} from 'rxjs/operators';
+import { Account} from '../Account';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-account-edit',
@@ -11,13 +18,83 @@ import {AccountService} from '../account.service';
 })
 export class AccountEditComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,
-              private accountService: AccountService,
-              private route: ActivatedRoute,
-              private help: Help) {
+
+  validateForm: FormGroup;
+  isLoading = false;
+  obj: Account = new Account();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private accountService: AccountService,
+    private route: ActivatedRoute,
+    private help: Help) {
   }
 
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        if (params.get('id')) {
+          return this.accountService.getById(params.get('id'));
+        } else {
+          return of(new Account());
+        }
+      })
+    ).subscribe(d => {
+      if (d.success) {
+        this.obj = d.data;
+      } else {
+        this.obj = new Account();
+      }
+    });
+
+    this.validateForm = this.formBuilder.group({
+
+      id: [null, [Validators.required]],
+
+      username: [null, [Validators.required]],
+
+      password: [null, [Validators.required]],
+
+      accountLocked: [null, [Validators.required]],
+
+      credentialsExpired: [null, [Validators.required]],
+
+      accountExpired: [null, [Validators.required]],
+
+      staffId: [null, [Validators.required]],
+
+      organizationId: [null, [Validators.required]],
+
+      wxOpenid: [null, [Validators.required]],
+
+      alipayOpenid: [null, [Validators.required]],
+
+      email: [null, [Validators.required]],
+
+      status: [null, [Validators.required]],
+
+      mobileLoginFlag: [null, [Validators.required]],
+
+      remark: [null, [Validators.required]],
+
+      created: [null, [Validators.required]],
+
+      modified: [null, [Validators.required]],
+
+      expiredDate: [null, [Validators.required]],
+
+    });
+  }
+
+  submitForm() {
+    this.isLoading = true;
+    this.accountService.saveOrUpdateData(this.obj).subscribe(res => {
+      this.isLoading = false;
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+        this.help.back();
+      }
+    });
   }
 
 }

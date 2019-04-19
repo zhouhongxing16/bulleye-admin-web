@@ -1,31 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { DepartmentService} from '../department.service';
 import {Help} from '../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {LoginRecord} from '../LoginRecord';
+import {LoginRecordService} from '../login-record.service';
 import {switchMap} from 'rxjs/operators';
-import { Department} from '../Department';
 import {of} from 'rxjs';
 
 @Component({
-  selector: 'app-department-edit',
-  templateUrl: './department-edit.component.html',
-  styleUrls: ['./department-edit.component.scss']
+  selector: 'app-login-record-edit',
+  templateUrl: './login-record-edit.component.html',
+  styleUrls: ['./login-record-edit.component.scss']
 })
-export class DepartmentEditComponent implements OnInit {
+export class LoginRecordEditComponent implements OnInit {
 
 
   validateForm: FormGroup;
   isLoading = false;
-  obj: Department = new Department();
+  obj: LoginRecord = new LoginRecord();
 
   constructor(
     private formBuilder: FormBuilder,
-    private departmentService: DepartmentService,
+    private loginRecordService: LoginRecordService,
     private route: ActivatedRoute,
     private help: Help) {
   }
@@ -34,16 +30,16 @@ export class DepartmentEditComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
-          return this.departmentService.getById(params.get('id'));
+          return this.loginRecordService.getById(params.get('id'));
         } else {
-          return of(new Department());
+          return of(new LoginRecord());
         }
       })
     ).subscribe(d => {
       if (d.success) {
         this.obj = d.data;
       } else {
-        this.obj = new Department();
+        this.obj = new LoginRecord();
       }
     });
 
@@ -51,17 +47,19 @@ export class DepartmentEditComponent implements OnInit {
 
       id: [null, [Validators.required]],
 
-      organizationId: [null, [Validators.required]],
+      username: [null, [Validators.required]],
 
-      code: [null, [Validators.required]],
+      ip: [null, [Validators.required]],
 
-      name: [null, [Validators.required]],
+      loginLocation: [null, [Validators.required]],
 
-      typeId: [null, [Validators.required]],
+      browser: [null, [Validators.required]],
 
-      remark: [null, [Validators.required]],
+      os: [null, [Validators.required]],
 
       status: [null, [Validators.required]],
+
+      message: [null, [Validators.required]],
 
       created: [null, [Validators.required]],
 
@@ -70,7 +68,7 @@ export class DepartmentEditComponent implements OnInit {
 
   submitForm() {
     this.isLoading = true;
-    this.departmentService.saveOrUpdateData(this.obj).subscribe(res => {
+    this.loginRecordService.saveOrUpdateData(this.obj).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);

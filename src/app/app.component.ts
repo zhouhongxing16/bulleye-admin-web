@@ -31,8 +31,7 @@ export class AppComponent {
         localStorage.removeItem('token');
         console.log('OK');
       }
-    })
-    ;
+    });
   }
 
   getMenu() {
