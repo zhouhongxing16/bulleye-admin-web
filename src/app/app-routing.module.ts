@@ -21,10 +21,9 @@ const routes: Routes = [
       {path: 'wxmember', loadChildren: './modules/wechat/wx-member/wx-member.module#WxMemberModule'},
       {path: 'wxmenu', loadChildren: './modules/wechat/wx-menu/wx-menu.module#WxMenuModule'},
       {path: 'wxreply', loadChildren: './modules/wechat/wx-reply/wx-reply.module#WxReplyModule'},
-      {path: '**', redirectTo: ''},
     ]
   },
-  {path: 'passport/login', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
