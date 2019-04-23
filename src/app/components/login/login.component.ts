@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import {Help} from '../../utils/Help';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
         if (msg.success) {
           localStorage.setItem('token', msg.data.token);
           this.message.create('success', msg.message);
-          window.location.reload();
+          this.router.navigate(['/']);
         } else {
           this.message.create('error', msg.message);
           console.log(msg);
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder, private help: Help, private message: NzMessageService) {
+  constructor(private fb: FormBuilder, private help: Help, private router: Router, private message: NzMessageService) {
   }
 
   ngOnInit(): void {
