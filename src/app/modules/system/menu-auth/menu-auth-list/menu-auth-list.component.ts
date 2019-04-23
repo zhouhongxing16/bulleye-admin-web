@@ -41,6 +41,7 @@ export class MenuAuthListComponent implements OnInit {
       this.getAllMenus();
     });
   }
+
   getAllMenus() {
     this.menuService.getAllMenus().subscribe(msg => {
       if (msg.success) {
@@ -48,12 +49,13 @@ export class MenuAuthListComponent implements OnInit {
       }
     });
   }
+
   getListByPage(reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.menuAuthService.getListByPage(this.pageIndex, this.pageSize, this.queryParams.menuId).subscribe(data => {
+    this.menuAuthService.getListByPage(this.pageIndex, this.pageSize, {menuId:  this.queryParams.menuId}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;

@@ -51,6 +51,8 @@ export class JwtInterceptor implements HttpInterceptor {
         return of(event);
         break;
       default:
+        console.log(event);
+        break;
     }
     return throwError(event);
   }

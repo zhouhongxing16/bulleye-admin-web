@@ -14,7 +14,6 @@ export class LogListComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   loading = false;
-  searchGenderList: string[] = [];
 
   constructor(private logService: LogService, private help: Help) {
 

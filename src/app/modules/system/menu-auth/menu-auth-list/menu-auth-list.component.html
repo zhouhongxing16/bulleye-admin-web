@@ -21,6 +21,7 @@
   (nzPageSizeChange)="getListByPage(true)">
   <thead nzSingleSort>
     <tr>
+      <th nzShowSort nzSortKey="menuName">菜单</th>
       <th nzShowSort nzSortKey="name">名称</th>
       <th nzShowSort nzSortKey="code">编码</th>
       <th nzShowSort nzSortKey="path">路径</th>
@@ -32,6 +33,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of menuAuthTable.data">
+      <td>{{data.menuName}}</td>
       <td>{{data.name}}</td>
       <td>{{data.code}}</td>
       <td>{{data.path}}</td>
