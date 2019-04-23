@@ -1,33 +1,35 @@
-import {Component, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Help} from '../../utils/Help';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
-import {Help} from './utils/Help';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [NzModalService]
+  selector: 'app-default-layout',
+  templateUrl: './default-layout.component.html',
+  styleUrls: ['./default-layout.component.scss']
 })
-export class AppComponent {
+export class DefaultLayoutComponent implements OnInit {
+
   title = 'bulleye-admin-web';
   userInfo: any;
   menus: any;
   triggerTemplate: TemplateRef<void> | null = null;
+
   constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService) {
-    /*const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       this.getMenu();
       this.getStaffInfo();
-    }*/
+    }
 
   }
-
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
-  /** custom trigger can be TemplateRef **/
   changeTrigger(): void {
     this.triggerTemplate = this.customTrigger;
   }
 
+  ngOnInit() {
+
+  }
   showLogoutConfirm(): void {
     this.modalService.confirm({
       nzTitle: '<i>确定注销登录吗?</i>',
@@ -86,5 +88,4 @@ export class AppComponent {
       }
     });
   }
-
 }

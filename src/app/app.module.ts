@@ -11,9 +11,10 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {Help} from './utils/Help';
 import {JwtInterceptor} from './utils/JwtInterceptor';
-import {SubmenuComponent} from './components/submenu/submenu.component';
-import {MenuComponent} from './components/menu/menu.component';
 import {LoginComponent} from './components/login/login.component';
+import { DefaultLayoutComponent } from './components/default-layout/default-layout.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {SubmenuComponent} from './components/submenu/submenu.component';
 
 registerLocaleData(zh);
 
@@ -21,6 +22,7 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     LoginComponent,
+    DefaultLayoutComponent,
     MenuComponent,
     SubmenuComponent,
   ],
@@ -31,7 +33,7 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [{provide: NZ_I18N, useValue: zh_CN}, Help,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
