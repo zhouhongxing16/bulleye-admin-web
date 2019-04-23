@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Help} from '../../../../utils/Help';
 import {WxMenuService} from '../wx-menu.service';
 import {WxAccount} from '../../wx-account/wx-account';
 import {WxMenu} from '../wx-menu';
+import {switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-wx-menu-edit',
@@ -24,6 +26,39 @@ export class WxMenuEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        if (params.get('id')) {
+          return this.wxMenuService.getById(params.get('id'));
+        } else {
+          return of(new WxMenu());
+        }
+      })
+    ).subscribe(d => {
+      if (d.success) {
+        this.obj = d.data;
+      } else {
+        this.obj = new WxMenu();
+      }
+    });
+
+    this.validateForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      remark: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      menuState: [null]
+    });
+  }
+
+  submitForm() {
+    this.isLoading = true;
+    this.wxMenuService.saveOrUpdateData(this.obj).subscribe(res => {
+      this.isLoading = false;
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+        this.help.back();
+      }
+    });
   }
 
 }
