@@ -14,9 +14,9 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">菜单类型</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="type" [(ngModel)]="obj.type" name="type" id="type" >
-        <label nz-radio [nzValue]="view">网页</label>
-        <label nz-radio [nzValue]="click">点击</label>
-        <label nz-radio [nzValue]="miniprogram">小程序</label>
+        <label nz-radio [nzValue]="'view'">网页</label>
+        <label nz-radio [nzValue]="'click'">点击</label>
+        <label nz-radio [nzValue]="'miniprogram'">小程序</label>
       </nz-radio-group>
       <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
         必选
