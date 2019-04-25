@@ -32,7 +32,7 @@
         <td>{{item.type}}</td>
         <td>{{item.author}}</td>
         <td>
-          <button *ngIf="item.parentId==0" title="增加数据" [routerLink]="['../add',data.id]" nz-button nzType="primary" nzShape="circle"><i
+          <button *ngIf="item.parentId==0" title="增加数据" [routerLink]="['../addChild',data.id]" nz-button nzType="primary" nzShape="circle"><i
             class="anticon anticon-add"></i></button>
           <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
             class="anticon anticon-edit"></i></button>

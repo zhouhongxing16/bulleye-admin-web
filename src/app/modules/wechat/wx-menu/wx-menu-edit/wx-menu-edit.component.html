@@ -11,7 +11,7 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">菜单类型</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="type">菜单类型</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="type" [(ngModel)]="obj.type" name="type" id="type" >
         <label nz-radio [nzValue]="'view'">网页</label>
@@ -23,23 +23,44 @@
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
-  type
-  key
-  url
-  mediaId
-  appId
-  page_path
-  author
-  sort
+
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="mediaId">素材media_id</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
-        <label nz-radio [nzValue]="0">启用</label>
-        <label nz-radio [nzValue]="1">禁用</label>
-      </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
-        必选
+      <input nz-input formControlName="mediaId" [(ngModel)]="obj.mediaId" name="mediaId" id="mediaId">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="appId">小程序的appid</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="appId" [(ngModel)]="obj.appId" name="appId" id="appId">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="pagePath">小程序的页面路径</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="pagePath" [(ngModel)]="obj.pagePath" name="pagePath" id="pagePath">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="author">用户信息获取</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="author" [(ngModel)]="obj.author" name="author" id="author">
+      <nz-form-explain *ngIf="validateForm.get('author').dirty && validateForm.get('author').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sort">排序</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="sort" [(ngModel)]="obj.sort" name="sort" id="sort">
+      <nz-form-explain *ngIf="validateForm.get('sort').dirty && validateForm.get('sort').errors">
+        必填
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
@@ -50,6 +71,9 @@
       <textarea formControlName="remark" name="remark" id="remark" [(ngModel)]="obj.remark" nz-input rows="4"></textarea>
     </nz-form-control>
   </nz-form-item>
+
+  <!--隐藏域-->
+  <input type="hidden" name="parentId" id="parentId" [(ngModel)]="obj.parentId">
 
   <nz-form-item nz-row style="margin-bottom:8px;">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">

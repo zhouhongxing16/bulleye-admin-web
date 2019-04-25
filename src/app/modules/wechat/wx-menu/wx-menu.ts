@@ -28,7 +28,6 @@ export class WxMenu {
   level: number;
 
   expand: boolean;
-  status: number;
 
   children?: WxMenu[];
 }

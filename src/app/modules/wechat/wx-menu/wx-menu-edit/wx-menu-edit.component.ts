@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Help} from '../../../../utils/Help';
 import {WxMenuService} from '../wx-menu.service';
-import {WxAccount} from '../../wx-account/wx-account';
 import {WxMenu} from '../wx-menu';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
@@ -35,18 +34,23 @@ export class WxMenuEditComponent implements OnInit {
         }
       })
     ).subscribe(d => {
-      if (d.success) {
+      if (d.success&&d.parentId!=0) {
         this.obj = d.data;
       } else {
         this.obj = new WxMenu();
+        this.obj.parentId = d.id;
       }
     });
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      remark: [null, [Validators.required]],
-      status: [null, [Validators.required]],
-      menuState: [null]
+      type: [null, [Validators.required]],
+      author: [null, [Validators.required]],
+      sort: [null, [Validators.required]],
+      mediaId: [null],
+      appId: [null],
+      pagePath: [null],
+      remark: [null]
     });
   }
 
