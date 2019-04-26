@@ -49,6 +49,7 @@ export class WxAccountEditComponent implements OnInit {
       status: [null, [Validators.required]],
       domain: [null],
       remark: [null],
+      parentId: [null],
       menuState: [null]
     });
   }

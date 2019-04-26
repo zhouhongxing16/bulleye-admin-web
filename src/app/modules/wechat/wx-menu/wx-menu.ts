@@ -7,7 +7,7 @@ export class WxMenu {
 
   name: string;
 
-  key: string;
+  keyValue: string;
 
   url: string;
 
