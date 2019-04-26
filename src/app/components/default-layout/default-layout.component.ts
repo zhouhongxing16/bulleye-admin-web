@@ -15,21 +15,24 @@ export class DefaultLayoutComponent implements OnInit {
   triggerTemplate: TemplateRef<void> | null = null;
 
   constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService) {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.getMenu();
-      this.getStaffInfo();
-    }
+
 
   }
+
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
+
   changeTrigger(): void {
     this.triggerTemplate = this.customTrigger;
   }
 
   ngOnInit() {
-
+    const token = localStorage.getItem('token');
+    this.getMenu();
+    if (token) {
+      this.getStaffInfo();
+    }
   }
+
   showLogoutConfirm(): void {
     this.modalService.confirm({
       nzTitle: '<i>确定注销登录吗?</i>',

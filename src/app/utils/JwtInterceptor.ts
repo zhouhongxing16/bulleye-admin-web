@@ -36,13 +36,13 @@ export class JwtInterceptor implements HttpInterceptor {
     // 业务处理：一些通用操作
     switch (event.status) {
       case 401:
+        console.log('not login');
         this.help.showMessage('warning', '未登录，请先登录！');
         this.router.navigate(['/login']);
         return of(event);
         break;
 
       case 403:
-        console.log('not login');
         this.help.showMessage('warning', '未授权，禁止访问！');
         return of(event);
         break;
