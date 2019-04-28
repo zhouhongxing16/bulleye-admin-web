@@ -49,21 +49,27 @@ export class StaffEditComponent implements OnInit {
 
     this.validateForm = this.formBuilder.group({
 
+      id: [null, null],
+
       serialNo: [null, [Validators.required]],
 
       name: [null, [Validators.required]],
 
-      birthday: [null, [Validators.required]],
-
       genderId: [null, [Validators.required]],
 
-      academicId: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
 
-      degreeId: [null, [Validators.required]],
+      email: [null, [Validators.required]],
 
       avatar: [null, [Validators.required]],
 
       departmentId: [null, [Validators.required]],
+
+      birthday: [null, [Validators.required]],
+
+      academicId: [null, [Validators.required]],
+
+      degreeId: [null, [Validators.required]],
 
       positionId: [null, [Validators.required]],
 
@@ -71,37 +77,25 @@ export class StaffEditComponent implements OnInit {
 
       typeId: [null, [Validators.required]],
 
-      mobile: [null, [Validators.required]],
+      identifyTypeId: [null, null],
 
-      identifyTypeId: [null, [Validators.required]],
-
-      identifyNo: [null, [Validators.required]],
-
-      email: [null, [Validators.required]],
-
-      remark: [null, null],
+      identifyNo: [null, null],
 
       status: [null, [Validators.required]],
 
-      birthProvinceId: [null, [Validators.required]],
+      birthProvinceId: [null, null],
 
-      birthCityId: [null, [Validators.required]],
+      birthCityId: [null, null],
 
-      policy: [null, [Validators.required]],
+      policy: [null, null],
 
-      weight: [null, [Validators.required]],
+      nationId: [null, null],
 
-      height: [null, [Validators.required]],
+      joinDate: [null, null],
 
-      healthStatus: [null, [Validators.required]],
+      remark: [null, null],
 
-      marryStatusId: [null, [Validators.required]],
-
-      nationId: [null, [Validators.required]],
-
-      vmnetNo: [null, [Validators.required]],
-
-      joinDate: [null, [Validators.required]],
+      created: [null, null],
 
     });
   }

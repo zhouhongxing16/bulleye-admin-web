@@ -1,277 +1,279 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">工号</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="serialNo" [(ngModel)]="obj.serialNo" name="serialNo" id="serialNo">
-      <nz-form-explain *ngIf="validateForm.get('serialNo').dirty && validateForm.get('serialNo').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">姓名</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
-      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+  <div nz-row [nzGutter]="24">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">生日</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="birthday" [(ngModel)]="obj.birthday" name="birthday" id="birthday">
-      <nz-form-explain *ngIf="validateForm.get('birthday').dirty && validateForm.get('birthday').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="serialNo">工号</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写工号" formControlName="serialNo" [(ngModel)]="obj.serialNo" name="serialNo"
+                 id="serialNo"/>
+        </nz-form-control>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">性别</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="genderId" [(ngModel)]="obj.genderId" name="genderId" id="genderId">
-      <nz-form-explain *ngIf="validateForm.get('genderId').dirty && validateForm.get('genderId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-item>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">学位</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="academicId" [(ngModel)]="obj.academicId" name="academicId" id="academicId">
-      <nz-form-explain *ngIf="validateForm.get('academicId').dirty && validateForm.get('academicId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">学历</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="degreeId" [(ngModel)]="obj.degreeId" name="degreeId" id="degreeId">
-      <nz-form-explain *ngIf="validateForm.get('degreeId').dirty && validateForm.get('degreeId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">姓名</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写姓名" formControlName="name" [(ngModel)]="obj.name" name="name" id="name"/>
+        </nz-form-control>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">头像</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="avatar" [(ngModel)]="obj.avatar" name="avatar" id="avatar">
-      <nz-form-explain *ngIf="validateForm.get('avatar').dirty && validateForm.get('avatar').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-item>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属部门</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="departmentId" [(ngModel)]="obj.departmentId" name="departmentId" id="departmentId">
-      <nz-form-explain *ngIf="validateForm.get('departmentId').dirty && validateForm.get('departmentId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">职位</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="positionId" [(ngModel)]="obj.positionId" name="positionId" id="positionId">
-      <nz-form-explain *ngIf="validateForm.get('positionId').dirty && validateForm.get('positionId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="genderId">性别</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写性别" formControlName="genderId" [(ngModel)]="obj.genderId" name="genderId"
+                 id="genderId"/>
+        </nz-form-control>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">职称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="titleId" [(ngModel)]="obj.titleId" name="titleId" id="titleId">
-      <nz-form-explain *ngIf="validateForm.get('titleId').dirty && validateForm.get('titleId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-item>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">人员类型</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="typeId" [(ngModel)]="obj.typeId" name="typeId" id="typeId">
-      <nz-form-explain *ngIf="validateForm.get('typeId').dirty && validateForm.get('typeId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">电话号码</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="mobile" [(ngModel)]="obj.mobile" name="mobile" id="mobile">
-      <nz-form-explain *ngIf="validateForm.get('mobile').dirty && validateForm.get('mobile').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+  </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">证件类型</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="identifyTypeId" [(ngModel)]="obj.identifyTypeId" name="identifyTypeId" id="identifyTypeId">
-      <nz-form-explain *ngIf="validateForm.get('identifyTypeId').dirty && validateForm.get('identifyTypeId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">证件号码</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="identifyNo" [(ngModel)]="obj.identifyNo" name="identifyNo" id="identifyNo">
-      <nz-form-explain *ngIf="validateForm.get('identifyNo').dirty && validateForm.get('identifyNo').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+  <div nz-row [nzGutter]="24">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">邮箱</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="email" [(ngModel)]="obj.email" name="email" id="email">
-      <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mobile">电话号码</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写电话号码" formControlName="mobile" [(ngModel)]="obj.mobile" name="mobile"
+                 id="mobile"/>
+        </nz-form-control>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属省份</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="birthProvinceId" [(ngModel)]="obj.birthProvinceId" name="birthProvinceId" id="birthProvinceId">
-      <nz-form-explain *ngIf="validateForm.get('birthProvinceId').dirty && validateForm.get('birthProvinceId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-item>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属城市</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="birthCityId" [(ngModel)]="obj.birthCityId" name="birthCityId" id="birthCityId">
-      <nz-form-explain *ngIf="validateForm.get('birthCityId').dirty && validateForm.get('birthCityId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">政治面貌</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="policy" [(ngModel)]="obj.policy" name="policy" id="policy">
-      <nz-form-explain *ngIf="validateForm.get('policy').dirty && validateForm.get('policy').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">邮箱</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写邮箱" formControlName="email" [(ngModel)]="obj.email" name="email" id="email"/>
+        </nz-form-control>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">体重</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="weight" [(ngModel)]="obj.weight" name="weight" id="weight">
-      <nz-form-explain *ngIf="validateForm.get('weight').dirty && validateForm.get('weight').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-item>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">身高</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="height" [(ngModel)]="obj.height" name="height" id="height">
-      <nz-form-explain *ngIf="validateForm.get('height').dirty && validateForm.get('height').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">健康状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="healthStatus" [(ngModel)]="obj.healthStatus" name="healthStatus" id="healthStatus">
-      <nz-form-explain *ngIf="validateForm.get('healthStatus').dirty && validateForm.get('healthStatus').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="avatar">头像</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写头像" formControlName="avatar" [(ngModel)]="obj.avatar" name="avatar"
+                 id="avatar"/>
+        </nz-form-control>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">婚姻状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="marryStatusId" [(ngModel)]="obj.marryStatusId" name="marryStatusId" id="marryStatusId">
-      <nz-form-explain *ngIf="validateForm.get('marryStatusId').dirty && validateForm.get('marryStatusId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-item>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">民族</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="nationId" [(ngModel)]="obj.nationId" name="nationId" id="nationId">
-      <nz-form-explain *ngIf="validateForm.get('nationId').dirty && validateForm.get('nationId').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">V网账号</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="vmnetNo" [(ngModel)]="obj.vmnetNo" name="vmnetNo" id="vmnetNo">
-      <nz-form-explain *ngIf="validateForm.get('vmnetNo').dirty && validateForm.get('vmnetNo').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+  </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">入职日期</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="joinDate" [(ngModel)]="obj.joinDate" name="joinDate" id="joinDate">
-      <nz-form-explain *ngIf="validateForm.get('joinDate').dirty && validateForm.get('joinDate').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="name">备注</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
-      <nz-form-explain *ngIf="validateForm.get('remark').dirty && validateForm.get('remark').errors">
-        必填
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+  <div nz-row [nzGutter]="24">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-radio-group formControlName="status" id="status" [(ngModel)]="obj.status">
-        <label nz-radio [nzValue]="0">启用</label>
-        <label nz-radio [nzValue]="1">禁用</label>
-      </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
-        必选
-      </nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nationId">民族</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写民族" formControlName="nationId" [(ngModel)]="obj.nationId" name="nationId"
+                 id="nationId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="departmentId">所属部门</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写所属部门" formControlName="departmentId" [(ngModel)]="obj.departmentId"
+                 name="departmentId" id="departmentId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="birthday">生日</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写生日" formControlName="birthday" [(ngModel)]="obj.birthday" name="birthday"
+                 id="birthday"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+  </div>
+
+
+  <div nz-row [nzGutter]="24">
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="academicId">学位</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写学位" formControlName="academicId" [(ngModel)]="obj.academicId"
+                 name="academicId" id="academicId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="degreeId">学历</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写学历" formControlName="degreeId" [(ngModel)]="obj.degreeId" name="degreeId"
+                 id="degreeId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="positionId">职位</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写职位" formControlName="positionId" [(ngModel)]="obj.positionId"
+                 name="positionId" id="positionId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+  </div>
+
+
+  <div nz-row [nzGutter]="24">
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="titleId">职称</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写职称" formControlName="titleId" [(ngModel)]="obj.titleId" name="titleId"
+                 id="titleId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="typeId">人员类型</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写人员类型" formControlName="typeId" [(ngModel)]="obj.typeId" name="typeId"
+                 id="typeId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="identifyTypeId">证件类型</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写证件类型" formControlName="identifyTypeId" [(ngModel)]="obj.identifyTypeId"
+                 name="identifyTypeId" id="identifyTypeId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+  </div>
+
+
+  <div nz-row [nzGutter]="24">
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="identifyNo">证件号码</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写证件号码" formControlName="identifyNo" [(ngModel)]="obj.identifyNo"
+                 name="identifyNo" id="identifyNo"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="birthProvinceId">所属省份</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写所属省份" formControlName="birthProvinceId" [(ngModel)]="obj.birthProvinceId"
+                 name="birthProvinceId" id="birthProvinceId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+  </div>
+
+
+  <div nz-row [nzGutter]="24">
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="birthCityId">所属城市</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写所属城市" formControlName="birthCityId" [(ngModel)]="obj.birthCityId"
+                 name="birthCityId" id="birthCityId"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="policy">政治面貌</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写政治面貌" formControlName="policy" [(ngModel)]="obj.policy" name="policy"
+                 id="policy"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+    <div nz-col [nzSpan]="8">
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input placeholder="请填写状态" formControlName="status" [(ngModel)]="obj.status" name="status"
+                 id="status"/>
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+
+
+  </div>
+
 
   <nz-form-item nz-row style="margin-bottom:8px;">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">

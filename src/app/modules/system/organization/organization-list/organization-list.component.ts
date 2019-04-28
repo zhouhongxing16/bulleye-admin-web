@@ -88,7 +88,7 @@ export class OrganizationListComponent implements OnInit {
         menuId: node.origin.id,
         displayName: node.origin.title,
         status: 1,
-        leaf: node.isLeaf
+        isLeaf: node.isLeaf
       });
       if (!node.isLeaf && node.children.length > 0) {
         this.getChildLeafNode(node.children);

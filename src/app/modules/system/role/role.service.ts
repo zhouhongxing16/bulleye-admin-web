@@ -15,5 +15,15 @@ export class RoleService extends BaseService<Role> {
     view: '',
     edit: '',
     add: '',
+    getRoleMenus: '/menu/getRoleMenus',
+    getCheckedLeafMenus: '/menu/getCheckedLeafMenus',
   };
+
+  saveRoleMenus(params) {
+    return this.help.post(this.url.getRoleMenus, params);
+  }
+
+  getCheckedLeafMenus(data: any) {
+    return this.help.post(this.url.getCheckedLeafMenus, data);
+  }
 }

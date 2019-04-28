@@ -34,9 +34,11 @@
     <td>{{data.status}}</td>
     <td>{{data.created}}</td>
     <td>
+      <button title="菜单授权" (click)="addMenu(data.id)" nz-button nzType="primary" nzShape="circle"><i nz-icon
+                                                                                                     type="windows"
+                                                                                                     theme="outline"></i>
+      </button>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
-        class="anticon anticon-edit"></i></button>
-      <button title="菜单授权" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
         <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
@@ -48,3 +50,21 @@
   </tr>
   </tbody>
 </nz-table>
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" [nzWidth]="300" nzPlacement="right" nzTitle="菜单授权"
+           (nzOnClose)="close()">
+
+  <nz-tree
+    #roleMenuAuthTree
+    [nzData]="nodes"
+    nzCheckable
+    nzMultiple
+    nzExpandAll
+    [nzCheckedKeys]="defaultCheckedKeys"
+    [nzSelectedKeys]="defaultSelectedKeys"
+    (nzClick)="nzEvent($event)"
+    (nzExpandChange)="nzEvent($event)"
+    (nzCheckBoxChange)="nzEvent($event)">
+  </nz-tree>
+  <button nz-button nzType="primary"  [nzLoading]="isLoading" (click)="getSelectedNodeList()">保存</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
+</nz-drawer>
