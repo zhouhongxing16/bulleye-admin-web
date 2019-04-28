@@ -34,11 +34,11 @@ export class WxMenuEditComponent implements OnInit {
         }
       })
     ).subscribe(d => {
-      if (d.success&&d.parentId!=0) {
+      if (d.success&&d.data.parentId!=0) {
         this.obj = d.data;
       } else {
         this.obj = new WxMenu();
-        this.obj.parentId = d.id;
+        this.obj.parentId = d.data.id;
       }
     });
 
