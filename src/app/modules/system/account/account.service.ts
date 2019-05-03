@@ -15,5 +15,20 @@ export class AccountService extends BaseService<Account> {
     view: '',
     edit: '',
     add: '',
+    getAllRoles: '/role/getAllRoles',
+    getRolesByAccountId: '/role/getRolesByAccountId',
+    saveAccountRoles: '/accountrole/saveAccountRoles',
   };
+
+  getAllRoles(data: any) {
+    return this.help.post(this.url.getAllRoles, data);
+  }
+
+  getRolesByAccountId(id: string) {
+    return this.help.get(this.url.getRolesByAccountId + '/' + id);
+  }
+
+  saveAccountRoles(data: any) {
+    return this.help.post(this.url.saveAccountRoles, data);
+  }
 }

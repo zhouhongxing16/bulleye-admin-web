@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Help} from '../../../../utils/Help';
 import {RoleService} from '../role.service';
 import {Role} from '../role';
-import {NzFormatEmitEvent, NzTreeComponent} from 'ng-zorro-antd';
+import {NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-role-list',
@@ -62,6 +62,7 @@ export class RoleListComponent implements OnInit {
 
   saveRoleMenus() {
     this.isLoading = true;
+    console.log(this.selectMenus);
     this.roleService.saveRoleMenus(this.selectMenus).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
@@ -73,7 +74,7 @@ export class RoleListComponent implements OnInit {
 
   addMenu(roleId: string): void {
     this.visible = true;
-    this.roleService.saveRoleMenus({roleId: roleId}).subscribe(msg => {
+    this.roleService.getOrganizationAuthMenus({roleId: roleId}).subscribe(msg => {
       if (msg.success) {
         this.roleId = roleId;
         this.getCheckedLeafMenus(roleId);
@@ -91,11 +92,12 @@ export class RoleListComponent implements OnInit {
 
   getHalfCheckedNodeList() {
     const halfCheckedNodeList = this.roleMenuAuthTree.getHalfCheckedNodeList();
-    console.log(halfCheckedNodeList);
     halfCheckedNodeList.forEach(node => {
       this.selectMenus.push({
         roleId: this.roleId,
-        menuId: node.origin.id
+        menuId: node.origin.id,
+        status: 1,
+        isLeaf: node.isLeaf
       });
     });
     this.saveRoleMenus();
@@ -106,7 +108,9 @@ export class RoleListComponent implements OnInit {
     nodes.forEach(node => {
       this.selectMenus.push({
         roleId: this.roleId,
-        menuId: node.origin.id
+        menuId: node.origin.id,
+        status: 1,
+        isLeaf: node.isLeaf
       });
       if (!node.isLeaf && node.children.length > 0) {
         this.getChildLeafNode(node.children);
@@ -126,7 +130,6 @@ export class RoleListComponent implements OnInit {
         res.data.forEach(function (value) {
           that.defaultCheckedKeys.push(value.menuId);
         });
-        console.log(this.defaultCheckedKeys);
       }
     });
   }

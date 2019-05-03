@@ -49,25 +49,23 @@ export class AccountEditComponent implements OnInit {
 
     this.validateForm = this.formBuilder.group({
 
-      id: [null, [Validators.required]],
+      id: [null, null],
 
       username: [null, [Validators.required]],
 
-      password: [null, [Validators.required]],
+      password: [null, null],
 
       accountLocked: [null, [Validators.required]],
-
-      credentialsExpired: [null, [Validators.required]],
 
       accountExpired: [null, [Validators.required]],
 
       staffId: [null, [Validators.required]],
 
-      organizationId: [null, [Validators.required]],
+      organizationId: [null, null],
 
-      wxOpenid: [null, [Validators.required]],
+      wxOpenid: [null, null],
 
-      alipayOpenid: [null, [Validators.required]],
+      alipayOpenid: [null, null],
 
       email: [null, [Validators.required]],
 
@@ -75,13 +73,13 @@ export class AccountEditComponent implements OnInit {
 
       mobileLoginFlag: [null, [Validators.required]],
 
-      remark: [null, [Validators.required]],
+      remark: [null, null],
 
-      created: [null, [Validators.required]],
+      created: [null, null],
 
-      modified: [null, [Validators.required]],
+      modified: [null, null],
 
-      expiredDate: [null, [Validators.required]],
+      expiredDate: [null, null],
 
     });
   }

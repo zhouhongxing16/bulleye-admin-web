@@ -32,6 +32,7 @@
     <td>{{data.status}}</td>
     <td>{{data.created}}</td>
     <td>
+      <button title="选择角色" (click)="openDrawer(data.id)" nz-button nzType="primary" nzShape="circle"><i nz-icon type="team" theme="outline"></i></button>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
@@ -44,3 +45,22 @@
   </tr>
   </tbody>
 </nz-table>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" [nzWidth]="300" nzPlacement="right" nzTitle="菜单授权"
+           (nzOnClose)="close()">
+
+  <nz-select
+    style="width: 100%;"
+    nzMode="multiple"
+    nzPlaceHolder="请选择角色"
+    [(ngModel)]="listOfSelectedRole"
+    nzAllowClear
+  >
+    <ng-container *ngFor="let option of roles">
+      <nz-option [nzLabel]="option.name" [nzValue]="option.id" *ngIf="isNotSelectedRole(option)"></nz-option>
+    </ng-container>
+  </nz-select>
+  <nz-divider></nz-divider>
+  <button nz-button nzType="primary"  [nzLoading]="isLoading" (click)="saveSelectedRoles()">保存</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
+</nz-drawer>

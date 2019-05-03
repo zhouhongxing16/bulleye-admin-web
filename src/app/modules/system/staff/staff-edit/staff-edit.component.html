@@ -259,17 +259,18 @@
       </nz-form-item>
     </div>
 
-
-    <div nz-col [nzSpan]="8">
-      <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写状态" formControlName="status" [(ngModel)]="obj.status" name="status"
-                 id="status"/>
-        </nz-form-control>
-
-      </nz-form-item>
-    </div>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
+          <label nz-radio [nzValue]="0">启用</label>
+          <label nz-radio [nzValue]="1">禁用</label>
+        </nz-radio-group>
+        <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
+          必选
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
 
 
   </div>

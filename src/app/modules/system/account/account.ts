@@ -6,11 +6,13 @@ export class Account {
 
   password: string;
 
-  accountLocked: string;
+  email: string;
 
-  credentialsExpired: string;
+  mobileLoginFlag: boolean;
 
-  accountExpired: string;
+  accountLocked: boolean;
+
+  accountExpired = true;
 
   staffId: string;
 
@@ -20,17 +22,14 @@ export class Account {
 
   alipayOpenid: string;
 
-  email: string;
-
-  status: string;
-
-  mobileLoginFlag: string;
+  status = 1;
 
   remark: string;
-
-  created: string;
 
   modified: string;
 
   expiredDate: string;
+
+  created: string;
+
 }

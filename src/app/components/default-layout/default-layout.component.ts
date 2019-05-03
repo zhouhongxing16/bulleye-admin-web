@@ -39,7 +39,7 @@ export class DefaultLayoutComponent implements OnInit {
       nzContent: '<b>注销后需要重新登录</b>',
       nzOnOk: () => {
         localStorage.removeItem('token');
-        console.log('OK');
+        window.location.reload();
       }
     });
   }

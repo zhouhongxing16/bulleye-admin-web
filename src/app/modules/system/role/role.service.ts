@@ -15,15 +15,21 @@ export class RoleService extends BaseService<Role> {
     view: '',
     edit: '',
     add: '',
-    getRoleMenus: '/menu/getRoleMenus',
-    getCheckedLeafMenus: '/menu/getCheckedLeafMenus',
+    getAllMenus: '/menu/getAllMenus',
+    getListByParams: '/rolemenu/getListByParams',
+    createRoleMenu: '/rolemenu/createRoleMenu',
+    getOrganizationAuthMenus: '/menu/getOrganizationAuthMenus',
   };
 
+  getOrganizationAuthMenus(params) {
+    return this.help.post(this.url.getOrganizationAuthMenus, params);
+  }
+
   saveRoleMenus(params) {
-    return this.help.post(this.url.getRoleMenus, params);
+    return this.help.post(this.url.createRoleMenu, params);
   }
 
   getCheckedLeafMenus(data: any) {
-    return this.help.post(this.url.getCheckedLeafMenus, data);
+    return this.help.post(this.url.getListByParams, data);
   }
 }

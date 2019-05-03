@@ -16,7 +16,7 @@ export class OrganizationService extends BaseService<Organization> {
     edit: '',
     add: '',
     createOrganizationMenu: '/organizationmenu/createOrganizationMenu',
-    getCheckedLeafMenus: '/organizationmenu/getListByParams',
+    getListByParams: '/organizationmenu/getListByParams',
   };
 
   saveOrganizationMenus(data: any) {
@@ -24,6 +24,6 @@ export class OrganizationService extends BaseService<Organization> {
   }
 
   getCheckedLeafMenus(data: any) {
-    return this.help.post(this.url.getCheckedLeafMenus, data);
+    return this.help.post(this.url.getListByParams, data);
   }
 }

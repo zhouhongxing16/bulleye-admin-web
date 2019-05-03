@@ -4,15 +4,16 @@ export class Role {
 
   organizationId: string;
 
-  code: string;
-
   name: string;
+
+  code: string;
 
   dataAuthFlag: string;
 
-  describe: string;
+  remark: string;
 
   status: string;
 
   created: string;
+
 }

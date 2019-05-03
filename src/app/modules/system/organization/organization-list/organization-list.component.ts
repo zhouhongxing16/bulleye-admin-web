@@ -17,7 +17,7 @@ export class OrganizationListComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   isLoading = false;
-  visible = false;
+  drawerVisible = false;
   organizationId: string;
   nodes = [];
   selectMenus = [];
@@ -36,7 +36,7 @@ export class OrganizationListComponent implements OnInit {
   }
 
   addMenu(organizationId: string): void {
-    this.visible = true;
+    this.drawerVisible = true;
     this.menuService.getOrganizationMenus({organizationId: organizationId}).subscribe(msg => {
       if (msg.success) {
         this.organizationId = organizationId;
@@ -97,7 +97,7 @@ export class OrganizationListComponent implements OnInit {
   }
 
   close(): void {
-    this.visible = false;
+    this.drawerVisible = false;
   }
 
   getCheckedLeafMenus(organizationId: string): void {
