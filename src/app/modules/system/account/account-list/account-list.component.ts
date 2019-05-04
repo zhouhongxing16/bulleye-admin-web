@@ -13,7 +13,7 @@ export class AccountListComponent implements OnInit {
   total = 0;
   pageIndex = 1;
   pageSize = 10;
-  loading = false;
+  isLoading = false;
   roles = [];
   drawerVisible = false;
   listOfSelectedRole = [];
@@ -33,13 +33,13 @@ export class AccountListComponent implements OnInit {
     if (reset) {
       this.pageIndex = 1;
     }
-    this.loading = true;
+    this.isLoading = true;
     this.accountService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
-      this.loading = false;
+      this.isLoading = false;
       this.rows = data.rows;
       this.total = data.total;
     }, err => {
-      this.loading = false;
+      this.isLoading = false;
       this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
     });
   }

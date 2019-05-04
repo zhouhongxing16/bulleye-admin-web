@@ -46,7 +46,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   getMenu() {
     const that = this;
-    this.help.post('/menu/getAllMenus', null).subscribe(msg => {
+    this.help.post('/menu/getMenusByAccountId', null).subscribe(msg => {
       if (msg.success) {
         that.menus = msg.data;
       } else {
