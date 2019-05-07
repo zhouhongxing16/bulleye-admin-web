@@ -5,9 +5,9 @@ import {WxMenuListComponent} from './wx-menu-list/wx-menu-list.component';
 
 const routes: Routes = [
   {path: 'list', component: WxMenuListComponent},
-  {path: 'edit/:id', component: WxMenuEditComponent},
+  {path: 'edit', component: WxMenuEditComponent},
   {path: 'add', component: WxMenuEditComponent},
-  {path: 'addChild/:id', component: WxMenuEditComponent}
+  {path: 'addChild', component: WxMenuEditComponent}
 ];
 
 

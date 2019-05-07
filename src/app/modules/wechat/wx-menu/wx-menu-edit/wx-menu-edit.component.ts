@@ -17,6 +17,7 @@ export class WxMenuEditComponent implements OnInit {
   validateForm: FormGroup;
   isLoading = false;
   obj: WxMenu = new WxMenu();
+  type : string;
 
   constructor(private formBuilder: FormBuilder,
               private wxMenuService: WxMenuService,
@@ -25,7 +26,8 @@ export class WxMenuEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
+    this.type = this.route.snapshot.queryParams['type'];
+    this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
           return this.wxMenuService.getById(params.get('id'));
@@ -34,12 +36,18 @@ export class WxMenuEditComponent implements OnInit {
         }
       })
     ).subscribe(d => {
-      if (d.success&&d.data.parentId!=0) {
-        this.obj = d.data;
-      } else {
+      if(this.type == 'addOne'){
+        this.obj = new WxMenu();
+        this.obj.parentId ='0';
+        this.obj.accountId = this.route.snapshot.queryParams['accountId'];
+      }else if(this.type == 'addTwo'){
         this.obj = new WxMenu();
         this.obj.parentId = d.data.id;
+        this.obj.accountId = d.data.accountId;
+      }else if(this.type == 'edit'){
+        this.obj = d.data;
       }
+      console.log(this.obj);
     });
 
     this.validateForm = this.formBuilder.group({
@@ -50,7 +58,10 @@ export class WxMenuEditComponent implements OnInit {
       mediaId: [null],
       appId: [null],
       pagePath: [null],
-      remark: [null]
+      remark: [null],
+      parentId: [null],
+      accountId: [null],
+      id: [null]
     });
   }
 

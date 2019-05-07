@@ -74,7 +74,9 @@
 
   <!--隐藏域-->
   <nz-form-item>
-      <input nz-input formControlName="parentId" type="hidden" name="parentId" id="parentId" [(ngModel)]="obj.parentId">
+    <input nz-input formControlName="id" type="hidden" name="id" id="id" [(ngModel)]="obj.id">
+    <input nz-input formControlName="parentId" type="hidden" name="parentId" id="parentId" [(ngModel)]="obj.parentId">
+    <input nz-input formControlName="accountId" type="hidden" name="accountId" id="accountId" [(ngModel)]="obj.accountId">
   </nz-form-item>
 
   <nz-form-item nz-row style="margin-bottom:8px;">

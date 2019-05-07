@@ -5,7 +5,7 @@
       <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
-  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="primary" routerLink="../add" [queryParams]="{type: 'addOne', accountId: chooseWxAccountId}"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
 
@@ -32,9 +32,9 @@
         <td>{{item.type}}</td>
         <td>{{item.author}}</td>
         <td>
-          <button *ngIf="item.parentId==0" title="增加数据" [routerLink]="['../addChild',data.id]" nz-button nzType="primary" nzShape="circle"><i
+          <button *ngIf="item.parentId==0" title="增加数据" [routerLink]="['../addChild']" [queryParams]="{id: data.id, type: 'addTwo'}" nz-button nzType="primary" nzShape="circle"><i
             class="anticon anticon-add"></i></button>
-          <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+          <button title="修改数据" [routerLink]="['../edit']" [queryParams]="{id: item.id, type: 'edit'}" nz-button nzType="primary" nzShape="circle"><i
             class="anticon anticon-edit"></i></button>
           <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
             <button nz-popconfirm title="删除数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
