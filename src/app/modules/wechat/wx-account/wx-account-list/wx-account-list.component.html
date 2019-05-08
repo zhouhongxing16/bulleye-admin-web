@@ -34,7 +34,10 @@
     <td>{{data.sourceId}}</td>
     <td>{{data.appId}}</td>
     <td>{{data.appSecret}}</td>
-    <td>{{data.status}}</td>
+    <td>
+        <ng-container *ngIf="data.status=='0'">启用</ng-container>
+        <ng-container *ngIf="data.status=='1'">禁用</ng-container>
+    </td>
     <td>{{data.created}}</td>
     <td>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i

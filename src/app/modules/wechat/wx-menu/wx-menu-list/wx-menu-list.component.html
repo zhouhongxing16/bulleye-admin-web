@@ -30,10 +30,13 @@
           {{item.name}}
         </td>
         <td>{{item.type}}</td>
-        <td>{{item.author}}</td>
+        <td>
+            <ng-container *ngIf="item.author=='1'">是</ng-container>
+            <ng-container *ngIf="item.author=='2'">否</ng-container>
+        </td>
         <td>
           <button *ngIf="item.parentId==0" title="增加数据" [routerLink]="['../addChild']" [queryParams]="{id: data.id, type: 'addTwo'}" nz-button nzType="primary" nzShape="circle"><i
-            class="anticon anticon-add"></i></button>
+            class="anticon anticon-save"></i></button>
           <button title="修改数据" [routerLink]="['../edit']" [queryParams]="{id: item.id, type: 'edit'}" nz-button nzType="primary" nzShape="circle"><i
             class="anticon anticon-edit"></i></button>
           <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">

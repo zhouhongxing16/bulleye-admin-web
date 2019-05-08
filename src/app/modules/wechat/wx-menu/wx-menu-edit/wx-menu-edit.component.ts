@@ -17,7 +17,7 @@ export class WxMenuEditComponent implements OnInit {
   validateForm: FormGroup;
   isLoading = false;
   obj: WxMenu = new WxMenu();
-  type : string;
+  type: string;
 
   constructor(private formBuilder: FormBuilder,
               private wxMenuService: WxMenuService,
@@ -36,15 +36,15 @@ export class WxMenuEditComponent implements OnInit {
         }
       })
     ).subscribe(d => {
-      if(this.type == 'addOne'){
+      if (this.type == 'addOne') {
         this.obj = new WxMenu();
-        this.obj.parentId ='0';
+        this.obj.parentId = '0';
         this.obj.accountId = this.route.snapshot.queryParams['accountId'];
-      }else if(this.type == 'addTwo'){
+      } else if (this.type == 'addTwo') {
         this.obj = new WxMenu();
         this.obj.parentId = d.data.id;
         this.obj.accountId = d.data.accountId;
-      }else if(this.type == 'edit'){
+      } else if (this.type == 'edit') {
         this.obj = d.data;
       }
       console.log(this.obj);
@@ -61,7 +61,9 @@ export class WxMenuEditComponent implements OnInit {
       remark: [null],
       parentId: [null],
       accountId: [null],
-      id: [null]
+      id: [null],
+      keyValue: [null],
+      url: [null]
     });
   }
 
