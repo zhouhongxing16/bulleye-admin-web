@@ -67,14 +67,29 @@
 
 
     <div nz-col [nzSpan]="8">
-      <nz-form-item nzFlex>
+      <!--<nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="avatar">头像</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写头像" formControlName="avatar" [(ngModel)]="obj.avatar" name="avatar"
                  id="avatar"/>
         </nz-form-control>
 
-      </nz-form-item>
+      </nz-form-item>-->
+      <nz-upload
+        class="avatar-uploader"
+        nzAction="/file/uploadfile"
+        nzName="fileUpload"
+        nzListType="picture-card"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)"
+      >
+        <ng-container *ngIf="!avatarUrl">
+          <i class="upload-icon" nz-icon [type]="loading ? 'loading' : 'plus'"></i>
+          <div class="ant-upload-text">Upload</div>
+        </ng-container>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
+      </nz-upload>
     </div>
 
 
