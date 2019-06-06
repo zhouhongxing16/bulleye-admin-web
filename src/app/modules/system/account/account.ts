@@ -8,11 +8,11 @@ export class Account {
 
   email: string;
 
-  mobileLoginFlag: boolean;
+  mobileLoginFlag = false;
 
-  accountLocked: boolean;
+  accountLocked = false;
 
-  accountExpired = true;
+  accountExpired = false;
 
   staffId: string;
 

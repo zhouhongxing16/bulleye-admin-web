@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit {
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
+      captcha: [null, [Validators.required]],
+      remember: [null, null],
     });
   }
 

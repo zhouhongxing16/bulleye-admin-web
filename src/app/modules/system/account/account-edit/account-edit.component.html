@@ -35,7 +35,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="accountLocked">是否锁定</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-switch [ngModel]="obj.accountLocked" formControlName="accountLocked" name="accountLocked" id="accountLocked" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+      <nz-switch [(ngModel)]="obj.accountLocked" formControlName="accountLocked" name="accountLocked" id="accountLocked" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
     </nz-form-control>
   </nz-form-item>
 
@@ -43,14 +43,14 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mobileLoginFlag">是否开通手机号登录</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-switch [ngModel]="obj.mobileLoginFlag" formControlName="mobileLoginFlag" name="mobileLoginFlag" id="mobileLoginFlag" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+      <nz-switch  [(ngModel)]="obj.mobileLoginFlag" formControlName="mobileLoginFlag" name="mobileLoginFlag" id="mobileLoginFlag" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="accountExpired">是否过期</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-switch  [ngModel]="obj.accountExpired" formControlName="accountExpired"  name="accountExpired" id="accountExpired" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+      <nz-switch   [(ngModel)]="obj.accountExpired" formControlName="accountExpired"  name="accountExpired" id="accountExpired" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
     </nz-form-control>
   </nz-form-item>
 
@@ -62,7 +62,7 @@
       <nz-date-picker formControlName="expiredDate"  [(ngModel)]="obj.expiredDate" id="expiredDate"
         nzShowTime
         nzFormat="yyyy-MM-dd HH:mm:ss"
-        nzPlaceHolder="Select Time"
+        nzPlaceHolder="选择过期时间"
       ></nz-date-picker>
       <nz-form-explain *ngIf="validateForm.get('expiredDate').dirty && validateForm.get('expiredDate').errors">
         必填
@@ -75,7 +75,7 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
     </nz-form-control>
-  </nz-form-item>{{obj|json}}
+  </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>

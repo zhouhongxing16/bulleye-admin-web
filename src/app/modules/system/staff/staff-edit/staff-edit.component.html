@@ -1,7 +1,23 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
-
   <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="6" nzOffset="2">
+      <nz-upload
+        class="avatar-uploader"
+        nzAction="/file/uploadfile"
+        nzName="fileUpload"
+        nzListType="picture-card"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)"
+      >
+        <ng-container *ngIf="!obj.avatar">
+          <i class="upload-icon" nz-icon [type]="isLoading ? 'loading' : 'plus'"></i>
+          <div class="ant-upload-text">头像</div>
+        </ng-container>
+        <img *ngIf="obj.avatar" width="150px" height="150px" [src]="obj.avatar" class="avatar"/>
+      </nz-upload>
+    </div>
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
@@ -38,11 +54,6 @@
     </div>
 
 
-  </div>
-
-
-  <div nz-row [nzGutter]="24">
-
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mobile">电话号码</nz-form-label>
@@ -53,7 +64,6 @@
 
       </nz-form-item>
     </div>
-
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
@@ -67,37 +77,15 @@
 
 
     <div nz-col [nzSpan]="8">
-      <!--<nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="avatar">头像</nz-form-label>
+      <nz-form-item nzFlex>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="identifyNo">证件号码</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写头像" formControlName="avatar" [(ngModel)]="obj.avatar" name="avatar"
-                 id="avatar"/>
+          <input nz-input placeholder="请填写证件号码" formControlName="identifyNo" [(ngModel)]="obj.identifyNo"
+                 name="identifyNo" id="identifyNo"/>
         </nz-form-control>
 
-      </nz-form-item>-->
-      <nz-upload
-        class="avatar-uploader"
-        nzAction="/file/uploadfile"
-        nzName="fileUpload"
-        nzListType="picture-card"
-        [nzShowUploadList]="false"
-        [nzBeforeUpload]="beforeUpload"
-        (nzChange)="handleChange($event)"
-      >
-        <ng-container *ngIf="!avatarUrl">
-          <i class="upload-icon" nz-icon [type]="loading ? 'loading' : 'plus'"></i>
-          <div class="ant-upload-text">Upload</div>
-        </ng-container>
-        <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
-      </nz-upload>
+      </nz-form-item>
     </div>
-
-
-  </div>
-
-
-  <div nz-row [nzGutter]="24">
-
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
@@ -106,10 +94,8 @@
           <input nz-input placeholder="请填写民族" formControlName="nationId" [(ngModel)]="obj.nationId" name="nationId"
                  id="nationId"/>
         </nz-form-control>
-
       </nz-form-item>
     </div>
-
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
@@ -127,46 +113,16 @@
       <nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="birthday">生日</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写生日" formControlName="birthday" [(ngModel)]="obj.birthday" name="birthday"
-                 id="birthday"/>
+          <nz-date-picker placeholder="请填写生日" formControlName="birthday" [(ngModel)]="obj.birthday" name="birthday"
+                          id="birthday"></nz-date-picker>
         </nz-form-control>
 
       </nz-form-item>
     </div>
 
-
-  </div>
-
-
-  <div nz-row [nzGutter]="24">
-
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="academicId">学位</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写学位" formControlName="academicId" [(ngModel)]="obj.academicId"
-                 name="academicId" id="academicId"/>
-        </nz-form-control>
-
-      </nz-form-item>
-    </div>
-
-
-    <div nz-col [nzSpan]="8">
-      <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="degreeId">学历</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写学历" formControlName="degreeId" [(ngModel)]="obj.degreeId" name="degreeId"
-                 id="degreeId"/>
-        </nz-form-control>
-
-      </nz-form-item>
-    </div>
-
-
-    <div nz-col [nzSpan]="8">
-      <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="positionId">职位</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="positionId">职位</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写职位" formControlName="positionId" [(ngModel)]="obj.positionId"
                  name="positionId" id="positionId"/>
@@ -176,14 +132,9 @@
     </div>
 
 
-  </div>
-
-
-  <div nz-row [nzGutter]="24">
-
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="titleId">职称</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="titleId">职称</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写职称" formControlName="titleId" [(ngModel)]="obj.titleId" name="titleId"
                  id="titleId"/>
@@ -195,7 +146,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="typeId">人员类型</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="typeId">人员类型</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写人员类型" formControlName="typeId" [(ngModel)]="obj.typeId" name="typeId"
                  id="typeId"/>
@@ -204,39 +155,20 @@
       </nz-form-item>
     </div>
 
-
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="identifyTypeId">证件类型</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写证件类型" formControlName="identifyTypeId" [(ngModel)]="obj.identifyTypeId"
-                 name="identifyTypeId" id="identifyTypeId"/>
-        </nz-form-control>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="typeId">入职日期</nz-form-label>
 
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-date-picker placeholder="请填入职日期" formControlName="joinDate" [(ngModel)]="obj.joinDate" name="joinDate"
+                 id="joinDate"></nz-date-picker>
+        </nz-form-control>
       </nz-form-item>
     </div>
 
-
-  </div>
-
-
-  <div nz-row [nzGutter]="24">
-
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="identifyNo">证件号码</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写证件号码" formControlName="identifyNo" [(ngModel)]="obj.identifyNo"
-                 name="identifyNo" id="identifyNo"/>
-        </nz-form-control>
-
-      </nz-form-item>
-    </div>
-
-
-    <div nz-col [nzSpan]="8">
-      <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="birthProvinceId">所属省份</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="birthProvinceId">所属省份</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写所属省份" formControlName="birthProvinceId" [(ngModel)]="obj.birthProvinceId"
                  name="birthProvinceId" id="birthProvinceId"/>
@@ -245,15 +177,9 @@
       </nz-form-item>
     </div>
 
-
-  </div>
-
-
-  <div nz-row [nzGutter]="24">
-
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="birthCityId">所属城市</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="birthCityId">所属城市</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写所属城市" formControlName="birthCityId" [(ngModel)]="obj.birthCityId"
                  name="birthCityId" id="birthCityId"/>
@@ -265,7 +191,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="policy">政治面貌</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="policy">政治面貌</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写政治面貌" formControlName="policy" [(ngModel)]="obj.policy" name="policy"
                  id="policy"/>
@@ -274,19 +200,20 @@
       </nz-form-item>
     </div>
 
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
-        <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
-          <label nz-radio [nzValue]="0">启用</label>
-          <label nz-radio [nzValue]="1">禁用</label>
-        </nz-radio-group>
-        <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
-          必选
-        </nz-form-explain>
-      </nz-form-control>
-    </nz-form-item>
-
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status">
+            <label nz-radio [nzValue]="0">启用</label>
+            <label nz-radio [nzValue]="1">禁用</label>
+          </nz-radio-group>
+          <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
+            必选
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
 
   </div>
 

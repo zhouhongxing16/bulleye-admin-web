@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Location} from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 @Injectable()
 export class Help {
   private loadId: any;
   public isCollapsed = false;
 
-  constructor(private http: HttpClient, private message: NzMessageService, private location: Location) {
+  constructor(private http: HttpClient, private message: NzMessageService, private location: Location, private datePipe: DatePipe) {
   }
 
   back() {
@@ -39,6 +40,10 @@ export class Help {
 
   post(url: string, params: any): Observable<any> {
     return this.http.post(url, params);
+  }
+
+  formatDate(date, format) {
+    return this.datePipe.transform(date, format);
   }
 
   isEmpty(val): boolean {

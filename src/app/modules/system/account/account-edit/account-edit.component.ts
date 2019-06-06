@@ -59,6 +59,8 @@ export class AccountEditComponent implements OnInit {
 
       accountExpired: [null, [Validators.required]],
 
+      mobileLoginFlag: [null, [Validators.required]],
+
       staffId: [null, [Validators.required]],
 
       organizationId: [null, null],
@@ -70,8 +72,6 @@ export class AccountEditComponent implements OnInit {
       email: [null, [Validators.required]],
 
       status: [null, [Validators.required]],
-
-      mobileLoginFlag: [null, [Validators.required]],
 
       remark: [null, null],
 

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, NgForm,
   Validators
 } from '@angular/forms';
 import {StaffService} from '../staff.service';
@@ -9,7 +9,8 @@ import {Help} from '../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {Staff} from '../Staff';
-import {of} from 'rxjs';
+import {Observable, Observer, of} from 'rxjs';
+import {UploadFile} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-staff-edit',
@@ -17,7 +18,6 @@ import {of} from 'rxjs';
   styleUrls: ['./staff-edit.component.scss']
 })
 export class StaffEditComponent implements OnInit {
-
 
   validateForm: FormGroup;
   isLoading = false;
@@ -61,21 +61,21 @@ export class StaffEditComponent implements OnInit {
 
       email: [null, [Validators.required]],
 
-      avatar: [null, [Validators.required]],
+      avatar: [null, null],
 
       departmentId: [null, [Validators.required]],
 
       birthday: [null, [Validators.required]],
 
-      academicId: [null, [Validators.required]],
+      academicId: [null, null],
 
-      degreeId: [null, [Validators.required]],
+      degreeId: [null, null],
 
-      positionId: [null, [Validators.required]],
+      positionId: [null, null],
 
-      titleId: [null, [Validators.required]],
+      titleId: [null, null],
 
-      typeId: [null, [Validators.required]],
+      typeId: [null, null],
 
       identifyTypeId: [null, null],
 
@@ -94,14 +94,80 @@ export class StaffEditComponent implements OnInit {
       joinDate: [null, null],
 
       remark: [null, null],
-
-      created: [null, null],
-
     });
+  }
+
+
+  beforeUpload = (file: File) => {
+    return new Observable((observer: Observer<boolean>) => {
+      const isJPG = file.type === 'image/jpeg';
+      if (!isJPG) {
+        this.help.showMessage('error', '只能上传 JPG 文件');
+        observer.complete();
+        return;
+      }
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.help.showMessage('error', '文件大小不能超过2MB!');
+        observer.complete();
+        return;
+      }
+      // check height
+      this.checkImageDimension(file).then(dimensionRes => {
+        if (!dimensionRes) {
+          this.help.showMessage('error', 'Image only 300x300 above');
+          observer.complete();
+          return;
+        }
+
+        observer.next(isJPG && isLt2M && dimensionRes);
+        observer.complete();
+      });
+    });
+  };
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+
+  private checkImageDimension(file: File): Promise<boolean> {
+    return new Promise(resolve => {
+      const img = new Image(); // create image
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
+        window.URL.revokeObjectURL(img.src!);
+        resolve(width === height && width >= 300);
+      };
+    });
+  }
+
+  handleChange(info: { file: UploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        this.isLoading = true;
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.isLoading = false;
+          this.obj.avatar = info.file.response.url;
+        });
+        break;
+      case 'error':
+        this.help.showMessage('error', '网络错误！');
+        this.isLoading = false;
+        break;
+    }
   }
 
   submitForm() {
     this.isLoading = true;
+    this.obj.birthday = this.help.formatDate(this.obj.birthday, 'yyyy-MM-dd');
+    this.obj.joinDate = this.help.formatDate(this.obj.joinDate, 'yyyy-MM-dd');
     this.staffService.saveOrUpdateData(this.obj).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
