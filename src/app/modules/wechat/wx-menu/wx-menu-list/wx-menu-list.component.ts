@@ -29,9 +29,9 @@ export class WxMenuListComponent implements OnInit {
   }
 
   getWxaccount() {
-    this.wxAccountService.select(new WxAccount()).subscribe(data => {
-      console.log(data.rows);
-      this.wxAccounts = data.rows;
+    this.wxAccountService.getListByParams({}).subscribe(data => {
+      console.log(data.data);
+      this.wxAccounts = data.data;
       this.getWxMenu(this.wxAccounts[0].id);
     }, err => {
 

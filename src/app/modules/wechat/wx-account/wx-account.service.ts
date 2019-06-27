@@ -19,16 +19,10 @@ export class WxAccountService extends BaseService<WxAccount> {
     view: '',
     edit: '',
     add: '',
+    getListByParams: '/wxaccount/getListByParams',
   };
 
-  select(wxAccount: WxAccount): Observable<any> {
-    return this.help.post(`${this.url.select}`, wxAccount).pipe(
-      map(res => {
-        this.data = {
-          rows: res.list,
-          total: res.list.length
-        };
-        return this.data;
-      }));
+  getListByParams(data: any){
+    return this.help.post(this.url.getListByParams, data);
   }
 }
