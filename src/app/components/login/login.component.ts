@@ -16,15 +16,15 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
-
-  requiredChange(type: string): void{
-    if(type=='account'){
+  isLoading = false;
+  requiredChange(type: string): void {
+    if (type === 'account') {
       this.validateForm.get('username').clearValidators();
       this.validateForm.get('password').clearValidators();
 
       this.validateForm.get('username')!.markAsPristine();
       this.validateForm.get('password')!.markAsPristine();
-    }else if(type=='phone'){
+    } else if (type === 'phone') {
       this.validateForm.get('mobile').setValidators(Validators.required);
       this.validateForm.get('captcha').setValidators(Validators.required);
 
@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    console.log();
     if (this.validateForm.valid) {
       this.help.post('/login', this.validateForm.value).subscribe(msg => {
         if (msg.success) {

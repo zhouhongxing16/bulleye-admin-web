@@ -33,7 +33,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" role="form">
   <nz-tabset [nzAnimated]="false" class="tabs" >
     <nz-tab [nzTitle]="'账号密码登录'" (nzClick)="requiredChange('account')">
-      <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg"></nz-alert>
+<!--      <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg"></nz-alert>-->
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
@@ -87,9 +87,9 @@
     <nz-col [nzSpan]="12">
       <label nz-checkbox id="remember" name="remember">自动登录</label>
     </nz-col>
-    <nz-col [nzSpan]="12" class="text-right">
-      <a class="forgot" (click)="help.message('error','请找欧阳锋')">忘记密码</a>
-    </nz-col>
+    <!--<nz-col [nzSpan]="12" class="text-right">
+      <a class="forgot" (click)="help.showMessage('error','请找欧阳锋')">忘记密码</a>
+    </nz-col>-->
   </nz-form-item>
   <nz-form-item>
     <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="isLoading" nzBlock>
@@ -99,9 +99,9 @@
 </form>
 <div class="other">
   其它登录方式
-  <i nz-tooltip="in fact Auth0 via window" (click)="open('auth0', 'window')" nz-icon type="alipay-circle"
+  <!-- <i nz-tooltip="in fact Auth0 via window" (click)="open('auth0', 'window')" nz-icon type="alipay-circle"
      class="icon"></i>
-  <i nz-tooltip="in fact Github via redirect" (click)="open('github')" nz-icon type="taobao-circle" class="icon"></i>
-  <i (click)="open('weibo', 'window')" nz-icon type="weibo-circle" class="icon"></i>
+ <i nz-tooltip="in fact Github via redirect" (click)="open('github')" nz-icon type="taobao-circle" class="icon"></i>
+  <i (click)="open('weibo', 'window')" nz-icon type="weibo-circle" class="icon"></i>-->
   <a class="register" routerLink="/passport/register">注册</a>
 </div>
