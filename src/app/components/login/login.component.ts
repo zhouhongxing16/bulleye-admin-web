@@ -17,6 +17,22 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
 
+  requiredChange(type: string): void{
+    if(type=='account'){
+      this.validateForm.get('username').clearValidators();
+      this.validateForm.get('password').clearValidators();
+
+      this.validateForm.get('username')!.markAsPristine();
+      this.validateForm.get('password')!.markAsPristine();
+    }else if(type=='phone'){
+      this.validateForm.get('mobile').setValidators(Validators.required);
+      this.validateForm.get('captcha').setValidators(Validators.required);
+
+      this.validateForm.get('mobile')!.markAsDirty();
+      this.validateForm.get('captcha')!.markAsDirty();
+    }
+  }
+
   submitForm(): void {
     const that = this;
     for (const i in this.validateForm.controls) {
@@ -46,10 +62,15 @@ export class LoginComponent implements OnInit {
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      mobile: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      remember: [null, null],
+      mobile: [null],
+      captcha: [null],
     });
+
+    this.validateForm.get('username').clearValidators();
+    this.validateForm.get('password').clearValidators();
+
+    this.validateForm.get('username')!.markAsPristine();
+    this.validateForm.get('password')!.markAsPristine();
   }
 
 }
