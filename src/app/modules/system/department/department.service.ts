@@ -1,7 +1,4 @@
-import { Injectable } from '@angular/core';
-import {Help} from '../../../utils/Help';
-import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
 import {Department} from './department';
 import {BaseService} from '../../../utils/base.service';
 

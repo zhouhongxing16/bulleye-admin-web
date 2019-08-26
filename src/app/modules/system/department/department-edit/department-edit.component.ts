@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { DepartmentService} from '../department.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DepartmentService} from '../department.service';
 import {Help} from '../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import { Department} from '../Department';
+import {Department} from '../Department';
 import {of} from 'rxjs';
 
 @Component({

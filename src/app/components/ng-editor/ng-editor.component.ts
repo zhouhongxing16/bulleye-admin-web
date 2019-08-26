@@ -24,11 +24,11 @@ export class NgEditorComponent implements OnInit {
 
   ngOnInit() {
   }
+
   /**
    * change
    */
   public change() {
-    console.log(this.content)
     this.contentChange.emit(this.content);
   }
 
