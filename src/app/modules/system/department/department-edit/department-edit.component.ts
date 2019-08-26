@@ -49,7 +49,7 @@ export class DepartmentEditComponent implements OnInit {
 
     this.validateForm = this.formBuilder.group({
 
-      id: [null, [Validators.required]],
+      id: [null, null],
 
       organizationId: [null, [Validators.required]],
 
@@ -59,11 +59,13 @@ export class DepartmentEditComponent implements OnInit {
 
       typeId: [null, [Validators.required]],
 
-      remark: [null, [Validators.required]],
+      remark: [null, null],
 
       status: [null, [Validators.required]],
 
-      created: [null, [Validators.required]],
+      brief: [null, null],
+
+      created: [null, null],
 
     });
   }

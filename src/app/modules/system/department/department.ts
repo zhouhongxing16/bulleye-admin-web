@@ -13,5 +13,7 @@ export class Department {
 
   status: string;
 
+  brief: string;
+
   created: string;
 }
