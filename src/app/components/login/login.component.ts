@@ -17,6 +17,9 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   isLoading = false;
+  count = 0;
+  interval$: any;
+
   requiredChange(type: string): void {
     if (type === 'account') {
       this.validateForm.get('username').clearValidators();
@@ -72,4 +75,33 @@ export class LoginComponent implements OnInit {
     this.validateForm.get('password')!.markAsPristine();
   }
 
+  getCaptcha() {
+    if (this.validateForm.get('mobile').invalid) {
+      this.validateForm.get('mobile').markAsDirty({onlySelf: true});
+      this.validateForm.get('mobile').updateValueAndValidity({onlySelf: true});
+      return;
+    } else {
+      this.sendVerificationCode();
+      this.count = 59;
+      this.interval$ = setInterval(() => {
+        this.count -= 1;
+        if (this.count <= 0) {
+          clearInterval(this.interval$);
+        }
+      }, 1000);
+    }
+  }
+
+  sendVerificationCode() {
+    const mobile = this.validateForm.get('mobile').value;
+    this.help.post('/message/sendVerificationCode', {mobiles: mobile}).subscribe((msg: any) => {
+      if (msg.success) {
+        this.help.showMessage('success', msg.msg);
+      }
+    });
+    console.log(this.validateForm.get('mobile').value);
+  }
 }
+
+
+
