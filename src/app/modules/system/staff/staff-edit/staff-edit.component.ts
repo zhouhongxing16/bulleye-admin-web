@@ -111,7 +111,7 @@ export class StaffEditComponent implements OnInit {
       // check height
       this.checkImageDimension(file).then(dimensionRes => {
         if (!dimensionRes) {
-          this.help.showMessage('error', 'Image only 300x300 above');
+          this.help.showMessage('error', '分辨率300x300以上');
           observer.complete();
           return;
         }
@@ -120,7 +120,7 @@ export class StaffEditComponent implements OnInit {
         observer.complete();
       });
     });
-  };
+  }
 
   private getBase64(img: File, callback: (img: string) => void): void {
     const reader = new FileReader();
