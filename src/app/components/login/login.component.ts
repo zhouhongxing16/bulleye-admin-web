@@ -19,32 +19,66 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   count = 0;
   interval$: any;
+  type = 'account';
+
+
+  constructor(private fb: FormBuilder, private help: Help, private router: Router, private message: NzMessageService) {
+    this.validateForm = this.fb.group({
+      username: [null, [Validators.required, Validators.minLength(2)]],
+      password: [null, Validators.required],
+      mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      captcha: [null, [Validators.required]],
+      remember: [true],
+    });
+  }
+
+  get username() {
+    return this.validateForm.controls.username;
+  }
+
+  get password() {
+    return this.validateForm.controls.password;
+  }
+
+  get mobile() {
+    return this.validateForm.controls.mobile;
+  }
+
+  get captcha() {
+    return this.validateForm.controls.captcha;
+  }
+
+  ngOnInit(): void {
+    console.log('login');
+  }
 
   requiredChange(type: string): void {
-    if (type === 'account') {
-      this.validateForm.get('username').clearValidators();
-      this.validateForm.get('password').clearValidators();
-
-      this.validateForm.get('username')!.markAsPristine();
-      this.validateForm.get('password')!.markAsPristine();
-    } else if (type === 'phone') {
-      this.validateForm.get('mobile').setValidators(Validators.required);
-      this.validateForm.get('captcha').setValidators(Validators.required);
-
-      this.validateForm.get('mobile')!.markAsDirty();
-      this.validateForm.get('captcha')!.markAsDirty();
-    }
+    this.type = type;
   }
 
   submitForm(): void {
-    const that = this;
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+    let loginUrl = '/login';
+    if (this.type === 'account') {
+      this.username.markAsDirty();
+      this.username.updateValueAndValidity();
+      this.password.markAsDirty();
+      this.password.updateValueAndValidity();
+      if (this.username.invalid || this.password.invalid) {
+        return;
+      }
+    } else {
+      this.mobile.markAsDirty();
+      this.mobile.updateValueAndValidity();
+      this.captcha.markAsDirty();
+      this.captcha.updateValueAndValidity();
+      if (this.mobile.invalid || this.captcha.invalid) {
+        return;
+      } else {
+        loginUrl = '/account/adminMobileLogin';
+      }
     }
 
-    if (this.validateForm.valid) {
-      this.help.post('/login', this.validateForm.value).subscribe(msg => {
+      this.help.post(loginUrl, this.validateForm.value).subscribe(msg => {
         if (msg.success) {
           localStorage.setItem('token', msg.data.token);
           this.message.create('success', msg.message);
@@ -54,29 +88,13 @@ export class LoginComponent implements OnInit {
           console.log(msg);
         }
       });
-    }
+
   }
 
-  constructor(private fb: FormBuilder, private help: Help, private router: Router, private message: NzMessageService) {
-  }
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      mobile: [null],
-      captcha: [null],
-    });
-
-    this.validateForm.get('username').clearValidators();
-    this.validateForm.get('password').clearValidators();
-
-    this.validateForm.get('username')!.markAsPristine();
-    this.validateForm.get('password')!.markAsPristine();
-  }
 
   getCaptcha() {
-    if (this.validateForm.get('mobile').invalid) {
+    console.log('mobile');
+    if (this.mobile.invalid) {
       this.validateForm.get('mobile').markAsDirty({onlySelf: true});
       this.validateForm.get('mobile').updateValueAndValidity({onlySelf: true});
       return;
