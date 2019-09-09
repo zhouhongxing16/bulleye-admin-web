@@ -33,7 +33,10 @@
             ],
             "styles": [
               "src/theme.less",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/codemirror/lib/codemirror.css",
+              "node_modules/codemirror/addon/hint/show-hint.css",
+              "node_modules/codemirror/theme/ambiance.css"
             ],
             "scripts": []
           },

@@ -1,6 +1,7 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Help} from '../../utils/Help';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-default-layout',
@@ -14,7 +15,7 @@ export class DefaultLayoutComponent implements OnInit {
   menus: any;
   triggerTemplate: TemplateRef<void> | null = null;
 
-  constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService) {
+  constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService,private router: Router) {
 
 
   }
@@ -31,6 +32,11 @@ export class DefaultLayoutComponent implements OnInit {
     if (token) {
       this.getStaffInfo();
     }
+  }
+
+  goToProfile() {
+    console.log(this.userInfo.id);
+    this.router.navigate(['/staff/edit', this.userInfo.id]);
   }
 
   showLogoutConfirm(): void {
