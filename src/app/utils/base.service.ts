@@ -10,13 +10,12 @@ export class BaseService<T> {
 
   flag = false;
   pageSize = 10;
-  pageNum = 1;
   data = {
     rows: [],
     total: 0
   };
 
-
+  private _id: string;
   public _url: {
     listByPage: string;
     create: string;
@@ -34,6 +33,14 @@ export class BaseService<T> {
 
   set url(value) {
     this._url = value;
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set id(value: string) {
+    this._id = value;
   }
 
   constructor(public help: Help) {
@@ -60,7 +67,7 @@ export class BaseService<T> {
 
   saveOrUpdateData(data: any) {
     let url = this.url.create;
-    if (data.id) {
+    if (data._id) {
       url = this.url.update;
     }
     return this.help.post(url, data);
