@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // SERVER_URL: 'http://localhost:8001',
-  SERVER_URL: 'http://112.74.44.225:8001',
+  SERVER_URL: 'http://localhost:8001',
+//  SERVER_URL: 'https://bulleye.zhouhongxing.cn',
 };
 
 /*
