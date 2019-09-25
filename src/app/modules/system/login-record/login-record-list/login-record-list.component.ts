@@ -15,7 +15,6 @@ export class LoginRecordListComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   loading = false;
-  searchGenderList: string[] = [];
 
   constructor(private loginRecordService: LoginRecordService, private help: Help) {
 

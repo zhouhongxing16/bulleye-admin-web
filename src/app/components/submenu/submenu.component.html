@@ -5,7 +5,7 @@
       <app-submenu *ngIf="item.children!=null" [menus]="item.children">
       </app-submenu>
     </li>
-    <li *ngIf="item.children==null" nz-menu-item   [routerLink]="item.path" [queryParams]="{id:item.id}">
+    <li *ngIf="item.children==null" nz-menu-item   (click)="goToPage(item)">
       <span title><i nz-icon [type]="item.icon?item.icon:'calendar'"></i><span class="nav-text">{{item.title}}</span></span>
     </li>
   </ng-container>

@@ -67,7 +67,7 @@ export class BaseService<T> {
 
   saveOrUpdateData(data: any) {
     let url = this.url.create;
-    if (data._id) {
+    if (data.id) {
       url = this.url.update;
     }
     return this.help.post(url, data);

@@ -1,61 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {StaffService} from '../staff.service';
 import {Help} from '../../../../utils/Help';
 import {Staff} from '../staff';
+import {ActivatedRoute} from '@angular/router';
+import {BaseListComponent} from '../../../../components/base-list/base-list.component';
 
 @Component({
   selector: 'app-staff-list',
   templateUrl: './staff-list.component.html',
   styleUrls: ['./staff-list.component.scss'],
 })
-export class StaffListComponent implements OnInit {
-  rows: Staff[] = [];
-  total = 0;
-  pageIndex = 1;
-  pageSize = 10;
-  loading = false;
-  searchGenderList: string[] = [];
+export class StaffListComponent extends BaseListComponent<Staff> {
 
-  constructor(private staffService: StaffService, private help: Help) {
-
+  constructor(staffService: StaffService, help: Help, router: ActivatedRoute) {
+    super(staffService, help, router);
   }
-
-  ngOnInit() {
-    this.getListByPage();
-  }
-
-  getListByPage(reset: boolean = false) {
-    if (reset) {
-      this.pageIndex = 1;
-    }
-    this.loading = true;
-    this.staffService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
-      this.loading = false;
-      this.rows = data.rows;
-      this.total = data.total;
-    }, err => {
-      this.loading = false;
-      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
-    });
-  }
-
-  updateFilter(value: string[]): void {
-    this.searchGenderList = value;
-    this.getListByPage(true);
-  }
-
-  deleteRow(id: string) {
-    this.help.loading('删除中...');
-    this.staffService.deleteById(id).subscribe(res => {
-      if (res.success) {
-        this.help.stopLoad();
-        this.help.showMessage('success', res.message);
-        this.getListByPage(true);
-      } else {
-        this.help.showMessage('error', res.message);
-      }
-    });
-  }
-
 
 }
