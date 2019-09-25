@@ -2,7 +2,7 @@
   <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="help.isCollapsed">
     <ng-container *ngFor="let item of menus">
 
-      <li *ngIf="item.children==null" nz-menu-item [routerLink]="item.path">
+      <li *ngIf="item.children==null" nz-menu-item [routerLink]="item.path"  [queryParams]="{id:item.id}">
         <span><i nz-icon [type]="item.icon?item.icon:'calendar'" ></i><span class="nav-text">{{item.title}}</span></span>
       </li>
       <li *ngIf="item.children!=null" nz-submenu>
