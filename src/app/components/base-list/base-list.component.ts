@@ -15,7 +15,7 @@ export class BaseListComponent<T> implements OnInit {
     flag: false
   };
 
-  constructor(private service: BaseService<T>, private help: Help, private router: ActivatedRoute) {
+  constructor(public service: BaseService<T>, public help: Help, public router: ActivatedRoute) {
   }
 
   ngOnInit() {
