@@ -19,8 +19,14 @@ export class BaseListComponent<T> implements OnInit {
   }
 
   ngOnInit() {
-    this.router.queryParamMap.subscribe(params => {
-      console.log( params);
+    this.router.queryParams.subscribe(params => {
+      if (this.help.isEmpty(params.code)) {
+        this.authData.flag = false;
+      } else {
+        this.authData.flag = true;
+        const dec = window.atob(params.code);
+        this.authData.auths = JSON.parse(dec);
+      }
     });
     this.getListByPage();
   }
@@ -55,6 +61,7 @@ export class BaseListComponent<T> implements OnInit {
 
   initAuth(code: string) {
     if (this.authData.flag) {
+      console.log(code)
       for (let i = 0; i < this.authData.auths.length; i++) {
         if (this.authData.auths[i].code === code) {
           return true;

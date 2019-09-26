@@ -24,8 +24,15 @@ export class SubmenuComponent implements OnInit {
 
   initAuth(obj: any) {
     this.help.get(`/rolemenuauth/getAuthByMenuId/` + obj.id).subscribe(msg => {
-      this.router.navigate([obj.path],  {
-        queryParams: msg.data
+      let enc = '';
+      if (msg.success && !this.help.isEmpty(msg.data)) {
+        const data = JSON.stringify(msg.data);
+        enc = window.btoa(data);
+      }
+      this.router.navigate([obj.path], {
+        queryParams: {
+          code: enc
+        }
       });
     });
   }
