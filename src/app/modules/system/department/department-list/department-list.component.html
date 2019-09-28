@@ -1,6 +1,6 @@
 <div class="table-operations">
-  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
-  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+  <button nz-button nzType="primary" routerLink="../add"  *ngIf="initAuth('add')"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" *ngIf="initAuth('delete')"><i class="anticon anticon-delete" ></i>删除</button>
 </div>
 <nz-table
   #staffTable
@@ -34,7 +34,7 @@
     <td>{{data.status}}</td>
     <td>{{data.created}}</td>
     <td>
-      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle" *ngIf="initAuth('edit')"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)" *ngIf="initAuth('delete')">
         <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle">
