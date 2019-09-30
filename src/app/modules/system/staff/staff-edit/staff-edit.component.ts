@@ -23,7 +23,7 @@ export class StaffEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private staffService: StaffService,
     private route: ActivatedRoute,
-    private help: Help) {
+    public help: Help) {
   }
 
   ngOnInit() {

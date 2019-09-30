@@ -11,7 +11,7 @@ export class MenuComponent implements OnInit {
 
   @Input() menus: any;
 
-  constructor(private help: Help, private router: Router) {
+  constructor(public help: Help, private router: Router) {
   }
 
   ngOnInit() {
