@@ -1,5 +1,11 @@
 <div class="table-operations">
-  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxAccountId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getListByPage($event, true)">
+    <ng-container *ngFor="let item of wxAccounts">
+      <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+    </ng-container>
+  </nz-select>&nbsp;&nbsp;
+  <button nz-button nzType="primary" [routerLink]="['../add',chooseWxAccountId]"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
 <nz-table
@@ -19,7 +25,7 @@
     <th nzShowSort nzSortKey="keyWord">关键字</th>
     <th nzShowSort nzSortKey="keyValue">内容</th>
     <th nzShowSort nzSortKey="keyType">类型</th>
-    <th nzShowSort nzSortKey="num"><span>使用次数</span></th>
+    <th nzShowSort nzSortKey="num"><span>回复次数</span></th>
     <th nzShowSort nzSortKey="status">状态</th>
     <th nzShowSort nzSortKey="created">创建时间</th>
     <th><span>操作</span></th>
@@ -29,9 +35,11 @@
   <tr *ngFor="let data of staffTable.data">
     <td>{{data.keyWord}}</td>
     <td>{{data.keyValue}}</td>
-    <td>{{data.keyType}}</td>
+    <td><ng-container *ngIf="data.keyType=='text'">文本</ng-container>
+        <ng-container *ngIf="data.keyType=='news'">图文</ng-container></td>
     <td>{{data.num}}</td>
-    <td>{{data.status}}</td>
+    <td><ng-container *ngIf="data.status=='1'">使用</ng-container>
+        <ng-container *ngIf="data.status=='2'">禁用</ng-container></td>
     <td>{{data.created}}</td>
     <td>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
