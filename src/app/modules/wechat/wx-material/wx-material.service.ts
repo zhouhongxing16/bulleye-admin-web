@@ -20,6 +20,8 @@ export class WxMaterialService extends BaseService<WxMaterial>{
     add: '',
     materialUpload: '/wxmaterial/materialUpload',
     pubMaterialToUser: '/wxmaterial/pubMaterialToUser',
+    addMaterial: '/wxmaterial/addMaterial',
+    updateMaterial: '/wxmaterial/updateMaterial',
   };
 
   select(wxMaterial: WxMaterial): Observable<any> {
@@ -39,6 +41,14 @@ export class WxMaterialService extends BaseService<WxMaterial>{
 
   pubMaterialToUser(id: string){
     return this.help.get(this.url.pubMaterialToUser + `/` + id);
+  }
+
+  addMaterial(data: any) {
+    let url = this.url.addMaterial;
+    if (data.id) {
+      url = this.url.updateMaterial;
+    }
+    return this.help.post(url, data);
   }
 }
 

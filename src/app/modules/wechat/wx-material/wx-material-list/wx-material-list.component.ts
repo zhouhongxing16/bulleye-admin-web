@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {WxMenu} from "../../wx-menu/wx-menu";
 import {WxAccount} from "../../wx-account/wx-account";
 import {Help} from "../../../../utils/Help";
 import {WxAccountService} from "../../wx-account/wx-account.service";

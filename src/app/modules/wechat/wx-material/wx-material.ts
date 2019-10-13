@@ -15,19 +15,21 @@ export class WxMaterial {
 
   thumbMediaId: string;
 
+  thumbFileId: string;
+
   author: string;
 
   digest: string;
 
-  showCoverPic: string;
+  showCoverPic: boolean;
 
   content: string;
 
   contentSourceUrl: string;
 
-  needOpenComment: string;
+  needOpenComment: boolean;
 
-  onlyFansCanComment: string;
+  onlyFansCanComment: boolean;
 
   introduction: string;
 
