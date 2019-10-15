@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {WxReplyService} from '../wx-reply.service';
 import {Help} from '../../../../utils/Help';
 import {WxReply} from '../wx-reply';
+import {WxAccountService} from '../../wx-account/wx-account.service';
+import {WxAccount} from '../../wx-account/wx-account';
 
 @Component({
   selector: 'app-wx-reply-list',
@@ -17,19 +19,35 @@ export class WxReplyListComponent implements OnInit {
   sortKey = null;
   loading = false;
 
-  constructor(private wxReplyService: WxReplyService, private help: Help) {
+  //公众号列表
+  wxAccounts: WxAccount[] = [];
+  //当前公众号
+  chooseWxAccountId = '';
+
+  constructor(private wxReplyService: WxReplyService, private help: Help, private wxAccountService: WxAccountService) {
   }
 
   ngOnInit() {
-    this.getListByPage();
+    this.getWxaccount();
   }
 
-  getListByPage(reset: boolean = false) {
+  getWxaccount() {
+    this.wxAccountService.getListByParams({}).subscribe(data => {
+      console.log(data.data);
+      this.wxAccounts = data.data;
+      this.getListByPage(this.wxAccounts[0].id, true);
+    }, err => {
+
+    });
+  }
+
+  getListByPage(accountId: string, reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
+    this.chooseWxAccountId = accountId;
     this.loading = true;
-    this.wxReplyService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
+    this.wxReplyService.getListByPage(this.pageIndex, this.pageSize, {accountId: accountId}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;
@@ -45,12 +63,15 @@ export class WxReplyListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.getListByPage(true);
+        this.getListByPage(this.chooseWxAccountId,true);
       } else {
         this.help.showMessage('error', res.message);
       }
     });
   }
 
+  UploadRow(id: string){
+
+  }
 
 }
