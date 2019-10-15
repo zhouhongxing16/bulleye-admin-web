@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Help} from '../../../utils/Help';
 import {Menu} from './menu';
 import {BaseService} from '../../../utils/base.service';
 
@@ -12,6 +11,7 @@ export class MenuService extends BaseService<Menu> {
 
   url = {
     listByPage: '/menu/listByPage',
+    getMenuAuthListByPage: '/menuauth/listByPage',
     create: '/menu/create',
     deleteById: '/menu/delete',
     getById: '/menu/getById',
@@ -30,5 +30,26 @@ export class MenuService extends BaseService<Menu> {
 
   getOrganizationMenus(params) {
     return this.help.post(this.url.getOrganizationMenus, params);
+  }
+
+
+
+  getMenuAuthListByPage(pageNum: number = 1, pageSize: number = 10, params: any): Observable<any> {
+    this.flag = false;
+    params.pageNum = pageNum;
+    params.pageSize = pageSize;
+    if (this.flag) {
+      return of(this.data);
+    } else {
+      return this.help.post(`${this.url.getMenuAuthListByPage}`, params).pipe(
+        map(res => {
+          this.flag = true;
+          this.data = {
+            rows: res.rows,
+            total: res.total
+          };
+          return this.data;
+        }));
+    }
   }
 }

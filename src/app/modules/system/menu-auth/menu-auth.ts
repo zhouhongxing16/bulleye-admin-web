@@ -11,7 +11,7 @@ export class MenuAuth {
 
   path: string;
 
-  status: string;
+  status: 1;
 
   created: string;
 

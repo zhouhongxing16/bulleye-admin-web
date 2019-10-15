@@ -5,6 +5,7 @@ import {NzDropdownContextComponent, NzDropdownService, NzFormatEmitEvent, NzTree
 import {Menu} from '../menu';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {MenuAuth} from '../../menu-auth/menu-auth';
 
 @Component({
   selector: 'app-menu-list',
@@ -16,14 +17,25 @@ export class MenuListComponent implements OnInit {
   @ViewChild('menuTree') menuTree: NzTreeComponent;
   dropdown: NzDropdownContextComponent;
   // actived node
-  activedNode: NzTreeNode;
+  activateNode: NzTreeNode;
   rightNode: NzTreeNode;
   nodes = [];
-  visible = false;
-  obj: Menu = new Menu();
+  drawerMenuVisible = false;
+  drawerMenuAuthVisible = false;
+  // 权限相关
+  authList = [];
+  total = 0;
+  pageIndex = 0;
+  pageSize = 10;
+
+  menu: Menu = new Menu();
+  menuAuth: MenuAuth = new MenuAuth();
   isLoading = false;
   validateForm: FormGroup;
+  validateAuthForm: FormGroup;
   expandKeys = [];
+
+  rows = [];
 
   // 构造函数里注入右键菜单的服务
   constructor(
@@ -46,30 +58,29 @@ export class MenuListComponent implements OnInit {
       status: [null, [Validators.required]],
       parentId: [null],
     });
+    this.validateAuthForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      path: [null, [Validators.required]],
+      code: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      menuId: [null, [Validators.required]],
+    });
   }
 
   createMenu(): void {
-    this.obj = new Menu();
-    this.obj.parentId = this.rightNode.origin.id;
+    this.menu = new Menu();
+    this.menu.parentId = this.rightNode.origin.id;
     this.expandKeys.push(this.rightNode.origin.id);
-    this.visible = true;
+    this.drawerMenuVisible = true;
     this.dropdown.close();
   }
 
   editMenu(): void {
-    this.obj = this.rightNode.origin;
-    this.visible = true;
+    this.menu = this.rightNode.origin;
+    this.drawerMenuVisible = true;
     this.dropdown.close();
   }
 
-  addAuth() {
-    console.log(this.rightNode.origin);
-    this.router.navigate(['/menuauth/list', this.rightNode.origin.id]);
-  }
-
-  close(): void {
-    this.visible = false;
-  }
 
   openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
     // do something if u want
@@ -106,7 +117,7 @@ export class MenuListComponent implements OnInit {
   }
 
   activeNode(data: NzFormatEmitEvent): void {
-    this.activedNode = data.node;
+    this.activateNode = data.node;
   }
 
   onChange($event: string): void {
@@ -123,13 +134,91 @@ export class MenuListComponent implements OnInit {
 
   submitForm() {
     this.isLoading = true;
-    this.menuService.saveOrUpdateData(this.obj).subscribe(res => {
+    this.menuService.saveOrUpdateData(this.menu).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
-        this.visible = false;
+        this.drawerMenuVisible = false;
         this.getAllMenus();
       }
     });
+  }
+
+
+  getAuthListByPage(reset: boolean = false) {
+    if (reset) {
+      this.pageIndex = 1;
+    }
+    this.isLoading = true;
+
+    this.menuService.getMenuAuthListByPage(this.pageIndex, this.pageSize, {menuId: this.menuAuth.menuId}).subscribe(data => {
+      this.isLoading = false;
+      this.rows = data.rows;
+      this.total = data.total;
+    }, err => {
+      this.isLoading = false;
+      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+    });
+  }
+
+  deleteRow(id: string) {
+    /*this.help.loading('删除中...');
+    this.service.deleteById(id).subscribe(res => {
+      if (res.success) {
+        this.help.stopLoad();
+        this.help.showMessage('success', res.message);
+        this.getListByPage(true);
+      } else {
+        this.help.showMessage('error', res.message);
+      }
+    });*/
+  }
+
+
+  saveOrUpdateMenuAuth() {
+    let url = '/menuauth/create';
+    if (this.menuAuth.id) {
+      url = '/menuauth/update';
+    }
+    const menuId = this.menuAuth.menuId;
+    this.help.post(url, this.menuAuth).subscribe(res => {
+      this.isLoading = false;
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+        this.help.clearObject(this.menuAuth);
+        this.menuAuth.menuId = menuId;
+        this.getAuthListByPage(true);
+      }
+    });
+  }
+
+  // 菜单权限相关
+  addAuth() {
+    this.menuAuth.menuId = this.rightNode.origin.id;
+    this.getAuthListByPage(true);
+    this.drawerMenuAuthVisible = true;
+    this.dropdown.close();
+  }
+
+  setData(id) {
+    for (const r of this.rows) {
+      if (r.id === id) {
+        console.log(r);
+        this.menuAuth = r;
+        break;
+      }
+    }
+  }
+
+  close(): void {
+    this.drawerMenuVisible = false;
+    this.drawerMenuAuthVisible = false;
+  }
+
+  onAuthMenuChange($event: string): void {
+    if (!this.help.isEmpty($event)) {
+      this.rightNode.origin.id = $event;
+      this.getAuthListByPage(true);
+    }
   }
 }

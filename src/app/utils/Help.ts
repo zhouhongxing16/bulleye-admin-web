@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {NzMessageService} from 'ng-zorro-antd';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {Location} from '@angular/common';
 import {DatePipe} from '@angular/common';
 
@@ -10,7 +10,13 @@ export class Help {
   private loadId: any;
   public isCollapsed = false;
 
-  constructor(private http: HttpClient, private message: NzMessageService, private location: Location, private datePipe: DatePipe) {
+  constructor(
+    private http: HttpClient,
+    private message: NzMessageService,
+    private location: Location,
+    private datePipe: DatePipe,
+    private modalService: NzModalService
+  ) {
   }
 
   back() {
@@ -54,6 +60,20 @@ export class Help {
     }
   }
 
+  showSuccessModal(title: string, content: string) {
+    if (this.isEmpty(title)) {
+      title = '提示';
+    }
+    if (this.isEmpty(content)) {
+      content = '内容';
+    }
+    const modal = this.modalService.success({
+      nzTitle: title,
+      nzContent: content
+    });
+    setTimeout(() => modal.destroy(), 2000);
+  }
+
   convertTime(timestamp: any) {
     const time: any = new Date(timestamp);
     const year = time.getFullYear();
@@ -63,5 +83,17 @@ export class Help {
     const minute = time.getMinutes();
     const second = time.getSeconds();
     return year + '-' + month + '-' + date + '   ' + hour + ':' + minute + ':' + second;
+  }
+
+  emptyObject(parsent) {
+    for (const key in parsent) {
+      delete parsent[key];
+    }
+  }
+
+  clearObject(data) {
+    for (const key in data) {
+      data[key] = null;
+    }
   }
 }
