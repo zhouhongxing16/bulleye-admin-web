@@ -18,8 +18,8 @@
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
-  (nzPageIndexChange)="getListByPage()"
-  (nzPageSizeChange)="getListByPage(true)">
+  (nzPageIndexChange)="getListByPage(null,false)"
+  (nzPageSizeChange)="getListByPage(null,true)">
   <thead nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="keyWord">关键字</th>
