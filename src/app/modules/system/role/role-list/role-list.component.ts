@@ -24,6 +24,8 @@ export class RoleListComponent implements OnInit {
   defaultCheckedKeys = [];
   defaultSelectedKeys = [];
 
+  roleMenuAuthVisible = false;
+
   constructor(private roleService: RoleService, private help: Help) {
   }
 
@@ -120,6 +122,7 @@ export class RoleListComponent implements OnInit {
 
   close(): void {
     this.visible = false;
+    this.roleMenuAuthVisible = false;
   }
 
   getCheckedLeafMenus(roleId: string): void {
@@ -136,6 +139,11 @@ export class RoleListComponent implements OnInit {
 
   nzEvent(event: NzFormatEmitEvent): void {
     console.log(event);
+  }
+
+  showRoleMenuAuth(roleId: string) {
+    console.log(roleId);
+    this.roleMenuAuthVisible = true;
   }
 
 }

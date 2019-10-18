@@ -36,6 +36,10 @@
                                                                                                      type="windows"
                                                                                                      theme="outline"></i>
       </button>
+      <button title="菜单功能授权" (click)="showRoleMenuAuth(data.id)" nz-button nzType="primary" nzShape="circle"><i nz-icon
+                                                                                                     type="robot"
+                                                                                                     theme="outline"></i>
+      </button>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
@@ -65,3 +69,7 @@
   <button nz-button nzType="primary"  [nzLoading]="isLoading" (click)="getSelectedNodeList()">保存</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
 </nz-drawer>
+
+<nz-modal [(nzVisible)]="roleMenuAuthVisible" nzTitle="The first Modal" (nzOnCancel)="close()" (nzOnOk)="close()">
+  <p>待完善。。。</p>
+</nz-modal>
