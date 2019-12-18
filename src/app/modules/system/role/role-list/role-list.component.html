@@ -56,12 +56,12 @@
            (nzOnClose)="close()">
   <nz-tree
     #roleMenuAuthTree
-    [nzData]="nodes"
+    [nzData]="menuNodes"
     nzCheckable
     nzMultiple
     nzExpandAll
-    [nzCheckedKeys]="defaultCheckedKeys"
-    [nzSelectedKeys]="defaultSelectedKeys"
+    [nzCheckedKeys]="roleMenuCheckedKeys"
+    [nzSelectedKeys]="roleMenuSelectedKeys"
     (nzClick)="nzEvent($event)"
     (nzExpandChange)="nzEvent($event)"
     (nzCheckBoxChange)="nzEvent($event)">
@@ -70,6 +70,17 @@
   <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
 </nz-drawer>
 
-<nz-modal [(nzVisible)]="roleMenuAuthVisible" nzTitle="The first Modal" (nzOnCancel)="close()" (nzOnOk)="close()">
-  <p>待完善。。。</p>
+<nz-modal [(nzVisible)]="roleMenuAuthVisible" nzTitle="功能授权" (nzOnCancel)="close()" (nzOnOk)="close()">
+  <nz-tree
+    #roleMenuFunctionTree
+    [nzData]="menuAuthNodes"
+    nzCheckable
+    nzMultiple
+    nzExpandAll
+    [nzCheckedKeys]="roleMenuCheckedKeys"
+    [nzSelectedKeys]="roleMenuSelectedKeys"
+    (nzClick)="nzEvent($event)"
+    (nzExpandChange)="nzEvent($event)"
+    (nzCheckBoxChange)="nzEvent($event)">
+  </nz-tree>
 </nz-modal>

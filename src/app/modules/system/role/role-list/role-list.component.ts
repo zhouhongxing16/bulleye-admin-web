@@ -3,6 +3,7 @@ import {Help} from '../../../../utils/Help';
 import {RoleService} from '../role.service';
 import {Role} from '../role';
 import {NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions} from 'ng-zorro-antd';
+import {RoleMenuAuthService} from '../../role-menu-auth/role-menu-auth.service';
 
 @Component({
   selector: 'app-role-list',
@@ -12,6 +13,7 @@ import {NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions} from 'ng-zorro-an
 export class RoleListComponent implements OnInit {
 
   @ViewChild('roleMenuAuthTree') roleMenuAuthTree: NzTreeComponent;
+  @ViewChild('roleMenuFunctionTree') roleMenuFunctionTree: NzTreeComponent;
   rows: Role[] = [];
   total = 0;
   pageIndex = 1;
@@ -19,14 +21,15 @@ export class RoleListComponent implements OnInit {
   isLoading = false;
   visible = false;
   roleId: string;
-  nodes = [];
+  menuNodes = [];
+
   selectMenus = [];
-  defaultCheckedKeys = [];
-  defaultSelectedKeys = [];
+  roleMenuCheckedKeys = [];
+  roleMenuSelectedKeys = [];
 
   roleMenuAuthVisible = false;
-
-  constructor(private roleService: RoleService, private help: Help) {
+  menuAuthNodes = [];
+  constructor(private roleService: RoleService, private roleMenuAuthService: RoleMenuAuthService, private help: Help) {
   }
 
   ngOnInit() {
@@ -80,7 +83,7 @@ export class RoleListComponent implements OnInit {
       if (msg.success) {
         this.roleId = roleId;
         this.getCheckedLeafMenus(roleId);
-        this.nodes = msg.data;
+        this.menuNodes = msg.data;
       }
     });
   }
@@ -129,9 +132,9 @@ export class RoleListComponent implements OnInit {
     const that = this;
     this.roleService.getCheckedLeafMenus({roleId: roleId, isLeaf: true}).subscribe(res => {
       if (res.success) {
-        that.defaultCheckedKeys = [];
+        that.roleMenuCheckedKeys = [];
         res.data.forEach(function (value) {
-          that.defaultCheckedKeys.push(value.menuId);
+          that.roleMenuCheckedKeys.push(value.menuId);
         });
       }
     });
@@ -144,6 +147,16 @@ export class RoleListComponent implements OnInit {
   showRoleMenuAuth(roleId: string) {
     console.log(roleId);
     this.roleMenuAuthVisible = true;
+    this.menuAuthNodes = [];
+    this.getMenuAndAuthByRoleId(roleId);
   }
 
+  // 获取角色菜单和功能
+  getMenuAndAuthByRoleId(roleId: string) {
+    this.roleMenuAuthService.getMenuAndAuthByRoleId(roleId).subscribe(msg => {
+      if (msg.success) {
+        this.menuAuthNodes = msg.data;
+      }
+    });
+  }
 }
