@@ -18,6 +18,8 @@ const routes: Routes = [
       {path: 'loginrecord', loadChildren: './modules/system/login-record/login-record.module#LoginRecordModule'},
       {path: 'wxaccount', loadChildren: './modules/wechat/wx-account/wx-account.module#WxAccountModule'},
       {path: 'log', loadChildren: './modules/system/log/log.module#LogModule'},
+      {path: 'monitor', loadChildren: './modules/system/monitor/monitor.module#MonitorModule'},
+      // 微信
       {path: 'wxmember', loadChildren: './modules/wechat/wx-member/wx-member.module#WxMemberModule'},
       {path: 'wxmenu', loadChildren: './modules/wechat/wx-menu/wx-menu.module#WxMenuModule'},
       {path: 'wxreply', loadChildren: './modules/wechat/wx-reply/wx-reply.module#WxReplyModule'},

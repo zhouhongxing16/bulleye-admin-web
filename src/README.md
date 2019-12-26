@@ -5,7 +5,7 @@ angular-cli常用命令:
 #1.首先创建一个模块
 ng generate/g module modules/(system、wechat)/name --routing --spec=false
 #2.创建这个模块的service
-ng generate/g service modules/(system、wechat)/name --routing --spec=false
+ng generate/g service modules/(system、wechat)/name/name --routing --spec=false
 #3.创建这个模块的组件
 ng generate/g component modules/(system、wechat)/name/name-list --routing --spec=false
 
