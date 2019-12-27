@@ -16,14 +16,22 @@ export class RoleMenuAuthService extends BaseService<Role> {
     edit: '',
     add: '',
     getAllMenus: '/menu/getAllMenus',
-    getListByParams: '/rolemenu/getListByParams',
-    createRoleMenu: '/rolemenu/createRoleMenu',
+    getListByParams: '/rolemenuauth/getListByParams',
+    createRoleMenuAuth: '/rolemenuauth/createRoleMenuAuth',
     getMenuAndAuthByRoleId: '/rolemenuauth/getMenuAndAuthByRoleId',
   };
 
 
   getMenuAndAuthByRoleId(roleId: string) {
     return this.help.get(this.url.getMenuAndAuthByRoleId + `/` + roleId);
+  }
+
+  createRoleMenuAuth(params: any) {
+    return this.help.post(this.url.createRoleMenuAuth, params);
+  }
+
+  getRoleMenuAuthCheckedData(data: any) {
+    return this.help.post(this.url.getListByParams, data);
   }
 
 }

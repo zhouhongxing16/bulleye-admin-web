@@ -24,11 +24,14 @@ export class RoleListComponent implements OnInit {
   menuNodes = [];
 
   selectMenus = [];
+  selectMenuAuthMenus = [];
   roleMenuCheckedKeys = [];
   roleMenuSelectedKeys = [];
 
+  roleMenuAuthCheckedKeys = [];
   roleMenuAuthVisible = false;
   menuAuthNodes = [];
+
   constructor(private roleService: RoleService, private roleMenuAuthService: RoleMenuAuthService, private help: Help) {
   }
 
@@ -88,10 +91,10 @@ export class RoleListComponent implements OnInit {
     });
   }
 
-  getSelectedNodeList() {
+  getSelectedMenuNodeList() {
     this.selectMenus = [];
     const selectNodes = this.roleMenuAuthTree.getCheckedNodeList();
-    this.getChildLeafNode(selectNodes);
+    this.getChildMenuLeafNode(selectNodes);
     this.getHalfCheckedNodeList();
   }
 
@@ -109,7 +112,7 @@ export class RoleListComponent implements OnInit {
   }
 
   // 递归获取叶子节点
-  getChildLeafNode(nodes: any) {
+  getChildMenuLeafNode(nodes: any) {
     nodes.forEach(node => {
       this.selectMenus.push({
         roleId: this.roleId,
@@ -118,7 +121,7 @@ export class RoleListComponent implements OnInit {
         isLeaf: node.isLeaf
       });
       if (!node.isLeaf && node.children.length > 0) {
-        this.getChildLeafNode(node.children);
+        this.getChildMenuLeafNode(node.children);
       }
     });
   }
@@ -144,10 +147,11 @@ export class RoleListComponent implements OnInit {
     console.log(event);
   }
 
+  // 打开角色功能授权页面
   showRoleMenuAuth(roleId: string) {
-    console.log(roleId);
     this.roleMenuAuthVisible = true;
     this.menuAuthNodes = [];
+    this.roleId = roleId;
     this.getMenuAndAuthByRoleId(roleId);
   }
 
@@ -156,6 +160,54 @@ export class RoleListComponent implements OnInit {
     this.roleMenuAuthService.getMenuAndAuthByRoleId(roleId).subscribe(msg => {
       if (msg.success) {
         this.menuAuthNodes = msg.data;
+        this.getRoleMenuAuthCheckedKeys(roleId);
+      }
+    });
+  }
+
+  getRoleMenuAuthCheckedKeys(roleId: string) {
+    const that = this;
+    this.roleMenuAuthService.getRoleMenuAuthCheckedData({roleId: roleId}).subscribe(res => {
+      if (res.success) {
+        that.roleMenuAuthCheckedKeys = [];
+        res.data.forEach(function (value) {
+          that.roleMenuAuthCheckedKeys.push(value.menuAuthId);
+        });
+      }
+    });
+  }
+
+  getSelectedMenuAuthNodeList() {
+    const selectMenuAuthNodes = this.roleMenuFunctionTree.getCheckedNodeList();
+    this.getChildMenuAuthLeafNode(selectMenuAuthNodes);
+    console.log(this.selectMenuAuthMenus);
+    this.saveRoleMenuAuth();
+  }
+
+  // 递归获取菜单功能授权叶子节点
+  getChildMenuAuthLeafNode(nodes: any) {
+    nodes.forEach(node => {
+      if (node.isLeaf && node.origin.type === 'menuAuth') {
+        this.selectMenuAuthMenus.push({
+          roleId: this.roleId,
+          menuAuthId: node.origin.id,
+          status: 1,
+          isLeaf: node.isLeaf
+        });
+      }
+      if (!node.isLeaf && node.children.length > 0) {
+        this.getChildMenuAuthLeafNode(node.children);
+      }
+    });
+  }
+
+  saveRoleMenuAuth() {
+    this.isLoading = true;
+    this.roleMenuAuthService.createRoleMenuAuth(this.selectMenuAuthMenus).subscribe(res => {
+      this.isLoading = false;
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+        this.close();
       }
     });
   }
