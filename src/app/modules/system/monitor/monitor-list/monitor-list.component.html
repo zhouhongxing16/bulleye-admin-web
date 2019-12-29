@@ -69,15 +69,13 @@
     <div nz-col [nzSpan]="24">
       <nz-card nzTitle="服务器信息">
         <nz-table nzTemplateMode>
-          <thead>
-          <tr>
-            <th>服务器名称</th>
-            <th>{{sys.computerName}}</th>
-            <th>操作系统</th>
-            <th>{{sys.osName}}</th>
-          </tr>
-          </thead>
           <tbody>
+          <tr>
+            <td>服务器名称</td>
+            <td>{{sys.computerName}}</td>
+            <td>操作系统</td>
+            <td>{{sys.osName}}</td>
+          </tr>
           <tr>
             <td>服务器IP</td>
             <td>{{sys.computerIp}}</td>

@@ -24,6 +24,8 @@ const routes: Routes = [
       {path: 'wxmenu', loadChildren: './modules/wechat/wx-menu/wx-menu.module#WxMenuModule'},
       {path: 'wxreply', loadChildren: './modules/wechat/wx-reply/wx-reply.module#WxReplyModule'},
       {path: 'wxmaterial', loadChildren: './modules/wechat/wx-material/wx-material.module#WxMaterialModule'},
+
+      {path: '', loadChildren:  './modules/home/home.module#HomeModule'}
     ]
   },
   {path: 'login', component: LoginComponent},

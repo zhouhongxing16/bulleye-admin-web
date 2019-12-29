@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Help} from '../../utils/Help';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-default-layout',
@@ -14,8 +15,17 @@ export class DefaultLayoutComponent implements OnInit {
   userInfo: any;
   menus: any;
   triggerTemplate: TemplateRef<void> | null = null;
+  passwordChangeModalFalse: boolean;
 
-  constructor(public help: Help, private modalService: NzModalService, private message: NzMessageService,private router: Router) {
+  validateForm: FormGroup;
+
+  constructor(
+    public help: Help,
+    private modalService: NzModalService,
+    private message: NzMessageService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
 
 
   }
@@ -32,11 +42,24 @@ export class DefaultLayoutComponent implements OnInit {
     if (token) {
       this.getStaffInfo();
     }
+    this.validateForm = this.fb.group({
+      name: [null, [Validators.required]],
+      nickname: [null],
+      required: [false]
+    });
   }
 
   goToProfile() {
     console.log(this.userInfo.id);
     this.router.navigate(['/staff/edit', this.userInfo.id]);
+  }
+
+  showChangePasswordModal() {
+    this.passwordChangeModalFalse = true;
+  }
+
+  closeModal() {
+    this.passwordChangeModalFalse = false;
   }
 
   showLogoutConfirm(): void {
@@ -87,14 +110,22 @@ export class DefaultLayoutComponent implements OnInit {
     });
   }
 
-  testAuth() {
-    const that = this;
-    this.help.post('/staff/list', {username: 'zhx', password: '1'}).subscribe(msg => {
-      if (msg.success) {
-        that.menus = msg.data;
-      } else {
-        console.log(msg);
-      }
-    });
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+  }
+
+  requiredChange(required: boolean): void {
+    if (!required) {
+      this.validateForm.get('nickname')!.clearValidators();
+      this.validateForm.get('nickname')!.markAsPristine();
+    } else {
+      this.validateForm.get('nickname')!.setValidators(Validators.required);
+      this.validateForm.get('nickname')!.markAsDirty();
+    }
+    this.validateForm.get('nickname')!.updateValueAndValidity();
   }
 }
