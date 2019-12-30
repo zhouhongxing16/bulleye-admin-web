@@ -47,34 +47,51 @@
       </div>
       <nz-footer style="text-align: center;"><a href="http://www.zhouhongxing.cn">Bulleye Admin ©2019 By Bulleye</a></nz-footer>
     </nz-content>
-    <nz-modal [(nzVisible)]="passwordChangeModalFalse" nzTitle="The first Modal" (nzOnCancel)="closeModal()" (nzOnOk)="showChangePasswordModal()">
-      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+<!--    修改密码modal-->
+    <nz-modal [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="submitPasswordForm()">
+      <form nz-form [formGroup]="validatePasswordForm">
+
+        <!--<nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired nzFor="oldPassword">旧密码</nz-form-label>
+          <nz-form-control [nzSpan]="16" nzErrorTip="请输入旧密码">
+            <input nz-input formControlName="oldPassword" [(ngModel)]="password.oldPassword" name="oldPassword" id="oldPassword">
+            <nz-form-explain *ngIf="validatePasswordForm.get('oldPassword').dirty && validatePasswordForm.get('oldPassword').errors">
+              必填
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>-->
+
         <nz-form-item>
-          <nz-form-label [nzSpan]="4" nzRequired nzFor="name">Name</nz-form-label>
-          <nz-form-control [nzSpan]="8" nzErrorTip="Please input your name">
-            <input type="text" nz-input formControlName="name" placeholder="Please input your name" />
+          <nz-form-label [nzSpan]="6" nzRequired nzFor="oldPassword">旧密码</nz-form-label>
+          <nz-form-control [nzSpan]="16" nzErrorTip="请输入旧密码">
+            <input type="password" [(ngModel)]="password.oldPassword" nz-input formControlName="oldPassword" placeholder="请输入旧密码" />
+            <nz-form-explain *ngIf="validatePasswordForm.get('oldPassword').dirty && validatePasswordForm.get('oldPassword').errors">
+              必填
+            </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
+
         <nz-form-item>
-          <nz-form-label [nzSpan]="4" nzFor="nickname" [nzRequired]="validateForm.get('required')?.value"
-          >Nickname</nz-form-label
-          >
-          <nz-form-control [nzSpan]="8" nzErrorTip="Please input your nickname">
-            <input type="text" nz-input formControlName="nickname" placeholder="Please input your nickname" />
+          <nz-form-label [nzSpan]="6" nzRequired nzFor="newPassword">新密码</nz-form-label>
+          <nz-form-control [nzSpan]="16" nzErrorTip="请输入新密码">
+            <input type="password" [(ngModel)]="password.newPassword" nz-input formControlName="newPassword" placeholder="请输入新密码" />
+            <nz-form-explain *ngIf="validatePasswordForm.get('newPassword').dirty && validatePasswordForm.get('newPassword').errors">
+              必填
+            </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
+
         <nz-form-item>
-          <nz-form-control [nzSpan]="8" [nzOffset]="4">
-            <label nz-checkbox formControlName="required" (ngModelChange)="requiredChange($event)"
-            >Nickname is required</label
-            >
+          <nz-form-label [nzSpan]="6" nzRequired nzFor="confirmPassword">确认新密码</nz-form-label>
+          <nz-form-control [nzSpan]="16" nzErrorTip="请确认新密码">
+            <input type="password"  [(ngModel)]="password.confirmPassword" nz-input formControlName="confirmPassword" placeholder="请确认新密码" />
+            <nz-form-explain *ngIf="validatePasswordForm.get('confirmPassword').dirty && validatePasswordForm.get('confirmPassword').errors">
+              必须与新密码相同
+            </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item>
-          <nz-form-control [nzSpan]="8" [nzOffset]="4">
-            <button nz-button nzType="primary">Check</button>
-          </nz-form-control>
-        </nz-form-item>
+
       </form>
     </nz-modal>
   </nz-layout>

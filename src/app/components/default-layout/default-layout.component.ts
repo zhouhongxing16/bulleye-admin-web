@@ -2,7 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Help} from '../../utils/Help';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-default-layout',
@@ -17,7 +17,12 @@ export class DefaultLayoutComponent implements OnInit {
   triggerTemplate: TemplateRef<void> | null = null;
   passwordChangeModalFalse: boolean;
 
-  validateForm: FormGroup;
+  validatePasswordForm: FormGroup;
+  password = {
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  };
 
   constructor(
     public help: Help,
@@ -42,10 +47,10 @@ export class DefaultLayoutComponent implements OnInit {
     if (token) {
       this.getStaffInfo();
     }
-    this.validateForm = this.fb.group({
-      name: [null, [Validators.required]],
-      nickname: [null],
-      required: [false]
+    this.validatePasswordForm = this.fb.group({
+      oldPassword: [null, [Validators.required]],
+      newPassword: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required, this.confirmationPasswordValidator]],
     });
   }
 
@@ -110,22 +115,29 @@ export class DefaultLayoutComponent implements OnInit {
     });
   }
 
-
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+  confirmationPasswordValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return {required: true};
+    } else if (control.value !== this.validatePasswordForm.controls.newPassword.value) {
+      return {confirm: true, error: true};
     }
-  }
+    return {};
+  };
 
-  requiredChange(required: boolean): void {
-    if (!required) {
-      this.validateForm.get('nickname')!.clearValidators();
-      this.validateForm.get('nickname')!.markAsPristine();
-    } else {
-      this.validateForm.get('nickname')!.setValidators(Validators.required);
-      this.validateForm.get('nickname')!.markAsDirty();
+  submitPasswordForm(): void {
+    for (const i in this.validatePasswordForm.controls) {
+      this.validatePasswordForm.controls[i].markAsDirty();
+      this.validatePasswordForm.controls[i].updateValueAndValidity();
     }
-    this.validateForm.get('nickname')!.updateValueAndValidity();
+    if (this.validatePasswordForm.valid) {
+      this.help.post('/account/changePassword', this.password).subscribe(result => {
+        if (result.success) {
+          this.help.showMessage('success', result.message);
+        } else {
+          this.help.showMessage('error', result.message);
+        }
+        console.log(result);
+      });
+    }
   }
 }
