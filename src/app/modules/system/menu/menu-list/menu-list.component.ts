@@ -4,7 +4,6 @@ import {MenuService} from '../menu.service';
 import {NzDropdownContextComponent, NzDropdownService, NzFormatEmitEvent, NzTreeComponent, NzTreeNode} from 'ng-zorro-antd';
 import {Menu} from '../menu';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {MenuAuth} from '../../menu-auth/menu-auth';
 
 @Component({
@@ -43,7 +42,6 @@ export class MenuListComponent implements OnInit {
     private menuService: MenuService,
     private help: Help,
     private nzDropdownService: NzDropdownService,
-    private router: Router
   ) {
   }
 

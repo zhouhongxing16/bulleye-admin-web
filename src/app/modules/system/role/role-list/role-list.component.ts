@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Help} from '../../../../utils/Help';
 import {RoleService} from '../role.service';
 import {Role} from '../role';
-import {NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions} from 'ng-zorro-antd';
+import {NzFormatEmitEvent, NzTreeComponent} from 'ng-zorro-antd';
 import {RoleMenuAuthService} from '../../role-menu-auth/role-menu-auth.service';
 
 @Component({

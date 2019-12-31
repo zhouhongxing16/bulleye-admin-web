@@ -133,6 +133,9 @@ export class DefaultLayoutComponent implements OnInit {
       this.help.post('/account/changePassword', this.password).subscribe(result => {
         if (result.success) {
           this.help.showMessage('success', result.message);
+          this.help.showMessage('info', '请重新登录！');
+          localStorage.removeItem('token');
+          window.location.reload();
         } else {
           this.help.showMessage('error', result.message);
         }

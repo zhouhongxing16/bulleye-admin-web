@@ -49,18 +49,8 @@
     </nz-content>
 
 <!--    修改密码modal-->
-    <nz-modal [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="submitPasswordForm()">
+    <nz-modal nzMaskClosable="false" [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="submitPasswordForm()">
       <form nz-form [formGroup]="validatePasswordForm">
-
-        <!--<nz-form-item>
-          <nz-form-label [nzSpan]="6" nzRequired nzFor="oldPassword">旧密码</nz-form-label>
-          <nz-form-control [nzSpan]="16" nzErrorTip="请输入旧密码">
-            <input nz-input formControlName="oldPassword" [(ngModel)]="password.oldPassword" name="oldPassword" id="oldPassword">
-            <nz-form-explain *ngIf="validatePasswordForm.get('oldPassword').dirty && validatePasswordForm.get('oldPassword').errors">
-              必填
-            </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>-->
 
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzRequired nzFor="oldPassword">旧密码</nz-form-label>
