@@ -41,20 +41,11 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">描述</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
-    </nz-form-control>
-  </nz-form-item>
-
-
-  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">简介</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <app-ng-editor [(content)]="obj.brief" formControlName="brief" ngDefaultControl  name="brief" id="brief"></app-ng-editor>
+      <app-ng-editor [(content)]="obj.status" formControlName="remark" ngDefaultControl  name="remark" id="remark"></app-ng-editor>
     </nz-form-control>
   </nz-form-item>
-{{obj|json}}
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">

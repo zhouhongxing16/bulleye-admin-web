@@ -31,8 +31,8 @@
     <td>{{data.code}}</td>
     <td>{{data.describe}}</td>
     <td>{{data.dataAuthFlag}}</td>
-    <td>{{data.status}}</td>
-    <td>{{data.created}}</td>
+    <td>{{data.status | status}}</td>
+    <td>{{data.created | date}}</td>
     <td>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle" *ngIf="initAuth('edit')"><i
         class="anticon anticon-edit"></i></button>

@@ -6,15 +6,17 @@ import { OrganizationListComponent } from './organization-list/organization-list
 import { OrganizationEditComponent } from './organization-edit/organization-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {CommonPipeModule} from '../../common/common-pipe.module';
 
 @NgModule({
   declarations: [OrganizationListComponent, OrganizationEditComponent],
-  imports: [
-    CommonModule,
-    OrganizationRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgZorroAntdModule
-  ]
+    imports: [
+        CommonModule,
+        OrganizationRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgZorroAntdModule,
+        CommonPipeModule
+    ]
 })
 export class OrganizationModule { }

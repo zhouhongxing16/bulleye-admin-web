@@ -8,12 +8,14 @@ import {DepartmentEditComponent} from './department-edit/department-edit.compone
 import {DepartmentListComponent} from './department-list/department-list.component';
 import {NgEditorComponent} from '../../../components/ng-editor/ng-editor.component';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import {CommonPipeModule} from '../../common/common-pipe.module';
 
 @NgModule({
   declarations: [DepartmentEditComponent, DepartmentListComponent,
     NgEditorComponent],
   imports: [
     CommonModule,
+    CommonPipeModule,
     DepartmentRoutingModule,
     ReactiveFormsModule,
     FormsModule,

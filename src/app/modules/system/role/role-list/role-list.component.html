@@ -29,7 +29,7 @@
     <td>{{data.name}}</td>
     <td>{{data.code}}</td>
     <td>{{data.remark}}</td>
-    <td>{{data.status}}</td>
+    <td>{{data.status | status}}</td>
     <td>{{data.created}}</td>
     <td>
       <button title="菜单授权" (click)="addMenu(data.id)" nz-button nzType="primary" nzShape="circle"><i nz-icon

@@ -121,7 +121,7 @@
         <td>{{data.name}}</td>
         <td>{{data.code}}</td>
         <td>{{data.path}}</td>
-        <td>{{data.status}}</td>
+        <td>{{data.status | status}}</td>
         <td>{{data.created}}</td>
         <td>
           <button title="修改数据" (click)="setData(data.id)" nz-button nzType="primary" nzShape="circle" ><i

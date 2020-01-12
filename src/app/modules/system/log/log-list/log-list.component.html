@@ -31,7 +31,7 @@
 
     <th nzShowSort nzSortKey="ip">IP</th>
 
-    <th nzShowSort nzSortKey="executionTime">执行时长</th>
+    <th nzShowSort nzSortKey="executionTime">执行时长(ms)</th>
 
     <th nzShowSort nzSortKey="created">操作时间</th>
 
@@ -61,8 +61,7 @@
 
     <td>{{data.created}}</td>
 
-    <td>{{data.status}}</td>
-
+    <td><div  [innerHTML]="data.status | status"></div></td>
     <td>
       <!--<button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>-->

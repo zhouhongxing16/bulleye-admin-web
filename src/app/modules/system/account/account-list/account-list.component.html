@@ -28,8 +28,8 @@
   <tr *ngFor="let data of staffTable.data">
     <td>{{data.username}}</td>
     <td>{{data.email}}</td>
-    <td>{{data.accountLocked}}</td>
-    <td>{{data.status}}</td>
+    <td>{{data.accountLocked | flag}}</td>
+    <td [innerHTML]="data.status | status"></td>
     <td>{{data.created}}</td>
     <td>
       <button title="选择角色" (click)="openDrawer(data.id)" nz-button nzType="primary" nzShape="circle"><i nz-icon

@@ -5,6 +5,7 @@ import { LogRoutingModule } from './log-routing.module';
 import { LogListComponent } from './log-list/log-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {CommonPipeModule} from '../../common/common-pipe.module';
 
 @NgModule({
   declarations: [LogListComponent],
@@ -13,7 +14,8 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
     LogRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    CommonPipeModule
   ]
 })
 export class LogModule { }
