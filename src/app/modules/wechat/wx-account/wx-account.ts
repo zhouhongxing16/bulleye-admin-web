@@ -1,20 +1,22 @@
 export class WxAccount {
-  id: string;
+    id: string;
 
-  name: string;
+    name: string;
 
-  sourceId: string;
+    logo: string;
 
-  appId: string;
+    sourceId: string;
 
-  appSecret: string;
+    appId: string;
 
-  domain: string;
+    appSecret: string;
 
-  status: number;
+    domain: string;
 
-  remark: string;
+    status: number;
 
-  menuState: string;
+    remark: string;
+
+    menuState: string;
 
 }

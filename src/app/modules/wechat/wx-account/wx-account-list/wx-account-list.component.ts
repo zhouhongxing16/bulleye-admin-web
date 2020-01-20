@@ -12,12 +12,12 @@ export class WxAccountListComponent implements OnInit {
   rows: WxAccount[] = [];
   total = 0;
   pageIndex = 1;
-  pageSize = 10;
+  pageSize = 8;
   sortValue = null;
   sortKey = null;
   loading = false;
 
-  //方法开始全选多选
+  // 方法开始全选多选
   isAllDisplayDataChecked = false;
   isIndeterminate = false;
   listOfDisplayData = [];
@@ -37,12 +37,14 @@ export class WxAccountListComponent implements OnInit {
     this.listOfDisplayData.forEach(item => this.mapOfCheckedId[item.id] = value);
     this.refreshStatus();
   }
-  //多选删除
+
+  // 多选删除
   deleteOfChecked() {
-    var ids = [];
-    for (var p1 in this.mapOfCheckedId) {
-      if (this.mapOfCheckedId.hasOwnProperty(p1) && this.mapOfCheckedId[p1])
+    const ids = [];
+    for (const p1 in this.mapOfCheckedId) {
+      if (this.mapOfCheckedId.hasOwnProperty(p1) && this.mapOfCheckedId[p1]) {
         ids.push(p1);
+      }
     }
   }
 

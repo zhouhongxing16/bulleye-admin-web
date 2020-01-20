@@ -1,8 +1,50 @@
 <div class="table-operations">
   <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed" (click)="deleteOfChecked()"><i class="anticon anticon-delete"></i>删除</button>
+  <nz-input-group nzSearch [nzAddOnAfter]="suffixButton" style="width: 500px">
+    <input type="text" nz-input placeholder="input search text"/>
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary" nzSearch>Search</button>
+  </ng-template>
 </div>
-<nz-table
+
+<nz-divider nzText="公众号管理"></nz-divider>
+
+<div nz-row>
+  <div style="margin-top: 20px" nz-col [nzXs]="{ span: 22, offset: 1 }" [nzMd]="{ span: 10, offset: 1 }"
+       [nzLg]="{ span: 4, offset: 1 }" *ngFor="let data of rows">
+    <nz-card [nzHoverable]="true" style="width:300px;" [nzCover]="coverTemplate"
+             [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+      <nz-card-meta
+        [nzTitle]="data.name"
+        [nzDescription]="data.remark==null?'This is the description':data.remark"
+      ></nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <img alt="image"
+           [src]="data.logo==null?'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png':data.logo"/>
+    </ng-template>
+    <ng-template #actionSetting>
+      <i nz-icon nzType="setting"></i>
+    </ng-template>
+    <ng-template #actionEdit>
+      <i nz-icon nzType="edit"></i>
+    </ng-template>
+    <ng-template #actionEllipsis>
+      <i nz-icon nzType="ellipsis"></i>
+    </ng-template>
+  </div>
+
+</div>
+<nz-divider nzText="---"></nz-divider>
+<div nz-row>
+  <div nz-col [nzSpan]="12" nzOffset="10">
+    <nz-pagination [nzPageIndex]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="total"
+                   nzShowQuickJumper></nz-pagination>
+  </div>
+</div>
+<!--<nz-table
   #staffTable
   nzShowSizeChanger
   [nzData]="rows"
@@ -17,7 +59,9 @@
   (nzCurrentPageDataChange)="currentPageDataChange($event)">
   <thead nzSingleSort>
   <tr>
-    <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate" (nzCheckedChange)="checkAll($event)"></th>
+    <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate"
+        (nzCheckedChange)="checkAll($event)"></th>
+    <th nzShowSort nzSortKey="logo">logo</th>
     <th nzShowSort nzSortKey="name">名称</th>
     <th nzShowSort nzSortKey="sourceId">ID</th>
     <th nzShowSort nzSortKey="appId">appId</th>
@@ -29,15 +73,16 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of staffTable.data">
-    <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()" ></td>
+    <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
+    <td>
+      <nz-avatar [nzShape]="'square'" [nzSize]="'large'"
+                 [nzSrc]="data.logo==null?'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png':data.logo"></nz-avatar>
+    </td>
     <td>{{data.name}}</td>
     <td>{{data.sourceId}}</td>
     <td>{{data.appId}}</td>
     <td>{{data.appSecret}}</td>
-    <td>
-        <ng-container *ngIf="data.status=='0'">启用</ng-container>
-        <ng-container *ngIf="data.status=='1'">禁用</ng-container>
-    </td>
+    <td>{{data.status | status}}</td>
     <td>{{data.created}}</td>
     <td>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
@@ -51,4 +96,4 @@
     </td>
   </tr>
   </tbody>
-</nz-table>
+</nz-table>-->
