@@ -22,12 +22,14 @@ export class MenuComponent implements OnInit {
   }
 
   initAuth(obj: any) {
+    this.help.loading();
     this.help.get(`/rolemenuauth/getAuthByMenuId/` + obj.id).subscribe(msg => {
       let enc = '';
       if (msg.success && !this.help.isEmpty(msg.data)) {
         const data = JSON.stringify(msg.data);
         enc = window.btoa(data);
       }
+      this.help.stopLoad();
       this.router.navigate([obj.path], {
         queryParams: {
           code: enc
