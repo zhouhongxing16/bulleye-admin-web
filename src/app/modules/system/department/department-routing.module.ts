@@ -5,6 +5,7 @@ import {DepartmentEditComponent} from './department-edit/department-edit.compone
 const routes: Routes = [
   {path: 'list', component: DepartmentListComponent},
   {path: 'edit/:id', component: DepartmentEditComponent},
+  {path: 'edit', component: DepartmentEditComponent},
   {path: 'add', component: DepartmentEditComponent}
 ];
 

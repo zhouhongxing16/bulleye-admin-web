@@ -2,13 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {Help} from '../../../../utils/Help';
 import {WxAccountService} from '../wx-account.service';
 import {WxAccount} from '../wx-account';
+import {WxAccountEditComponent} from '../wx-account-edit/wx-account-edit.component';
+import {switchMap} from 'rxjs/operators';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {of} from 'rxjs';
+import {BaseListComponent} from '../../../../components/base-list/base-list.component';
 
 @Component({
   selector: 'app-wx-account-list',
   templateUrl: './wx-account-list.component.html',
   styleUrls: ['./wx-account-list.component.scss']
 })
-export class WxAccountListComponent implements OnInit {
+export class WxAccountListComponent extends BaseListComponent<WxAccount> {
   rows: WxAccount[] = [];
   total = 0;
   pageIndex = 1;
@@ -22,6 +27,11 @@ export class WxAccountListComponent implements OnInit {
   isIndeterminate = false;
   listOfDisplayData = [];
   mapOfCheckedId = {};
+
+
+  constructor( wxAccountService: WxAccountService,  help: Help,  route: ActivatedRoute, router: Router) {
+    super(wxAccountService, help, route, router);
+  }
 
   currentPageDataChange($event: Array<{}>): void {
     this.listOfDisplayData = $event;
@@ -37,50 +47,4 @@ export class WxAccountListComponent implements OnInit {
     this.listOfDisplayData.forEach(item => this.mapOfCheckedId[item.id] = value);
     this.refreshStatus();
   }
-
-  // 多选删除
-  deleteOfChecked() {
-    const ids = [];
-    for (const p1 in this.mapOfCheckedId) {
-      if (this.mapOfCheckedId.hasOwnProperty(p1) && this.mapOfCheckedId[p1]) {
-        ids.push(p1);
-      }
-    }
-  }
-
-  constructor(private wxAccountService: WxAccountService, private help: Help) {
-  }
-
-  ngOnInit() {
-    this.getListByPage();
-  }
-
-  getListByPage(reset: boolean = false) {
-    if (reset) {
-      this.pageIndex = 1;
-    }
-    this.loading = true;
-    this.wxAccountService.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
-      this.loading = false;
-      this.rows = data.rows;
-      this.total = data.total;
-    }, err => {
-      this.loading = false;
-      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
-    });
-  }
-
-  deleteRow(id: string) {
-    this.help.loading('删除中...');
-    this.wxAccountService.deleteById(id).subscribe(res => {
-      if (res.success) {
-        this.help.stopLoad();
-        this.help.showMessage('success', res.message);
-        this.getListByPage(true);
-      } else {
-        this.help.showMessage('error', res.message);
-      }
-    });
-  }
-
 }

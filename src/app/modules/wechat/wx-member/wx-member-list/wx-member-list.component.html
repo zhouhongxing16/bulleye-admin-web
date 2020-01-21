@@ -30,8 +30,8 @@
     <td>{{data.nickname}}</td>
     <td>{{data.sex}}</td>
     <td>{{data.city}}</td>
-    <td>{{data.subscribe}}</td>
-    <td>{{data.subscribeTime}}</td>
+    <td>{{data.subscribe | flag}}</td>
+    <td>{{data.subscribeTime | date:"yyyy-MM-dd hh:ss"}}</td>
     <td>
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>

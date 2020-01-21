@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
-import {Location} from '@angular/common';
-import {DatePipe} from '@angular/common';
+import {DatePipe, Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class Help {
@@ -15,7 +15,8 @@ export class Help {
     private message: NzMessageService,
     private location: Location,
     private datePipe: DatePipe,
-    private modalService: NzModalService
+    public modalService: NzModalService,
+    private router: Router
   ) {
   }
 
@@ -60,6 +61,12 @@ export class Help {
     }
   }
 
+  goToPage(path: string, params: any) {
+    this.router.navigate([path], {
+      queryParams: params
+    });
+  }
+
   showSuccessModal(title: string, content: string) {
     if (this.isEmpty(title)) {
       title = '提示';
@@ -73,6 +80,7 @@ export class Help {
     });
     setTimeout(() => modal.destroy(), 2000);
   }
+
 
   convertTime(timestamp: any) {
     const time: any = new Date(timestamp);

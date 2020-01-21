@@ -14,7 +14,7 @@ import {of} from 'rxjs';
 })
 export class DepartmentEditComponent implements OnInit {
 
-
+  pageParams: any;
   validateForm: FormGroup;
   isLoading = false;
   obj: Department = new Department();
@@ -27,7 +27,10 @@ export class DepartmentEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
+    this.route.queryParams.subscribe(params => {
+      this.pageParams = params;
+    });
+    this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
           return this.departmentService.getById(params.get('id'));
@@ -72,7 +75,7 @@ export class DepartmentEditComponent implements OnInit {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
-        this.help.back();
+        this.help.goToPage('/department/list', this.pageParams);
       }
     });
   }

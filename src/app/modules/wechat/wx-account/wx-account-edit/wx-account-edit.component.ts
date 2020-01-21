@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Help} from '../../../../utils/Help';
 import {WxAccountService} from '../wx-account.service';
 import {WxAccount} from '../wx-account';
@@ -17,15 +17,21 @@ export class WxAccountEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private wxAccountService: WxAccountService,
               private route: ActivatedRoute,
-              private help: Help) {
+              private help: Help,
+              public router: Router
+  ) {
   }
 
+  pageParams: any;
   validateForm: FormGroup;
   isLoading = false;
   obj: WxAccount = new WxAccount();
 
   ngOnInit() {
-    this.route.paramMap.pipe(
+    this.route.queryParams.subscribe(params => {
+      this.pageParams = params;
+    });
+    this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
           return this.wxAccountService.getById(params.get('id'));
@@ -60,7 +66,7 @@ export class WxAccountEditComponent implements OnInit {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
-        this.help.back();
+        this.help.goToPage('/wxaccount/list', this.pageParams);
       }
     });
   }

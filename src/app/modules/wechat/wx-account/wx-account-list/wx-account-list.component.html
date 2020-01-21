@@ -1,5 +1,6 @@
 <div class="table-operations">
-  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+<!--  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;-->
+  <button nz-button nzType="primary" (click)="createComponentModal()"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed" (click)="deleteOfChecked()"><i class="anticon anticon-delete"></i>删除</button>
   <nz-input-group nzSearch [nzAddOnAfter]="suffixButton" style="width: 500px">
     <input type="text" nz-input placeholder="input search text"/>
@@ -10,41 +11,26 @@
 </div>
 
 <nz-divider nzText="公众号管理"></nz-divider>
-
+<!--
 <div nz-row>
-  <div style="margin-top: 20px" nz-col [nzXs]="{ span: 22, offset: 1 }" [nzMd]="{ span: 10, offset: 1 }"
-       [nzLg]="{ span: 4, offset: 1 }" *ngFor="let data of rows">
-    <nz-card [nzHoverable]="true" style="width:300px;" [nzCover]="coverTemplate"
-             [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-      <nz-card-meta
-        [nzTitle]="data.name"
-        [nzDescription]="data.remark==null?'This is the description':data.remark"
-      ></nz-card-meta>
-    </nz-card>
-    <ng-template #coverTemplate>
-      <img alt="image"
-           [src]="data.logo==null?'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png':data.logo"/>
-    </ng-template>
-    <ng-template #actionSetting>
-      <i nz-icon nzType="setting"></i>
-    </ng-template>
-    <ng-template #actionEdit>
-      <i nz-icon nzType="edit"></i>
-    </ng-template>
-    <ng-template #actionEllipsis>
-      <i nz-icon nzType="ellipsis"></i>
-    </ng-template>
-  </div>
+<div style="margin-top: 20px" nz-col [nzXs]="{ span: 22, offset: 1 }" [nzMd]="{ span: 10, offset: 1 }"
+      [nzLg]="{ span: 4, offset: 1 }" *ngFor="let data of rows">
+   <nz-card [nzHoverable]="true" style="width:300px;" [nzCover]="coverTemplate"
+            [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+     <nz-card-meta
+       [nzTitle]="data.name"
+       [nzDescription]="data.remark==null?'This is the description':data.remark"
+     ></nz-card-meta>
+   </nz-card>
 
-</div>
-<nz-divider nzText="---"></nz-divider>
+ </div>
 <div nz-row>
-  <div nz-col [nzSpan]="12" nzOffset="10">
-    <nz-pagination [nzPageIndex]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="total"
-                   nzShowQuickJumper></nz-pagination>
-  </div>
-</div>
-<!--<nz-table
+ <div nz-col [nzSpan]="12" nzOffset="10">
+   <nz-pagination [nzPageIndex]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="total"
+                  nzShowQuickJumper></nz-pagination>
+ </div>
+</div>-->
+<nz-table
   #staffTable
   nzShowSizeChanger
   [nzData]="rows"
@@ -85,7 +71,7 @@
     <td>{{data.status | status}}</td>
     <td>{{data.created}}</td>
     <td>
-      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+      <button title="修改数据" (click)="goToPage('/wxaccount/edit',{id:data.id,code:authData.authCode})" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
         <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
@@ -96,4 +82,4 @@
     </td>
   </tr>
   </tbody>
-</nz-table>-->
+</nz-table>

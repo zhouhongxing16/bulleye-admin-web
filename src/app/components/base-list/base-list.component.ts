@@ -1,7 +1,7 @@
 import {OnInit} from '@angular/core';
 import {BaseService} from '../../utils/base.service';
 import {Help} from '../../utils/Help';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 export class BaseListComponent<T> implements OnInit {
 
@@ -12,20 +12,26 @@ export class BaseListComponent<T> implements OnInit {
   loading = false;
   authData: any = {
     auths: [],
-    flag: false
+    flag: false,
+    authCode: ''
   };
 
-  constructor(public service: BaseService<T>, public help: Help, public router: ActivatedRoute) {
+  constructor(public service: BaseService<T>, public help: Help, public route: ActivatedRoute, public router: Router) {
   }
 
   ngOnInit() {
-    this.router.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
+      this.authData.authCode = params.code;
       if (this.help.isEmpty(params.code)) {
         this.authData.flag = false;
       } else {
         this.authData.flag = true;
         const dec = window.atob(params.code);
         this.authData.auths = JSON.parse(dec);
+      }
+      if (!this.help.isEmpty(params.pageSize) && !this.help.isEmpty(params.pageIndex)) {
+        this.pageSize = params.pageSize;
+        this.pageIndex = params.pageIndex;
       }
     });
     this.getListByPage();
@@ -59,9 +65,17 @@ export class BaseListComponent<T> implements OnInit {
     });
   }
 
+  goToPage(path: string, params: any) {
+    params.pageIndex = this.pageIndex;
+    params.pageSize = this.pageSize;
+    this.router.navigate([path], {
+      queryParams: params
+    });
+  }
+
   initAuth(code: string) {
     if (this.authData.flag) {
-      console.log(code)
+      console.log(code);
       for (let i = 0; i < this.authData.auths.length; i++) {
         if (this.authData.auths[i].code === code) {
           return true;

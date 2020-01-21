@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {StaffService} from '../staff.service';
 import {Help} from '../../../../utils/Help';
 import {Staff} from '../staff';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BaseListComponent} from '../../../../components/base-list/base-list.component';
 
 @Component({
@@ -12,8 +12,8 @@ import {BaseListComponent} from '../../../../components/base-list/base-list.comp
 })
 export class StaffListComponent extends BaseListComponent<Staff> {
 
-  constructor(staffService: StaffService, help: Help, router: ActivatedRoute) {
-    super(staffService, help, router);
+  constructor(staffService: StaffService, help: Help, route: ActivatedRoute, router: Router) {
+    super(staffService, help, route, router);
   }
 
 }

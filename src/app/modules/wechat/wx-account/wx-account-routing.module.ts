@@ -6,6 +6,7 @@ import {WxAccountListComponent} from './wx-account-list/wx-account-list.componen
 const routes: Routes = [
   {path: 'list', component: WxAccountListComponent},
   {path: 'edit/:id', component: WxAccountEditComponent},
+  {path: 'edit', component: WxAccountEditComponent},
   {path: 'add', component: WxAccountEditComponent}
 ];
 
