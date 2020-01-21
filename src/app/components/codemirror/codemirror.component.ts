@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/sql/sql';
 import 'codemirror/addon/hint/show-hint.js';
 import 'codemirror/addon/hint/sql-hint.js';

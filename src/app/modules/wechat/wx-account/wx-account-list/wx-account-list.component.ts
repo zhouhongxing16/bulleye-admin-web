@@ -1,11 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Help} from '../../../../utils/Help';
 import {WxAccountService} from '../wx-account.service';
 import {WxAccount} from '../wx-account';
-import {WxAccountEditComponent} from '../wx-account-edit/wx-account-edit.component';
-import {switchMap} from 'rxjs/operators';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {of} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BaseListComponent} from '../../../../components/base-list/base-list.component';
 
 @Component({
@@ -33,6 +30,15 @@ export class WxAccountListComponent extends BaseListComponent<WxAccount> {
     super(wxAccountService, help, route, router);
   }
 
+// 多选删除
+  deleteOfChecked() {
+    const ids = [];
+    for (const p1 in this.mapOfCheckedId) {
+      if (this.mapOfCheckedId.hasOwnProperty(p1) && this.mapOfCheckedId[p1]) {
+        ids.push(p1);
+      }
+    }
+  }
   currentPageDataChange($event: Array<{}>): void {
     this.listOfDisplayData = $event;
     this.refreshStatus();

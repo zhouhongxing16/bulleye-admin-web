@@ -17,8 +17,7 @@ export class WxAccountEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private wxAccountService: WxAccountService,
               private route: ActivatedRoute,
-              private help: Help,
-              public router: Router
+              public help: Help
   ) {
   }
 

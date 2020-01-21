@@ -23,7 +23,7 @@ export class DepartmentEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private departmentService: DepartmentService,
     private route: ActivatedRoute,
-    private help: Help) {
+    public help: Help) {
   }
 
   ngOnInit() {
