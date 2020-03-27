@@ -2,7 +2,7 @@ export class WxReply {
 
   id: string;
 
-  accountId: string;
+  sourceId: string;
 
   keyWord: string;
 

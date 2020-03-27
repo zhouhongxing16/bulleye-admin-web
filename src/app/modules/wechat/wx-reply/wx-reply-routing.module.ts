@@ -6,7 +6,7 @@ import {WxReplyListComponent} from './wx-reply-list/wx-reply-list.component';
 const routes: Routes = [
   {path: 'list', component: WxReplyListComponent},
   {path: 'edit/:id', component: WxReplyEditComponent},
-  {path: 'add/:accountId', component: WxReplyEditComponent}
+  {path: 'add/:sourceId', component: WxReplyEditComponent}
 ];
 
 @NgModule({

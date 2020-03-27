@@ -30,7 +30,7 @@ export class WxMaterialEditComponent implements OnInit {
   validateForm: FormGroup;
   isLoading = false;
   obj: WxMaterial = new WxMaterial();
-  chooseWxAccountId;
+  chooseWxSourceId;
 
   constructor(private formBuilder: FormBuilder,
               private wxMaterialService: WxMaterialService,
@@ -43,7 +43,7 @@ export class WxMaterialEditComponent implements OnInit {
         if (params.get('id')) {
           return this.wxMaterialService.getById(params.get('id'));
         } else {
-          this.chooseWxAccountId = params.get('accountId');
+          this.chooseWxSourceId = params.get('sourceId');
           return of(new WxMaterial());
         }
       })
@@ -54,8 +54,8 @@ export class WxMaterialEditComponent implements OnInit {
         this.obj = new WxMaterial();
       }
     });
-    if(this.chooseWxAccountId){
-      this.obj.accountId = this.chooseWxAccountId;
+    if(this.chooseWxSourceId){
+      this.obj.sourceId = this.chooseWxSourceId;
     }
     console.log(this.obj);
     this.validateForm = this.formBuilder.group({

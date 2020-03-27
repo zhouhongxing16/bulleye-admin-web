@@ -32,7 +32,7 @@ export class WxReplyEditComponent implements OnInit {
   validateForm: FormGroup;
   isLoading = false;
   obj: WxReply = new WxReply();
-  chooseWxAccountId;
+  chooseSourceId;
 
   constructor(private formBuilder: FormBuilder,
               private wxReplyService: WxReplyService,
@@ -46,7 +46,7 @@ export class WxReplyEditComponent implements OnInit {
         if (params.get('id')) {
           return this.wxReplyService.getById(params.get('id'));
         } else {
-          this.chooseWxAccountId = params.get('accountId');
+          this.chooseSourceId = params.get('sourceId');
           return of(new WxReply());
         }
       })
@@ -57,8 +57,8 @@ export class WxReplyEditComponent implements OnInit {
         this.obj = new WxReply();
       }
     });
-    if(this.chooseWxAccountId){
-      this.obj.accountId = this.chooseWxAccountId;
+    if(this.chooseSourceId){
+      this.obj.sourceId = this.chooseSourceId;
     }
     this.validateForm = this.formBuilder.group({
       keyWord: [null, [Validators.required]],

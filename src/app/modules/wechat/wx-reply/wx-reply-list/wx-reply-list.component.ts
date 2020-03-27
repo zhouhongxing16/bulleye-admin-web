@@ -22,7 +22,7 @@ export class WxReplyListComponent implements OnInit {
   //公众号列表
   wxAccounts: WxAccount[] = [];
   //当前公众号
-  chooseWxAccountId = '';
+  chooseSourceId = '';
 
   constructor(private wxReplyService: WxReplyService, private help: Help, private wxAccountService: WxAccountService) {
   }
@@ -35,19 +35,19 @@ export class WxReplyListComponent implements OnInit {
     this.wxAccountService.getListByParams({}).subscribe(data => {
       console.log(data.data);
       this.wxAccounts = data.data;
-      this.getListByPage(this.wxAccounts[0].id, true);
+      this.getListByPage(this.wxAccounts[0].sourceId, true);
     }, err => {
 
     });
   }
 
-  getListByPage(accountId: string, reset: boolean = false) {
+  getListByPage(sourceId: string, reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
-    this.chooseWxAccountId = accountId;
+    this.chooseSourceId = sourceId;
     this.loading = true;
-    this.wxReplyService.getListByPage(this.pageIndex, this.pageSize, {accountId: accountId}).subscribe(data => {
+    this.wxReplyService.getListByPage(this.pageIndex, this.pageSize, {sourceId: sourceId}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;
@@ -63,7 +63,7 @@ export class WxReplyListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.getListByPage(this.chooseWxAccountId,true);
+        this.getListByPage(this.chooseSourceId,true);
       } else {
         this.help.showMessage('error', res.message);
       }

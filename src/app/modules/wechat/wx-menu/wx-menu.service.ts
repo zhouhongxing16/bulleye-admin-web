@@ -23,11 +23,11 @@ export class WxMenuService extends BaseService<WxMenu> {
     createWxMenu: '/wxmenu/createWxMenu',
   };
 
-  getWxMenu(accountId: string) {
-    return this.help.get(this.url.getWxMenu + `/` + accountId);
+  getWxMenu(sourceId: string) {
+    return this.help.get(this.url.getWxMenu + `/` + sourceId);
   }
 
-  createWxMenu(accountId: string) {
-    return this.help.get(this.url.createWxMenu + `/` + accountId);
+  createWxMenu(sourceId: string) {
+    return this.help.get(this.url.createWxMenu + `/` + sourceId);
   }
 }

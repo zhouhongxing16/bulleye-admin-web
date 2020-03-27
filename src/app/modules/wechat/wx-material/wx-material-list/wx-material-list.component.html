@@ -1,11 +1,11 @@
 <div class="table-operations">
-  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxAccountId" nzAllowClear nzPlaceHolder="Choose"
-             (ngModelChange)="getListByPage(true,chooseWxAccountId)">
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getListByPage(true,chooseWxSourceId)">
     <ng-container *ngFor="let item of wxAccounts">
-      <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+      <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
-  <button nz-button nzType="primary" [routerLink]="['../add',chooseWxAccountId]">
+  <button nz-button nzType="primary" [routerLink]="['../add',chooseWxSourceId]">
     <i class="anticon anticon-plus"></i>添加
   </button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
@@ -21,8 +21,8 @@
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
-  (nzPageIndexChange)="getListByPage(false,chooseWxAccountId)"
-  (nzPageSizeChange)="getListByPage(true,chooseWxAccountId)"
+  (nzPageIndexChange)="getListByPage(false,chooseWxSourceId)"
+  (nzPageSizeChange)="getListByPage(false,chooseWxSourceId)"
   (nzCurrentPageDataChange)="currentPageDataChange($event)">
   <thead nzSingleSort>
   <tr>

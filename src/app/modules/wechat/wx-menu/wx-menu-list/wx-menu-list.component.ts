@@ -17,7 +17,7 @@ export class WxMenuListComponent implements OnInit {
   expand: true;
   loading = false;
   mapOfExpandedData = {};
-  chooseWxAccountId = '';
+  chooseWxSourceId = '';
 
   constructor(private wxMenuService: WxMenuService,
               private help: Help,
@@ -32,17 +32,17 @@ export class WxMenuListComponent implements OnInit {
     this.wxAccountService.getListByParams({}).subscribe(data => {
       console.log(data.data);
       this.wxAccounts = data.data;
-      this.getWxMenu(this.wxAccounts[0].id);
+      this.getWxMenu(this.wxAccounts[0].sourceId);
     }, err => {
 
     });
   }
 
-  getWxMenu(accountId:string) {
-    if (accountId){
-      this.chooseWxAccountId = accountId;
+  getWxMenu(sourceId:string) {
+    if (sourceId){
+      this.chooseWxSourceId = sourceId;
       this.loading = true;
-      this.wxMenuService.getWxMenu(accountId).subscribe(data => {
+      this.wxMenuService.getWxMenu(sourceId).subscribe(data => {
         this.loading = false;
         this.rows = data.wxMenu;
         this.rows.forEach(item => {
@@ -103,7 +103,7 @@ export class WxMenuListComponent implements OnInit {
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.getWxMenu(this.chooseWxAccountId);
+        this.getWxMenu(this.chooseWxSourceId);
       } else {
         this.help.showMessage('error', res.message);
       }
@@ -111,15 +111,13 @@ export class WxMenuListComponent implements OnInit {
   }
 
   createWxMenu() {
-
-
     this.loading = true;
-    this.wxMenuService.createWxMenu(this.chooseWxAccountId).subscribe(res => {
+    this.wxMenuService.createWxMenu(this.chooseWxSourceId).subscribe(res => {
       this.loading = false;
       if (res.success) {
         this.help.stopLoad();
         this.help.showMessage('success', res.message);
-        this.getWxMenu(this.chooseWxAccountId);
+        this.getWxMenu(this.chooseWxSourceId);
       } else {
         this.help.showMessage('error', res.message);
       }

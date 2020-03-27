@@ -61,8 +61,8 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="showCoverPic">显示封面</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="showCoverPic" [(ngModel)]="obj.showCoverPic" name="showCoverPic" id="showCoverPic">
-        <label nz-radio [nzValue]=0>否</label>
-        <label nz-radio [nzValue]=1>是</label>
+        <label nz-radio [nzValue]=false>否</label>
+        <label nz-radio [nzValue]=true>是</label>
       </nz-radio-group>
       <nz-form-explain *ngIf="validateForm.get('showCoverPic').dirty && validateForm.get('showCoverPic').errors">
         必选
@@ -105,8 +105,8 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="needOpenComment">打开评论</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="needOpenComment" [(ngModel)]="obj.needOpenComment" name="needOpenComment" id="needOpenComment">
-        <label nz-radio [nzValue]=0>否</label>
-        <label nz-radio [nzValue]=1>是</label>
+        <label nz-radio [nzValue]=false>否</label>
+        <label nz-radio [nzValue]=true>是</label>
       </nz-radio-group>
       <nz-form-explain *ngIf="validateForm.get('needOpenComment').dirty && validateForm.get('needOpenComment').errors">
         必选
@@ -118,8 +118,8 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="onlyFansCanComment">游客评论</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="onlyFansCanComment" [(ngModel)]="obj.onlyFansCanComment" name="onlyFansCanComment" id="onlyFansCanComment">
-        <label nz-radio [nzValue]=0>否</label>
-        <label nz-radio [nzValue]=1>是</label>
+        <label nz-radio [nzValue]=false>否</label>
+        <label nz-radio [nzValue]=true>是</label>
       </nz-radio-group>
       <nz-form-explain *ngIf="validateForm.get('onlyFansCanComment').dirty && validateForm.get('onlyFansCanComment').errors">
         必选

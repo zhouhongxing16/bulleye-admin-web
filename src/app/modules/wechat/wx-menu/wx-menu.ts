@@ -1,7 +1,7 @@
 export class WxMenu {
   id: string;
 
-  accountId: string;
+  sourceId: string;
 
   type: string;
 

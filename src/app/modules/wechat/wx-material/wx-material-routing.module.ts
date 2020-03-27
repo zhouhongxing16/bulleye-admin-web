@@ -6,7 +6,7 @@ import {WxMaterialEditComponent} from "./wx-material-edit/wx-material-edit.compo
 const routes: Routes = [
   {path: 'list', component: WxMaterialListComponent},
   {path: 'edit/:id', component: WxMaterialEditComponent},
-  {path: 'add/:accountId', component: WxMaterialEditComponent},
+  {path: 'add/:sourceId', component: WxMaterialEditComponent},
 ];
 
 @NgModule({

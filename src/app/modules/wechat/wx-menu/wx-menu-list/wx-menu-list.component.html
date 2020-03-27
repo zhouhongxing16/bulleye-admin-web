@@ -1,11 +1,11 @@
 <div class="table-operations">
-  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxAccountId" nzAllowClear nzPlaceHolder="Choose"
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
              (ngModelChange)="getWxMenu($event)">
     <ng-container *ngFor="let item of wxAccounts">
-      <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+      <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
-  <button nz-button nzType="primary" routerLink="../add" [queryParams]="{type: 'addOne', accountId: chooseWxAccountId}"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="primary" routerLink="../add" [queryParams]="{type: 'addOne', sourceId: chooseWxSourceId}"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
 

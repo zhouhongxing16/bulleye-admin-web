@@ -1,7 +1,7 @@
 export class WxMember {
   id: string;
 
-  accountId: string;
+  sourceId: string;
 
   subscribe: string;
 

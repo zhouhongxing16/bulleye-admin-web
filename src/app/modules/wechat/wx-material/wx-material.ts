@@ -3,7 +3,7 @@ export class WxMaterial {
 
   mediaId: string;
 
-  accountId: string;
+  sourceId: string;
 
   name: string;
 

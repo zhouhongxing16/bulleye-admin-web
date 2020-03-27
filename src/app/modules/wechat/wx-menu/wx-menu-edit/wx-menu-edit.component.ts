@@ -39,11 +39,11 @@ export class WxMenuEditComponent implements OnInit {
       if (this.type == 'addOne') {
         this.obj = new WxMenu();
         this.obj.parentId = '0';
-        this.obj.accountId = this.route.snapshot.queryParams['accountId'];
+        this.obj.sourceId = this.route.snapshot.queryParams['sourceId'];
       } else if (this.type == 'addTwo') {
         this.obj = new WxMenu();
         this.obj.parentId = d.data.id;
-        this.obj.accountId = d.data.accountId;
+        this.obj.sourceId = d.data.sourceId;
       } else if (this.type == 'edit') {
         this.obj = d.data;
       }
@@ -60,7 +60,7 @@ export class WxMenuEditComponent implements OnInit {
       pagePath: [null],
       remark: [null],
       parentId: [null],
-      accountId: [null],
+      sourceId: [null],
       id: [null],
       keyValue: [null],
       url: [null]

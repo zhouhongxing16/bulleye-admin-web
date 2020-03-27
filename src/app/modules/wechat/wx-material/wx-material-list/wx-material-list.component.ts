@@ -15,7 +15,7 @@ export class WxMaterialListComponent implements OnInit {
   rows: WxMaterial[] = [];
   wxAccounts: WxAccount[] = [];//可选的微信号
   loading = false;
-  chooseWxAccountId = '';//选中的微信accountid
+  chooseWxSourceId = '';//选中的微信sourceId
 
   total = 0;
   pageIndex = 1;
@@ -55,18 +55,19 @@ export class WxMaterialListComponent implements OnInit {
     this.wxAccountService.getListByParams({}).subscribe(data => {
       console.log(data.data);
       this.wxAccounts = data.data;
-      this.chooseWxAccountId = this.wxAccounts[0].id;
-      this.getListByPage(true, this.wxAccounts[0].id);
+      this.chooseWxSourceId = this.wxAccounts[0].sourceId;
+      this.getListByPage(true, this.chooseWxSourceId);
     }, err => {
     });
   }
 
-  getListByPage(reset: boolean = false, accountId: string) {
+  getListByPage(reset: boolean = false, sourceId: string) {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.wxMaterialService.getListByPage(this.pageIndex, this.pageSize, {accountId:accountId}).subscribe(data => {
+    this.chooseWxSourceId = sourceId
+    this.wxMaterialService.getListByPage(this.pageIndex, this.pageSize, {sourceId:sourceId}).subscribe(data => {
       this.loading = false;
       this.rows = data.rows;
       this.total = data.total;
