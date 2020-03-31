@@ -48,18 +48,23 @@
       <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
-        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle">
+        <button nz-popconfirm title="删除数据" nz-button nzType="primary" nzShape="circle">
           <i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i>
         </button>
       </nz-popconfirm>
-      <nz-popconfirm [nzTitle]="'确定上传吗?'" (nzOnConfirm)="UploadRow(data.id)">
+      <nz-popconfirm [nzTitle]="'确定生成吗?'" (nzOnConfirm)="UploadRow(data.id)">
         <button nz-popconfirm title="生成素材" nz-button nzType="primary" nzShape="circle">
-          <i nz-icon type="vertical-align-top" theme="outline" twoToneColor="red" title="生成素材"></i>
+          <i nz-icon type="plus-circle" theme="outline" twoToneColor="red" title="生成素材"></i>
+        </button>
+      </nz-popconfirm>
+      <nz-popconfirm [nzTitle]="'确定删除永久素材吗?'" (nzOnConfirm)="unUploadRow(data.id)">
+        <button nz-popconfirm title="删除永久素材" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="minus-circle" theme="outline" twoToneColor="red" title="删除永久素材"></i>
         </button>
       </nz-popconfirm>
       <nz-popconfirm [nzTitle]="'确定推送吗?'" (nzOnConfirm)="PubRow(data.id)">
         <button nz-popconfirm title="推送素材" nz-button nzType="primary" nzShape="circle">
-          <i nz-icon type="vertical-align-top" theme="outline" twoToneColor="red" title="推送素材"></i>
+          <i nz-icon type="project" theme="outline" twoToneColor="red" title="推送素材"></i>
         </button>
       </nz-popconfirm>
     </td>

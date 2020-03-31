@@ -77,6 +77,10 @@ export class WxMaterialListComponent implements OnInit {
     });
   }
 
+  deleteRow(id: string) {
+
+  }
+
   UploadRow(id: string){
     this.help.loading('上传中...');
     this.wxMaterialService.materialUpload(id).subscribe(res => {
@@ -89,8 +93,20 @@ export class WxMaterialListComponent implements OnInit {
     });
   }
 
+  unUploadRow(id: string){
+    this.help.loading('正在删除...');
+    this.wxMaterialService.materialDelete(id).subscribe(res => {
+      this.help.stopLoad();
+      if (res.success) {
+        this.help.showMessage('success', res.message);
+      } else {
+        this.help.showMessage('error', res.message);
+      }
+    })
+  }
+
   PubRow(id: string){
-    this.help.loading("推送中");
+    this.help.loading("推送中...");
     this.wxMaterialService.pubMaterialToUser(id).subscribe(res => {
       this.help.stopLoad();
       if (res.success) {
@@ -100,5 +116,7 @@ export class WxMaterialListComponent implements OnInit {
       }
     });
   }
+
+
 
 }

@@ -9,6 +9,7 @@ import {Observable, Observer, of} from 'rxjs';
 import {UploadFile} from 'ng-zorro-antd';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn.js';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-wx-material-edit',
@@ -32,6 +33,8 @@ export class WxMaterialEditComponent implements OnInit {
   obj: WxMaterial = new WxMaterial();
   chooseWxSourceId;
 
+  thumbUrl: String;
+
   constructor(private formBuilder: FormBuilder,
               private wxMaterialService: WxMaterialService,
               private route: ActivatedRoute,
@@ -50,6 +53,9 @@ export class WxMaterialEditComponent implements OnInit {
     ).subscribe(d => {
       if (d.success) {
         this.obj = d.data;
+        this.wxMaterialService.getAttachFileById(this.obj.thumbFileId).subscribe(data => {
+          this.thumbUrl = environment.SERVER_URL+'/api/file'+data.data.path
+        })
       } else {
         this.obj = new WxMaterial();
       }
@@ -57,7 +63,6 @@ export class WxMaterialEditComponent implements OnInit {
     if(this.chooseWxSourceId){
       this.obj.sourceId = this.chooseWxSourceId;
     }
-    console.log(this.obj);
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       type: [null, [Validators.required]],
@@ -110,7 +115,9 @@ export class WxMaterialEditComponent implements OnInit {
       case 'done':
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.isLoading = false;
-          this.obj.thumbMediaId = info.file.response.id;
+          console.log(info)
+          this.thumbUrl = info.file.thumbUrl
+          this.obj.thumbFileId = info.file.response.id;
         });
         break;
       case 'error':
@@ -142,7 +149,7 @@ export class WxMaterialEditComponent implements OnInit {
   submitForm() {
     this.isLoading = true;
     console.log(this.obj)
-    this.wxMaterialService.addMaterial(this.obj).subscribe(res => {
+    this.wxMaterialService.saveOrUpdateData(this.obj).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);

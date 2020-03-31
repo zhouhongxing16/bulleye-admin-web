@@ -19,9 +19,11 @@ export class WxMaterialService extends BaseService<WxMaterial>{
     edit: '',
     add: '',
     materialUpload: '/wxmaterial/materialUpload',
-    pubMaterialToUser: '/wxmaterial/pubMaterialToUser',
+    materialDelete: '/wxmaterial/materialDelete',
+    pubMaterialToUser: '/wxmaterial/materialDelete',
     addMaterial: '/wxmaterial/addMaterial',
     updateMaterial: '/wxmaterial/updateMaterial',
+    getAttachFileById: '/file/getById'
   };
 
   select(wxMaterial: WxMaterial): Observable<any> {
@@ -39,8 +41,16 @@ export class WxMaterialService extends BaseService<WxMaterial>{
     return this.help.get(this.url.materialUpload + `/` + id);
   }
 
+  materialDelete(id: string){
+    return this.help.get(this.url.materialDelete + `/` + id);
+  }
+
   pubMaterialToUser(id: string){
     return this.help.get(this.url.pubMaterialToUser + `/` + id);
+  }
+
+  getAttachFileById(id: string){
+    return this.help.get(this.url.getAttachFileById + `/` + id);
   }
 
   addMaterial(data: any) {
