@@ -25,16 +25,32 @@ export class MenuComponent implements OnInit {
     this.help.loading();
     this.help.get(`/rolemenuauth/getAuthByMenuId/` + obj.id).subscribe(msg => {
       let enc = '';
+      this.help.stopLoad();
       if (msg.success && !this.help.isEmpty(msg.data)) {
         const data = JSON.stringify(msg.data);
         enc = window.btoa(data);
-      }
-      this.help.stopLoad();
-      this.router.navigate([obj.path], {
-        queryParams: {
-          code: enc
+        let authFlag = false;
+        for (let i = 0; i < msg.data.length; i++) {
+          if (msg.data[i].code == 'list') {
+            authFlag = true;
+          }
         }
-      });
+        if (authFlag) {
+          this.router.navigate([obj.path], {
+            queryParams: {
+              code: enc
+            }
+          });
+        } else {
+          this.help.showMessage('warning', '未授权，禁止访问！');
+        }
+      } else {
+        this.router.navigate([obj.path], {
+          queryParams: {
+            code: enc
+          }
+        });
+      }
     });
   }
 }

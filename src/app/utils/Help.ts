@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {NzMessageService, NzModalService} from 'ng-zorro-antd';
-import {DatePipe, Location} from '@angular/common';
+import {Observable, Observer} from 'rxjs';
+import {NzMessageService, NzModalService, UploadFile} from 'ng-zorro-antd';
+import {formatDate, Location} from '@angular/common';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -14,7 +14,6 @@ export class Help {
     private http: HttpClient,
     private message: NzMessageService,
     private location: Location,
-    private datePipe: DatePipe,
     public modalService: NzModalService,
     private router: Router
   ) {
@@ -49,8 +48,9 @@ export class Help {
     return this.http.post(url, params);
   }
 
-  formatDate(date, format) {
-    return this.datePipe.transform(date, format);
+  fmtDate(date, format) {
+    let time = formatDate(new Date(), format, 'zh-Hans');
+    return time;
   }
 
   isEmpty(val): boolean {
@@ -93,10 +93,72 @@ export class Help {
     return year + '-' + month + '-' + date + '   ' + hour + ':' + minute + ':' + second;
   }
 
-  emptyObject(parsent) {
-    for (const key in parsent) {
-      delete parsent[key];
+
+  beforeUpload = (file: File) => {
+    return new Observable((observer: Observer<boolean>) => {
+      const isJPG = file.type === 'image/jpeg';
+      if (!isJPG) {
+        this.showMessage('error', '只能上传 JPG 文件');
+        observer.complete();
+        return;
+      }
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.showMessage('error', '文件大小不能超过2MB!');
+        observer.complete();
+        return;
+      }
+      // check height
+      this.checkImageDimension(file).then(dimensionRes => {
+        if (!dimensionRes) {
+          this.showMessage('error', '分辨率300x300以上');
+          observer.complete();
+          return;
+        }
+
+        observer.next(isJPG && isLt2M && dimensionRes);
+        observer.complete();
+      });
+    });
+  }
+
+  getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+
+  checkImageDimension(file: File): Promise<boolean> {
+    return new Promise(resolve => {
+      const img = new Image(); // create image
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
+        window.URL.revokeObjectURL(img.src!);
+        resolve(width === height && width >= 300);
+      };
+    });
+  }
+
+
+  getListObjectById(list: any = [], id) {
+    let obj = null;
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].id === id) {
+        obj = list[i];
+        break;
+      }
     }
+    return obj;
+  }
+
+
+  copyObject(fromObj, toObj) {
+    for (const key in fromObj) {
+      toObj[key] = fromObj[key];
+    }
+    return toObj;
   }
 
   clearObject(data) {
@@ -104,4 +166,5 @@ export class Help {
       data[key] = null;
     }
   }
+
 }

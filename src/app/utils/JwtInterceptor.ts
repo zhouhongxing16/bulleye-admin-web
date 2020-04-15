@@ -38,6 +38,7 @@ export class JwtInterceptor implements HttpInterceptor {
       case 401:
         console.log('not login');
         this.help.showMessage('warning', '未登录，请先登录！');
+        localStorage.removeItem('token');
         this.router.navigate(['/login']);
         return of(event);
         break;

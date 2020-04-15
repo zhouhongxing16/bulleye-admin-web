@@ -1,7 +1,14 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Help} from '../../../../utils/Help';
 import {MenuService} from '../menu.service';
-import {NzDropdownContextComponent, NzDropdownService, NzFormatEmitEvent, NzTreeComponent, NzTreeNode} from 'ng-zorro-antd';
+import {
+  NzDropdownContextComponent,
+  NzDropdownService,
+  NzFormatEmitEvent,
+  NzTreeComponent,
+  NzTreeNode
+
+} from 'ng-zorro-antd';
 import {Menu} from '../menu';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MenuAuth} from '../../menu-auth/menu-auth';
@@ -50,7 +57,7 @@ export class MenuListComponent implements OnInit {
     this.validateForm = this.formBuilder.group({
       icon: [null, [Validators.required]],
       title: [null, [Validators.required]],
-      path: [null, [Validators.required]],
+      path: [null, null],
       code: [null, [Validators.required]],
       sort: [null, [Validators.required]],
       status: [null, [Validators.required]],
@@ -74,13 +81,15 @@ export class MenuListComponent implements OnInit {
   }
 
   editMenu(): void {
-    this.menu = this.rightNode.origin;
+    console.log(this.rightNode) ;
+    this.menu = this.help.copyObject( this.rightNode.origin,this.menu);
+    console.log(this.menu);
     this.drawerMenuVisible = true;
     this.dropdown.close();
   }
 
 
-  openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
+  openFolder(data: NzTreeNode | Required<NzFormatEmitEvent>): void {
     // do something if u want
     if (data instanceof NzTreeNode) {
       data.isExpanded = !data.isExpanded;

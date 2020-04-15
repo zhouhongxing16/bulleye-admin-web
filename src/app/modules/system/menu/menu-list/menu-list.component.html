@@ -110,7 +110,7 @@
       <tr>
         <th nzShowSort nzSortKey="name">名称</th>
         <th nzShowSort nzSortKey="code">编码</th>
-        <th nzShowSort nzSortKey="describe">描述</th>
+        <th nzShowSort nzSortKey="describe">Path</th>
         <th nzShowSort nzSortKey="status">状态</th>
         <th nzShowSort nzSortKey="created">创建时间</th>
         <th><span>操作</span></th>
@@ -145,7 +145,7 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="parentId">父节点</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <nz-tree-select [(ngModel)]="menu.parentId" formControlName="parentId"
+        <nz-tree-select [(ngModel)]="menu.parentId" formControlName="parentId" id="parentId"
           [nzDefaultExpandedKeys]="expandKeys"
           [nzNodes]="nodes"
                                                     nzShowSearch
@@ -187,7 +187,7 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="path">path</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="path">path</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <input nz-input formControlName="path" [(ngModel)]="menu.path" name="path" id="path">
         <nz-form-explain *ngIf="validateForm.get('path').dirty && validateForm.get('path').errors">

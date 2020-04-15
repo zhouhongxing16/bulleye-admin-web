@@ -8,7 +8,7 @@
         nzName="fileUpload"
         nzListType="picture-card"
         [nzShowUploadList]="false"
-        [nzBeforeUpload]="beforeUpload"
+        [nzBeforeUpload]="help.beforeUpload"
         (nzChange)="handleChange($event)"
       >
         <ng-container *ngIf="!obj.avatar">
@@ -161,7 +161,7 @@
 
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-date-picker placeholder="请填入职日期" formControlName="joinDate" [(ngModel)]="obj.joinDate" name="joinDate"
-                 id="joinDate"></nz-date-picker>
+                          id="joinDate"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
     </div>

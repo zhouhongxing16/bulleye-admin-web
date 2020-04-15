@@ -179,6 +179,7 @@ export class RoleListComponent implements OnInit {
 
   getSelectedMenuAuthNodeList() {
     const selectMenuAuthNodes = this.roleMenuFunctionTree.getCheckedNodeList();
+    console.log(this.selectMenuAuthMenus);
     this.getChildMenuAuthLeafNode(selectMenuAuthNodes);
     console.log(this.selectMenuAuthMenus);
     this.saveRoleMenuAuth();
@@ -186,6 +187,7 @@ export class RoleListComponent implements OnInit {
 
   // 递归获取菜单功能授权叶子节点
   getChildMenuAuthLeafNode(nodes: any) {
+    console.log(nodes);
     nodes.forEach(node => {
       if (node.isLeaf && node.origin.type === 'menuAuth') {
         this.selectMenuAuthMenus.push({
