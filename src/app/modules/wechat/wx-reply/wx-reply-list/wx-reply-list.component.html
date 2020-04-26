@@ -34,7 +34,10 @@
   <tbody>
   <tr *ngFor="let data of staffTable.data">
     <td>{{data.keyWord}}</td>
-    <td>{{data.keyValue}}</td>
+    <td>
+      <span *ngIf="data.keyType=='text'">{{data.keyValue}}</span>
+      <span *ngIf="data.keyType=='news'">{{data.mediaId}}</span>
+    </td>
     <td><ng-container *ngIf="data.keyType=='text'">文本</ng-container>
         <ng-container *ngIf="data.keyType=='news'">图文</ng-container></td>
     <td>{{data.num}}</td>

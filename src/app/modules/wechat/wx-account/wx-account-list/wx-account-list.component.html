@@ -54,7 +54,7 @@
       <button title="修改数据" (click)="goToPage('/wxaccount/edit',{id:data.id,code:authData.authCode})" nz-button nzType="primary" nzShape="circle"><i
         class="anticon anticon-edit"></i></button>
       <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
-        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+        <button nz-popconfirm title="删除数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
                                                                                           theme="outline"
                                                                                           twoToneColor="red"
                                                                                           title="删除"></i></button>

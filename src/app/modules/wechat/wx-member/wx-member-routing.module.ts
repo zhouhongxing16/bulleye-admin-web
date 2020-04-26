@@ -6,6 +6,7 @@ import {WxMemberListComponent} from './wx-member-list/wx-member-list.component';
 const routes: Routes = [
   {path: 'list', component: WxMemberListComponent},
   {path: 'edit/:id', component: WxMemberEditComponent},
+  {path: 'edit', component: WxMemberEditComponent},
   {path: 'add', component: WxMemberEditComponent}
 ];
 

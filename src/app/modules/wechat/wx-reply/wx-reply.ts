@@ -17,4 +17,6 @@ export class WxReply {
   status: string;
 
   created: string;
+
+  mediaId: string;
 }

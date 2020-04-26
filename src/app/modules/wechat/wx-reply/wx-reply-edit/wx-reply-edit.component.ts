@@ -8,6 +8,8 @@ import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn.js';
+import {WxMaterialService} from '../../wx-material/wx-material.service';
+import {WxMaterial} from '../../wx-material/wx-material';
 
 
 @Component({
@@ -33,9 +35,11 @@ export class WxReplyEditComponent implements OnInit {
   isLoading = false;
   obj: WxReply = new WxReply();
   chooseSourceId;
+  wxMaterialList;
 
   constructor(private formBuilder: FormBuilder,
               private wxReplyService: WxReplyService,
+              private wxMaterialService: WxMaterialService,
               private route: ActivatedRoute,
               private help: Help) {
   }
@@ -56,20 +60,29 @@ export class WxReplyEditComponent implements OnInit {
       } else {
         this.obj = new WxReply();
       }
+      if(this.chooseSourceId){
+        this.obj.sourceId = this.chooseSourceId;
+      }
+      if(this.obj.keyType == 'news'){
+        this.getMediaId()
+      }
     });
-    if(this.chooseSourceId){
-      this.obj.sourceId = this.chooseSourceId;
-    }
     this.validateForm = this.formBuilder.group({
       keyWord: [null, [Validators.required]],
       keyType: [null, [Validators.required]],
       keyValue: [null, [Validators.required]],
       status: [null, [Validators.required]],
-
+      mediaId: [null, [Validators.required]],
+      url: [null, [Validators.required]],
     });
   }
 
-
+  getMediaId (){
+    this.wxMaterialService.getEverMaterialBySourceId(this.obj.sourceId).subscribe(res =>{
+      this.wxMaterialList = res
+      console.log(res)
+    })
+  }
 
   submitForm() {
     this.isLoading = true;
@@ -77,7 +90,6 @@ export class WxReplyEditComponent implements OnInit {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
-        this.help.back();
       }
     });
   }

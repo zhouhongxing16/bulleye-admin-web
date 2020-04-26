@@ -13,10 +13,10 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="type">素材类型</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="type" [(ngModel)]="obj.type" name="type" id="type">
-        <label nz-radio [nzValue]="'image'">图片</label>
+        <!--<label nz-radio [nzValue]="'image'">图片</label>
         <label nz-radio [nzValue]="'voice'">语音</label>
         <label nz-radio [nzValue]="'video'">视频</label>
-        <label nz-radio [nzValue]="'thumb'">缩略图</label>
+        <label nz-radio [nzValue]="'thumb'">缩略图</label>-->
         <label nz-radio [nzValue]="'news'">图文</label>
       </nz-radio-group>
       <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
@@ -127,7 +127,7 @@
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item>
+  <nz-form-item *ngIf="obj.type == 'video'">
     <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="introduction">视频描述</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <textarea formControlName="introduction" rows="4" name="introduction" id="introduction" nz-input [(ngModel)]="obj.introduction"></textarea>

@@ -6,6 +6,7 @@ import {WxMenuService} from '../wx-menu.service';
 import {WxMenu} from '../wx-menu';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
+import {WxMaterialService} from '../../wx-material/wx-material.service';
 
 @Component({
   selector: 'app-wx-menu-edit',
@@ -18,9 +19,11 @@ export class WxMenuEditComponent implements OnInit {
   isLoading = false;
   obj: WxMenu = new WxMenu();
   type: string;
+  wxMaterialList;
 
   constructor(private formBuilder: FormBuilder,
               private wxMenuService: WxMenuService,
+              private wxMaterialService: WxMaterialService,
               private route: ActivatedRoute,
               private help: Help) {
   }
@@ -65,6 +68,13 @@ export class WxMenuEditComponent implements OnInit {
       keyValue: [null],
       url: [null]
     });
+  }
+
+  getMediaId (){
+    this.wxMaterialService.getEverMaterialBySourceId(this.obj.sourceId).subscribe(res =>{
+      this.wxMaterialList = res
+      console.log(res)
+    })
   }
 
   submitForm() {

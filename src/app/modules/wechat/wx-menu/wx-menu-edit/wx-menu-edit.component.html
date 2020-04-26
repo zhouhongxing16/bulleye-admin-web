@@ -14,8 +14,9 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-radio-group formControlName="type" [(ngModel)]="obj.type" name="type" id="type">
         <label nz-radio [nzValue]="'view'">网页</label>
-        <label nz-radio [nzValue]="'click'">点击</label>
+        <label nz-radio [nzValue]="'click'" >点击</label>
         <label nz-radio [nzValue]="'miniprogram'">小程序</label>
+        <label nz-radio [nzValue]="'view_limited'" (click)="getMediaId()">素材发送</label>
       </nz-radio-group>
       <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
         必选
@@ -28,9 +29,9 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="url" [(ngModel)]="obj.url" name="url" id="url">
     </nz-form-control>
-    <!--<nz-form-explain *ngIf="validateForm.get('url').dirty && validateForm.get('url').errors">
+    <nz-form-explain *ngIf="validateForm.get('url').dirty && validateForm.get('url').errors">
       必填
-    </nz-form-explain>-->
+    </nz-form-explain>
   </nz-form-item>
 
   <nz-form-item *ngIf="obj.type=='click'">
@@ -38,15 +39,19 @@
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="keyValue" [(ngModel)]="obj.keyValue" name="keyValue" id="keyValue">
     </nz-form-control>
-    <!--<nz-form-explain *ngIf="validateForm.get('keyValue').dirty && validateForm.get('keyValue').errors">
+    <nz-form-explain *ngIf="validateForm.get('keyValue').dirty && validateForm.get('keyValue').errors">
       必填
-    </nz-form-explain>-->
+    </nz-form-explain>
   </nz-form-item>
 
-  <nz-form-item *ngIf="obj.type=='media_id'||obj.type=='view_limited'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mediaId">素材media_id</nz-form-label>
+  <nz-form-item *ngIf="obj.type=='view_limited'">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mediaId">素材</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="mediaId" [(ngModel)]="obj.mediaId" name="mediaId" id="mediaId">
+      <nz-select formControlName="mediaId" id="mediaId" name="mediaId" [(ngModel)]="obj.mediaId" nzAllowClear nzPlaceHolder="Choose">
+        <ng-container *ngFor="let item of wxMaterialList">
+          <nz-option [nzLabel]="item.name" [nzValue]="item.mediaId"></nz-option>
+        </ng-container>
+      </nz-select>
     </nz-form-control>
     <!--<nz-form-explain *ngIf="validateForm.get('mediaId').dirty && validateForm.get('mediaId').errors">
       必填

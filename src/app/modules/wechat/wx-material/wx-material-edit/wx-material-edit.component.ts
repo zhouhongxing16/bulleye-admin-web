@@ -149,7 +149,7 @@ export class WxMaterialEditComponent implements OnInit {
   submitForm() {
     this.isLoading = true;
     console.log(this.obj)
-    this.wxMaterialService.saveOrUpdateData(this.obj).subscribe(res => {
+    this.wxMaterialService.updateMaterial(this.obj).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
